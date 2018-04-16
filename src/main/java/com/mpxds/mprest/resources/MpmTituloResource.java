@@ -7,20 +7,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mpxds.mprest.domain.MpCategoria;
-import com.mpxds.mprest.services.MpCategoriaService;
+import com.mpxds.mprest.domain.MpmTitulo;
+import com.mpxds.mprest.services.MpmTituloService;
 
 @RestController
-@RequestMapping(value="/categorias")
-public class MpCategoriaResource {
+@RequestMapping(value="/mTitulos")
+public class MpmTituloResource {
 	//
 	@Autowired
-	private MpCategoriaService mpService;
+	private MpmTituloService mpService;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 		//
-		MpCategoria mpObj = mpService.buscar(id);
+		MpmTitulo mpObj = mpService.buscar(id);
 		//
 		return ResponseEntity.ok().body(mpObj);
 	}
