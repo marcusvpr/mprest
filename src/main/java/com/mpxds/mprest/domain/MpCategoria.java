@@ -1,5 +1,6 @@
 package com.mpxds.mprest.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -9,6 +10,7 @@ public class MpCategoria extends MpEntity {
 	//
 	private static final long serialVersionUID = 1L;
 		
+	@Column(nullable = true, length = 100)
 	private String nome;
 	
 	//

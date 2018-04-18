@@ -1,10 +1,19 @@
 package com.mpxds.mprest.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "mpm_titulo")
@@ -14,61 +23,111 @@ public class MpmTitulo extends MpEntity {
 		
 	@Column(name = "nome_arquivo", nullable = true, length = 40)
 	private String nomeArquivo;	
+	
 	@Column(name = "fins_falimentares", nullable = true, length = 1)
 	private String finsFAlimentares;
+	
 	@Column(nullable = true, length = 1)
 	private String aceite;
+	
 	@Column(name = "numero_talao_3oficio", nullable = true, length = 16)
 	private String numeroTalao3oficio;
+	
 	@Column(name = "convenio_numero_livro", nullable = true, length = 10)
 	private String convenioNumeroLivro;
+	
 	@Column(name = "talao_numero_livro", nullable = true, length = 10)
 	private String talaoNumeroLivro;
+	
 	@Column(nullable = true, length = 1)
 	private String aVista;
+	
 	@Column(nullable = true, length = 1)
 	private String nihil;
+	
 	@Column(nullable = true, length = 1)
 	private String digital;
+	
 	@Column(nullable = true, length = 255)
 	private String observacao;
+	
 	@Column(name = "total_pagar", nullable = true, length = 10)
 	private String totalPagar;
+	
 	@Column(name = "total_deposito", nullable = true, length = 10)
 	private String totalDeposito;
+	
 	@Column(name = "valor_distribuicao", nullable = true, length = 10)
 	private String valorDistribuicao;
+	
 	@Column(nullable = true, length = 10)
 	private String saldo;
+	
 	@Column(nullable = true, length = 10)
 	private String valor;
+	
 	@Column(name = "agencia_cedente", nullable = true, length = 28)
 	private String agenciaCedente;
+	
 	@Column(nullable = true, length = 1)
 	private String endosso;
+	
 	@Column(name = "numero_banco", nullable = true, length = 46)
 	private String numeroBanco;
+	
 	@Column(name = "numero_titulo", nullable = true, length = 46)
 	private String numeroTitulo;
+	
+	@JsonFormat(pattern="dd/MM/yyyy hh:mm")
 	@Column(name = "data_vencimento", nullable = true)
 	private Date dataVencimento;
+
+	@JsonFormat(pattern="dd/MM/yyyy hh:mm")
 	@Column(name = "data_emissao", nullable = true)
 	private Date dataEmissao;
+
 	@Column(name = "numero_distribuicao", nullable = true, length = 18)
 	private String numeroDistribuicao;
+
+	@JsonFormat(pattern="dd/MM/yyyy hh:mm")
 	@Column(name = "data_distribuicao", nullable = true)
 	private Date dataDistribuicao;
+	
 	@Column(name = "codigo_apresentante", nullable = true, length = 13)
 	private String codigoApresentante;
+
+	@JsonFormat(pattern="dd/MM/yyyy hh:mm")
 	@Column(name = "data_ate", nullable = true)
 	private Date dataAte;
+
 	@Column(name = "numero_protocolo", nullable = true, length = 12)
 	private String numeroProtocolo;
+	
+	@JsonFormat(pattern="dd/MM/yyyy hh:mm")
 	@Column(name = "data_protocolo", nullable = true)
 	private Date dataProtocolo;
+
 	@Column(nullable = true, length = 4)
 	private String faixa;	
+			
+	@ManyToOne
+	@JoinColumn(name="mpmAlinea_id")
+	private MpmAlinea mpmAlinea;
 	
+	@ManyToOne
+	@JoinColumn(name="mpmEspecie_id")
+	private MpmEspecie mpmEspecie;
+	
+	@OneToMany(mappedBy="mpmTitulo")
+	private List<MpmTituloStatus> mpmTituloStatuss = new ArrayList<>();
+			
+	@ManyToMany
+	@JoinTable(name = "mpmTitulo_mpmDevedor",
+		joinColumns = @JoinColumn(name = "mpmTitulo_id"),
+		inverseJoinColumns = @JoinColumn(name = "mpmDevedor_id")
+	)	
+	private List<MpmDevedor> mpmDevedors = new ArrayList<>();
+
 	//
 	
 	public MpmTitulo() {
@@ -80,7 +139,8 @@ public class MpmTitulo extends MpEntity {
 			String observacao, String totalPagar, String totalDeposito, String valorDistribuicao, String saldo,
 			String valor, String agenciaCedente, String endosso, String numeroBanco, String numeroTitulo,
 			Date dataVencimento, Date dataEmissao, String numeroDistribuicao, Date dataDistribuicao,
-			String codigoApresentante, Date dataAte, String numeroProtocolo, Date dataProtocolo, String faixa) {
+			String codigoApresentante, Date dataAte, String numeroProtocolo, Date dataProtocolo, String faixa,
+			MpmAlinea mpmAlinea, MpmEspecie mpmEspecie) {
 		//
 		super();
 		
@@ -112,9 +172,10 @@ public class MpmTitulo extends MpEntity {
 		this.numeroProtocolo = numeroProtocolo;
 		this.dataProtocolo = dataProtocolo;
 		this.faixa = faixa;
+		
+		this.mpmAlinea = mpmAlinea;
+		this.mpmEspecie = mpmEspecie;
 	}
-
-
 
 	//
 	
@@ -206,5 +267,18 @@ public class MpmTitulo extends MpEntity {
 
 	public String getFaixa() { return faixa; }
 	public void setFaixa(String faixa) { this.faixa = faixa; }
+
+	public MpmAlinea getMpmAlinea() { return mpmAlinea; }
+	public void setMpmAlinea(MpmAlinea mpmAlinea) { this.mpmAlinea = mpmAlinea; }
+
+	public MpmEspecie getMpmEspecie() { return mpmEspecie; }
+	public void setMpmEspecie(MpmEspecie mpmEspecie) { this.mpmEspecie = mpmEspecie; }
+	
+	public List<MpmTituloStatus> getMpmTituloStatuss() { return mpmTituloStatuss; }
+	public void setMpmTituloStatuss(List<MpmTituloStatus> mpmTituloStatuss) { 
+																this.mpmTituloStatuss = mpmTituloStatuss; }
+	
+	public List<MpmDevedor> getMpmDevedors() { return mpmDevedors; }
+	public void setMpmDevedors(List<MpmDevedor> mpmDevedors) { this.mpmDevedors = mpmDevedors; }
 
 }
