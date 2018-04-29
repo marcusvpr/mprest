@@ -1,5 +1,6 @@
 package com.mpxds.mprest.domain;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -7,17 +8,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "mpm_cidade")
+@Table(name = "mpadt_cidade")
 public class MpmCidade extends MpEntity {
 	//
 	private static final long serialVersionUID = 1L;
 		
-	@Column(nullable = true, length = 30)
+	@Column(nullable = false, length = 30)
 	private String descricao;
 	
 	@ManyToOne
-	@JoinColumn(name="mpmEstadoUf_id")
+	@JoinColumn(name = "mpmEstadoUf_id")
 	private MpmEstadoUf mpmEstadoUf;
+	
 	//
 	
 	public MpmCidade() {
@@ -40,5 +42,5 @@ public class MpmCidade extends MpEntity {
 	
 	public MpmEstadoUf getMpmEstadoUf() { return mpmEstadoUf; }
 	public void setMpmEstadoUf(MpmEstadoUf mpmEstadoUf) { this.mpmEstadoUf = mpmEstadoUf; }
-
+	
 }

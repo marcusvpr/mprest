@@ -18,9 +18,9 @@ public class MpmEstadoUfResource {
 	private MpmEstadoUfService mpService;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
+	public ResponseEntity<?> findId(@PathVariable Integer id) {
 		//
-		MpmEstadoUf mpObj = mpService.buscar(id);
+		MpmEstadoUf mpObj = mpService.buscarId(id);
 		//
 		return ResponseEntity.ok().body(mpObj);
 	}

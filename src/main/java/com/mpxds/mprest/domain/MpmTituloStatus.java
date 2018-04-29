@@ -2,23 +2,27 @@ package com.mpxds.mprest.domain;
 
 import java.util.Date;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "mpm_titulo_status")
+@Table(name = "mpadt_titulo_status")
 public class MpmTituloStatus extends MpEntity {
 	//
 	private static final long serialVersionUID = 1L;
 		
 	@JsonFormat(pattern="dd/MM/yyyy hh:mm")
 	@Column(name = "data_ocorrencia", nullable = true)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataOcorrencia;
 	
 	@Column(nullable = true, length = 2)

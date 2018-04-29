@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataroot xmlns:od="urn:schemas-microsoft-com:officedata">
+<Endosso>
+<Cod_Endosso>M</Cod_Endosso>
+<Dsc_Endosso>ENDOSSO MANDATO</Dsc_Endosso>
+</Endosso>
+<Endosso>
+<Cod_Endosso>S</Cod_Endosso>
+<Dsc_Endosso>SEM ENDOSSO</Dsc_Endosso>
+</Endosso>
+<Endosso>
+<Cod_Endosso>T</Cod_Endosso>
+<Dsc_Endosso>ENDOSSO TRANSLATIVO</Dsc_Endosso>
+</Endosso>
+</dataroot>

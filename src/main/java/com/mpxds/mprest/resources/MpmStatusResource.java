@@ -18,9 +18,9 @@ public class MpmStatusResource {
 	private MpmStatusService mpService;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
+	public ResponseEntity<?> findId(@PathVariable Integer id) {
 		//
-		MpmStatus mpObj = mpService.buscar(id);
+		MpmStatus mpObj = mpService.buscarId(id);
 		//
 		return ResponseEntity.ok().body(mpObj);
 	}

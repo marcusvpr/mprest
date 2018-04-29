@@ -18,9 +18,9 @@ public class MpmIdentificacaoResource {
 	private MpmIdentificacaoService mpService;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
+	public ResponseEntity<?> findId(@PathVariable Integer id) {
 		//
-		MpmIdentificacao mpObj = mpService.buscar(id);
+		MpmIdentificacao mpObj = mpService.buscarId(id);
 		//
 		return ResponseEntity.ok().body(mpObj);
 	}

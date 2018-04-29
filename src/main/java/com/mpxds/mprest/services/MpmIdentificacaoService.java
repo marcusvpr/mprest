@@ -14,9 +14,16 @@ public class MpmIdentificacaoService {
 	@Autowired
 	private MpmIdentificacaoRepository mpRepo;
 	
-	public MpmIdentificacao buscar(Integer id) {
+	public MpmIdentificacao buscarId(Integer id) {
 		//
 		Optional<MpmIdentificacao> mpObj = mpRepo.findById(id);
+		//
+		return mpObj.orElse(null);
+	}
+	
+	public MpmIdentificacao buscarCodigo(Integer codigo) {
+		//
+		Optional<MpmIdentificacao> mpObj = mpRepo.findByCodigo(codigo);
 		//
 		return mpObj.orElse(null);
 	}

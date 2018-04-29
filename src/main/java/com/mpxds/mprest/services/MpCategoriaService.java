@@ -14,7 +14,7 @@ public class MpCategoriaService {
 	@Autowired
 	private MpCategoriaRepository mpRepo;
 	
-	public MpCategoria buscar(Integer id) {
+	public MpCategoria buscarId(Integer id) {
 		//
 		Optional<MpCategoria> mpObj = mpRepo.findById(id);
 		//

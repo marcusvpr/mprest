@@ -14,7 +14,7 @@ public class MpmEspecieService {
 	@Autowired
 	private MpmEspecieRepository mpRepo;
 	
-	public MpmEspecie buscar(Integer id) {
+	public MpmEspecie buscarId(Integer id) {
 		//
 		Optional<MpmEspecie> mpObj = mpRepo.findById(id);
 		//

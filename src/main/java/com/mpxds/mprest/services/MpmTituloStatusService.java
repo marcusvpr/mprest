@@ -14,7 +14,7 @@ public class MpmTituloStatusService {
 	@Autowired
 	private MpmTituloStatusRepository mpRepo;
 	
-	public MpmTituloStatus buscar(Integer id) {
+	public MpmTituloStatus buscarId(Integer id) {
 		//
 		Optional<MpmTituloStatus> mpObj = mpRepo.findById(id);
 		//

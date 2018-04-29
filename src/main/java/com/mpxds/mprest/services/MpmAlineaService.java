@@ -14,7 +14,7 @@ public class MpmAlineaService {
 	@Autowired
 	private MpmAlineaRepository mpRepo;
 	
-	public MpmAlinea buscar(Integer id) {
+	public MpmAlinea buscarId(Integer id) {
 		//
 		Optional<MpmAlinea> mpObj = mpRepo.findById(id);
 		//

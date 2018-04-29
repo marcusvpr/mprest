@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "mpm_alinea")
+@Table(name = "mpadt_alinea")
 public class MpmAlinea extends MpEntity {
 	//
 	private static final long serialVersionUID = 1L;

@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataroot xmlns:od="urn:schemas-microsoft-com:officedata">
+<Especies>
+<Esp_Codigo>CBI</Esp_Codigo>
+<Descricao>CED.CRED BANC IND.</Descricao>
+<No_Codigo>1</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>CC</Esp_Codigo>
+<Descricao>CONTRATO DE CAMBIO</Descricao>
+<No_Codigo>2</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>CCB</Esp_Codigo>
+<Descricao>CED CREDITO BANCARIO</Descricao>
+<No_Codigo>3</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>CCC</Esp_Codigo>
+<Descricao>CED CREDITO COMERCIAL</Descricao>
+<No_Codigo>4</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>CCE</Esp_Codigo>
+<Descricao>CED.CRED. Á EXPORTACAO</Descricao>
+<No_Codigo>5</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>CCI</Esp_Codigo>
+<Descricao>CED CRED INDUSTRIAL</Descricao>
+<No_Codigo>6</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>CCR</Esp_Codigo>
+<Descricao>CED.CRED. RURAL</Descricao>
+<No_Codigo>7</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>CD</Esp_Codigo>
+<Descricao>CONF DE DIVIDA</Descricao>
+<No_Codigo>8</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>CDA</Esp_Codigo>
+<Descricao>CERT DIV ATIVA</Descricao>
+<No_Codigo>9</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>CDT</Esp_Codigo>
+<Descricao>CERTIDAO DEB TRIBUNAL</Descricao>
+<No_Codigo>60</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>CH</Esp_Codigo>
+<Descricao>CHEQUE</Descricao>
+<No_Codigo>10</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>CHP</Esp_Codigo>
+<Descricao>CEDULA HIPOTECARIA</Descricao>
+<No_Codigo>11</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>CJV</Esp_Codigo>
+<Descricao>CONTA JUDICIALMENTE VERIF</Descricao>
+<No_Codigo>12</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>CM</Esp_Codigo>
+<Descricao>CONTRATO DE MUTUO</Descricao>
+<No_Codigo>13</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>CPH</Esp_Codigo>
+<Descricao>CED RURAL PIGNORATICIA HI</Descricao>
+<No_Codigo>14</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>CPS</Esp_Codigo>
+<Descricao>CONTA PRESTAÇAO  SERV</Descricao>
+<No_Codigo>15</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>CRH</Esp_Codigo>
+<Descricao>CED. RURAL HIPOTECARIA</Descricao>
+<No_Codigo>16</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>CRP</Esp_Codigo>
+<Descricao>CED. RURAL PIGNORATICIA</Descricao>
+<No_Codigo>17</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>DD</Esp_Codigo>
+<Descricao>DOC DE DIVIDA</Descricao>
+<No_Codigo>40</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>DIV</Esp_Codigo>
+<Descricao>DIVERSOS</Descricao>
+<No_Codigo>25</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>DM</Esp_Codigo>
+<Descricao><![CDATA[DUP MERCANTIL ]]></Descricao>
+<No_Codigo>19</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>DMI</Esp_Codigo>
+<Descricao>DUP MERC IND</Descricao>
+<No_Codigo>20</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>DR</Esp_Codigo>
+<Descricao>DUP RURAL</Descricao>
+<No_Codigo>21</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>DRI</Esp_Codigo>
+<Descricao>DUP RURAL IND</Descricao>
+<No_Codigo>22</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>DS</Esp_Codigo>
+<Descricao>DUP SERVICO</Descricao>
+<No_Codigo>23</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>DSI</Esp_Codigo>
+<Descricao>DUP SERVICO IND</Descricao>
+<No_Codigo>24</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>EC</Esp_Codigo>
+<Descricao>ESPECIE DE CONTRATO</Descricao>
+<No_Codigo>18</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>ECC</Esp_Codigo>
+<Descricao>ENCARGOS CONDOMINIAIS</Descricao>
+<No_Codigo>26</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>LC</Esp_Codigo>
+<Descricao>LETRA DE CAMBIO</Descricao>
+<No_Codigo>27</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>NCC</Esp_Codigo>
+<Descricao>NOTA DE CREDITO COMERCIAL</Descricao>
+<No_Codigo>28</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>NCE</Esp_Codigo>
+<Descricao>NOTA  CRED  Á EXPORTACAO</Descricao>
+<No_Codigo>29</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>NCI</Esp_Codigo>
+<Descricao>NOTA CRED. INDUSTRIAL</Descricao>
+<No_Codigo>30</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>NCR</Esp_Codigo>
+<Descricao>NOTA CRED. RURAL</Descricao>
+<No_Codigo>31</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>NP</Esp_Codigo>
+<Descricao>NOTA PROMISSORIA</Descricao>
+<No_Codigo>32</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>NPR</Esp_Codigo>
+<Descricao>NOTA PROMISSORIA RURAL</Descricao>
+<No_Codigo>33</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>RA</Esp_Codigo>
+<Descricao>RECIBO DE ALUGUEL</Descricao>
+<No_Codigo>34</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>SJ</Esp_Codigo>
+<Descricao>SENTENÇA JUDICIAL</Descricao>
+<No_Codigo>35</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>TA</Esp_Codigo>
+<Descricao>TERMO DE ACORDO</Descricao>
+<No_Codigo>36</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>TJ</Esp_Codigo>
+<Descricao>TÍTULO JUDICIAL</Descricao>
+<No_Codigo>41</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>TJD</Esp_Codigo>
+<Descricao>TITULO JUD DEFINITIVO</Descricao>
+<No_Codigo>59</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>TM</Esp_Codigo>
+<Descricao>TRIPL MERCANTIL</Descricao>
+<No_Codigo>37</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>TS</Esp_Codigo>
+<Descricao>TRIPL DE SERVICOS</Descricao>
+<No_Codigo>38</No_Codigo>
+</Especies>
+<Especies>
+<Esp_Codigo>W</Esp_Codigo>
+<Descricao>WARRANT</Descricao>
+<No_Codigo>39</No_Codigo>
+</Especies>
+</dataroot>

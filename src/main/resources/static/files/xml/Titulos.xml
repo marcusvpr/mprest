@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataroot xmlns:od="urn:schemas-microsoft-com:officedata">
+<Titulos>
+<Dt_Protocolo>2017-03-08T00:00:00</Dt_Protocolo>
+<No_Protocolo>016172</No_Protocolo>
+<Dt_Ate>2017-03-13T00:00:00</Dt_Ate>
+<Cod_Apresentante>999999</Cod_Apresentante>
+<Convenio><![CDATA[ ]]></Convenio>
+<Empresa></Empresa>
+<Dt_Distribuicao>2017-03-07T00:00:00</Dt_Distribuicao>
+<No_Distribuicao>0064689</No_Distribuicao>
+<Dt_Emissao>2016-06-03T00:00:00</Dt_Emissao>
+<Dt_Vencto>2016-06-03T00:00:00</Dt_Vencto>
+<No_Titulo><![CDATA[000109     ]]></No_Titulo>
+<No_Banco><![CDATA[               ]]></No_Banco>
+<Cod_Endosso>S</Cod_Endosso>
+<AgenciaCedente>00001</AgenciaCedente>
+<Valor>1000</Valor>
+<Saldo>1000</Saldo>
+<Esp_Codigo>CH</Esp_Codigo>
+<CodigoAlinea>11-12</CodigoAlinea>
+<Tp_Apresentante>A</Tp_Apresentante>
+<Edital>N</Edital>
+<MicroEmpresa>N</MicroEmpresa>
+<Emolumento>246,34</Emolumento>
+<Distribuicao>94,38</Distribuicao>
+<Lei_489>0,28</Lei_489>
+<Lei_713>49,26</Lei_713>
+<Vl_Variavel>4,92</Vl_Variavel>
+<Faixa>O</Faixa>
+<Intimacao>0</Intimacao>
+<Coobrigado>0</Coobrigado>
+<Diligencia>0</Diligencia>
+<Vl_Edital>0</Vl_Edital>
+<Outros>0</Outros>
+<Tot_Emolu>246,34</Tot_Emolu>
+<Tot_Pagar>1443,81</Tot_Pagar>
+<Tot_Deposito>349,43</Tot_Deposito>
+<Cco_Deved>1</Cco_Deved>
+<Cco_Aval>0</Cco_Aval>
+<Cco_Endoss>0</Cco_Endoss>
+<Cco_Notif>0</Cco_Notif>
+<Cco_EndIgs>0</Cco_EndIgs>
+<Cco_EndDifs>0</Cco_EndDifs>
+<Usr_Titulo>CELSO</Usr_Titulo>
+<Dt_Sist_Tit>2017-03-14T11:58:55</Dt_Sist_Tit>
+<Dt_Ocorrencia>2017-03-13T00:00:00</Dt_Ocorrencia>
+<Oco_Codigo>PO</Oco_Codigo>
+<No_Cancelamento>0</No_Cancelamento>
+<DinChq></DinChq>
+<Oco_Obs></Oco_Obs>
+<Oco_Bloqueia>S</Oco_Bloqueia>
+<Oco_Usr>GILBERTO</Oco_Usr>
+<Dt_Sist_Oco>2017-03-13T17:07:03</Dt_Sist_Oco>
+<Tit_Chq_Rps></Tit_Chq_Rps>
+<Tit_Obs1>INTIMADO POR EDITAL  (11) POR TER O ENDEREÇO DESCONHECIDO.</Tit_Obs1>
+<Tit_Motivo>PAGAMENTO</Tit_Motivo>
+<Tit_CustasPg></Tit_CustasPg>
+<Tit_ResIntima></Tit_ResIntima>
+<Tit_ResCorreio></Tit_ResCorreio>
+<Tit_DtEdital>2017-03-10T00:00:00</Tit_DtEdital>
+<Tit_Intimado>POR EDITAL</Tit_Intimado>
+<Tit_Respondido></Tit_Respondido>
+<Tit_ResSE></Tit_ResSE>
+<Tit_ResSP></Tit_ResSP>
+<Tit_VlReembEdital>0</Tit_VlReembEdital>
+<No_Cliente></No_Cliente>
+<NomeApresentante><![CDATA[CODERE DO BRASIL ENTRETENIMENTO LTDA         ]]></NomeApresentante>
+<EnderecoApresentante>RUA DA CONCEICAO</EnderecoApresentante>
+<NumeroApresentante>27</NumeroApresentante>
+<ComplementoApresentante></ComplementoApresentante>
+<BairroApresentante>CENTRO</BairroApresentante>
+<CidadeApresentante>NITEROI</CidadeApresentante>
+<UfApresentante>RJ</UfApresentante>
+<CepApresentante>24020-080</CepApresentante>
+<NomeFavorecido><![CDATA[CODERE DO BRASIL ENTRETENIMENTO LTDA         ]]></NomeFavorecido>
+<EnderecoFavorecido></EnderecoFavorecido>
+<NumeroFavorecido></NumeroFavorecido>
+<ComplementoFavorecido></ComplementoFavorecido>
+<BairroFavorecido></BairroFavorecido>
+<CidadeFavorecido></CidadeFavorecido>
+<UfFavorecido></UfFavorecido>
+<CepFavorecido></CepFavorecido>
+<NomeSacador>CODERE DO BRASIL</NomeSacador>
+<EnderecoSacador></EnderecoSacador>
+<NumeroSacador></NumeroSacador>
+<ComplementoSacador></ComplementoSacador>
+<BairroSacador></BairroSacador>
+<CidadeSacador></CidadeSacador>
+<UfSacador></UfSacador>
+<CepSacador></CepSacador>
+<Tp_DoctoApresentante>CNPJ</Tp_DoctoApresentante>
+<No_DoctoApresentante>05410619000600</No_DoctoApresentante>
+<Tp_DoctoFavorecido></Tp_DoctoFavorecido>
+<No_DoctoFavorecido></No_DoctoFavorecido>
+<Tp_DoctoSacador></Tp_DoctoSacador>
+<No_DoctoSacador></No_DoctoSacador>
+<No_Livro>5357</No_Livro>
+<No_Folha>222</No_Folha>
+<Encerrado></Encerrado>
+<Cod_Irregularidade></Cod_Irregularidade>
+<Nihil>N</Nihil>
+<Avista>N</Avista>
+<RsDesiste></RsDesiste>
+<Lei4664>12,31</Lei4664>
+<Lei111>12,31</Lei111>
+<Lei3761>14,16</Lei3761>
+<Talao_NoLivro>0</Talao_NoLivro>
+<Convenio_NoLivro>0</Convenio_NoLivro>
+<No_Talao3Ofi></No_Talao3Ofi>
+<Aceite>N</Aceite>
+<FinsFalimentares>N</FinsFalimentares>
+<Arquivamento>0</Arquivamento>
+<Lei6281>9,85</Lei6281>
+</Titulos>
+</dataroot>

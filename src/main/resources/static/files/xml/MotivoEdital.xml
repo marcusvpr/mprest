@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataroot xmlns:od="urn:schemas-microsoft-com:officedata">
+<MotivoEdital>
+<CodMotivoEdital>01</CodMotivoEdital>
+<DescMotivoEdital>DIFÍCIL ACESSO</DescMotivoEdital>
+</MotivoEdital>
+<MotivoEdital>
+<CodMotivoEdital>02</CodMotivoEdital>
+<DescMotivoEdital>AUSENTE, APÓS TENTATIVAS MALOGRADAS</DescMotivoEdital>
+</MotivoEdital>
+<MotivoEdital>
+<CodMotivoEdital>03</CodMotivoEdital>
+<DescMotivoEdital>MUDOU- SE</DescMotivoEdital>
+</MotivoEdital>
+<MotivoEdital>
+<CodMotivoEdital>04</CodMotivoEdital>
+<DescMotivoEdital>FECHADO</DescMotivoEdital>
+</MotivoEdital>
+<MotivoEdital>
+<CodMotivoEdital>05</CodMotivoEdital>
+<DescMotivoEdital>ENDEREÇO INSUFICIENTE</DescMotivoEdital>
+</MotivoEdital>
+<MotivoEdital>
+<CodMotivoEdital>06</CodMotivoEdital>
+<DescMotivoEdital>ENDEREÇO NÃO LOCALIZADO</DescMotivoEdital>
+</MotivoEdital>
+<MotivoEdital>
+<CodMotivoEdital>07</CodMotivoEdital>
+<DescMotivoEdital>RECUSADO</DescMotivoEdital>
+</MotivoEdital>
+<MotivoEdital>
+<CodMotivoEdital>08</CodMotivoEdital>
+<DescMotivoEdital>DESCONHECIDO</DescMotivoEdital>
+</MotivoEdital>
+<MotivoEdital>
+<CodMotivoEdital>09</CodMotivoEdital>
+<DescMotivoEdital>FORA DA COMARCA</DescMotivoEdital>
+</MotivoEdital>
+<MotivoEdital>
+<CodMotivoEdital>10</CodMotivoEdital>
+<DescMotivoEdital>FALECIDO</DescMotivoEdital>
+</MotivoEdital>
+<MotivoEdital>
+<CodMotivoEdital>11</CodMotivoEdital>
+<DescMotivoEdital>ENDEREÇO IGNORADO</DescMotivoEdital>
+</MotivoEdital>
+<MotivoEdital>
+<CodMotivoEdital>12</CodMotivoEdital>
+<DescMotivoEdital>LOCAL PERIGOSO</DescMotivoEdital>
+</MotivoEdital>
+<MotivoEdital>
+<CodMotivoEdital>13</CodMotivoEdital>
+<DescMotivoEdital>NÃO RESIDE NO ENDEREÇO FORNECIDO</DescMotivoEdital>
+</MotivoEdital>
+<MotivoEdital>
+<CodMotivoEdital>14</CodMotivoEdital>
+<DescMotivoEdital>NÃO ESTÁ ESTABELECIDO NO ENDEREÇO</DescMotivoEdital>
+</MotivoEdital>
+</dataroot>

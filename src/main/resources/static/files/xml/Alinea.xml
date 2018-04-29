@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataroot xmlns:od="urn:schemas-microsoft-com:officedata">
+<Alinea>
+<CodigoAlinea>11</CodigoAlinea>
+<DescricaoAlinea>INSUFICIENCIA DE FUNDOS</DescricaoAlinea>
+</Alinea>
+<Alinea>
+<CodigoAlinea>12</CodigoAlinea>
+<DescricaoAlinea>CONTA ENCERRADA</DescricaoAlinea>
+</Alinea>
+<Alinea>
+<CodigoAlinea>13</CodigoAlinea>
+<DescricaoAlinea>A</DescricaoAlinea>
+</Alinea>
+<Alinea>
+<CodigoAlinea>14</CodigoAlinea>
+<DescricaoAlinea>.</DescricaoAlinea>
+</Alinea>
+<Alinea>
+<CodigoAlinea>19</CodigoAlinea>
+<DescricaoAlinea>NAO SEI</DescricaoAlinea>
+</Alinea>
+<Alinea>
+<CodigoAlinea>20</CodigoAlinea>
+<DescricaoAlinea>.</DescricaoAlinea>
+</Alinea>
+<Alinea>
+<CodigoAlinea>21</CodigoAlinea>
+<DescricaoAlinea>CONTRA ORDEM</DescricaoAlinea>
+</Alinea>
+<Alinea>
+<CodigoAlinea>22</CodigoAlinea>
+<DescricaoAlinea>DIVERGENCIA,INS ASS</DescricaoAlinea>
+</Alinea>
+<Alinea>
+<CodigoAlinea>24</CodigoAlinea>
+<DescricaoAlinea>BLOQ JUD OU DETERMIN BC</DescricaoAlinea>
+</Alinea>
+<Alinea>
+<CodigoAlinea>25</CodigoAlinea>
+<DescricaoAlinea>CANC DO TALONARIO P/SACAD</DescricaoAlinea>
+</Alinea>
+<Alinea>
+<CodigoAlinea>26</CodigoAlinea>
+<DescricaoAlinea>INOPERANCIA TEMP TRANSPOR</DescricaoAlinea>
+</Alinea>
+<Alinea>
+<CodigoAlinea>28</CodigoAlinea>
+<DescricaoAlinea>NAO SEI</DescricaoAlinea>
+</Alinea>
+<Alinea>
+<CodigoAlinea>29</CodigoAlinea>
+<DescricaoAlinea>N SEI</DescricaoAlinea>
+</Alinea>
+<Alinea>
+<CodigoAlinea>31</CodigoAlinea>
+<DescricaoAlinea>.</DescricaoAlinea>
+</Alinea>
+<Alinea>
+<CodigoAlinea>34</CodigoAlinea>
+<DescricaoAlinea>NAO SEI</DescricaoAlinea>
+</Alinea>
+<Alinea>
+<CodigoAlinea>35</CodigoAlinea>
+<DescricaoAlinea>CHEQUE FRAUDADO</DescricaoAlinea>
+</Alinea>
+<Alinea>
+<CodigoAlinea>40</CodigoAlinea>
+<DescricaoAlinea>NAO SEI NAO</DescricaoAlinea>
+</Alinea>
+<Alinea>
+<CodigoAlinea>41</CodigoAlinea>
+<DescricaoAlinea>NAO SEI O Q SIGNIF</DescricaoAlinea>
+</Alinea>
+<Alinea>
+<CodigoAlinea>43</CodigoAlinea>
+<DescricaoAlinea>DEVOLVIDA ANTERIORMENTE</DescricaoAlinea>
+</Alinea>
+<Alinea>
+<CodigoAlinea>44</CodigoAlinea>
+<DescricaoAlinea>CHEQUE PRESCRITO</DescricaoAlinea>
+</Alinea>
+<Alinea>
+<CodigoAlinea>48</CodigoAlinea>
+<DescricaoAlinea>CH  SP 100 S/IDENT CREDOR</DescricaoAlinea>
+</Alinea>
+<Alinea>
+<CodigoAlinea>49</CodigoAlinea>
+<DescricaoAlinea><![CDATA[REMESSA NULA ]]></DescricaoAlinea>
+</Alinea>
+<Alinea>
+<CodigoAlinea>61</CodigoAlinea>
+<DescricaoAlinea>PAPEL NAO COMPENSÁVEL</DescricaoAlinea>
+</Alinea>
+</dataroot>

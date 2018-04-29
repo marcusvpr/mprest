@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -12,11 +13,13 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-@Table(name = "mpm_titulo")
+@Table(name = "mpadt_titulo")
 public class MpmTitulo extends MpEntity {
 	//
 	private static final long serialVersionUID = 1L;
@@ -79,10 +82,12 @@ public class MpmTitulo extends MpEntity {
 	private String numeroTitulo;
 	
 	@JsonFormat(pattern="dd/MM/yyyy hh:mm")
+	@Temporal(TemporalType.DATE)
 	@Column(name = "data_vencimento", nullable = true)
 	private Date dataVencimento;
 
 	@JsonFormat(pattern="dd/MM/yyyy hh:mm")
+	@Temporal(TemporalType.DATE)
 	@Column(name = "data_emissao", nullable = true)
 	private Date dataEmissao;
 
@@ -90,6 +95,7 @@ public class MpmTitulo extends MpEntity {
 	private String numeroDistribuicao;
 
 	@JsonFormat(pattern="dd/MM/yyyy hh:mm")
+	@Temporal(TemporalType.DATE)
 	@Column(name = "data_distribuicao", nullable = true)
 	private Date dataDistribuicao;
 	
@@ -97,6 +103,7 @@ public class MpmTitulo extends MpEntity {
 	private String codigoApresentante;
 
 	@JsonFormat(pattern="dd/MM/yyyy hh:mm")
+	@Temporal(TemporalType.DATE)
 	@Column(name = "data_ate", nullable = true)
 	private Date dataAte;
 
@@ -104,6 +111,7 @@ public class MpmTitulo extends MpEntity {
 	private String numeroProtocolo;
 	
 	@JsonFormat(pattern="dd/MM/yyyy hh:mm")
+	@Temporal(TemporalType.DATE)
 	@Column(name = "data_protocolo", nullable = true)
 	private Date dataProtocolo;
 
@@ -118,6 +126,10 @@ public class MpmTitulo extends MpEntity {
 	@JoinColumn(name="mpmEspecie_id")
 	private MpmEspecie mpmEspecie;
 	
+	@ManyToOne
+	@JoinColumn(name="mpmEndosso_id")
+	private MpmEndosso mpmEndosso;
+	
 	@OneToMany(mappedBy="mpmTitulo")
 	private List<MpmTituloStatus> mpmTituloStatuss = new ArrayList<>();
 			
@@ -128,22 +140,36 @@ public class MpmTitulo extends MpEntity {
 	)	
 	private List<MpmDevedor> mpmDevedors = new ArrayList<>();
 
+	@ManyToMany
+	@JoinTable(name = "mpmTitulo_mpmApresentante", 
+		joinColumns = @JoinColumn(name = "mpmTitulo_id"), 
+		inverseJoinColumns = @JoinColumn(name = "mpmApresentante_id"))
+	private List<MpmApresentante> mpmApresentantes = new ArrayList<>();
+
+	@ManyToMany
+	@JoinTable(name = "mpmTitulo_mpmPessoaTitulo", 
+		joinColumns = @JoinColumn(name = "mpmTitulo_id"), 
+		inverseJoinColumns = @JoinColumn(name = "mpmPessoaTitulo_id"))
+	private List<MpmPessoaTitulo> mpmPessoaTitulos = new ArrayList<>();
+
 	//
 	
 	public MpmTitulo() {
 		//
 	}
 	
-	public MpmTitulo(String nomeArquivo, String finsFAlimentares, String aceite, String numeroTalao3oficio,
+	public MpmTitulo(Integer id, String nomeArquivo, String finsFAlimentares,
+			String aceite, String numeroTalao3oficio,
 			String convenioNumeroLivro, String talaoNumeroLivro, String aVista, String nihil, String digital,
 			String observacao, String totalPagar, String totalDeposito, String valorDistribuicao, String saldo,
 			String valor, String agenciaCedente, String endosso, String numeroBanco, String numeroTitulo,
 			Date dataVencimento, Date dataEmissao, String numeroDistribuicao, Date dataDistribuicao,
 			String codigoApresentante, Date dataAte, String numeroProtocolo, Date dataProtocolo, String faixa,
-			MpmAlinea mpmAlinea, MpmEspecie mpmEspecie) {
+			MpmAlinea mpmAlinea, MpmEspecie mpmEspecie, MpmEndosso mpmEndosso) {
 		//
 		super();
 		
+		this.id = id;
 		this.nomeArquivo = nomeArquivo;
 		this.finsFAlimentares = finsFAlimentares;
 		this.aceite = aceite;
@@ -175,6 +201,7 @@ public class MpmTitulo extends MpEntity {
 		
 		this.mpmAlinea = mpmAlinea;
 		this.mpmEspecie = mpmEspecie;
+		this.mpmEndosso = mpmEndosso;
 	}
 
 	//
@@ -273,6 +300,9 @@ public class MpmTitulo extends MpEntity {
 
 	public MpmEspecie getMpmEspecie() { return mpmEspecie; }
 	public void setMpmEspecie(MpmEspecie mpmEspecie) { this.mpmEspecie = mpmEspecie; }
+
+	public MpmEndosso getMpmEndosso() { return mpmEndosso; }
+	public void setMpmEndosso(MpmEndosso mpmEndosso) { this.mpmEndosso = mpmEndosso; }
 	
 	public List<MpmTituloStatus> getMpmTituloStatuss() { return mpmTituloStatuss; }
 	public void setMpmTituloStatuss(List<MpmTituloStatus> mpmTituloStatuss) { 
@@ -281,4 +311,12 @@ public class MpmTitulo extends MpEntity {
 	public List<MpmDevedor> getMpmDevedors() { return mpmDevedors; }
 	public void setMpmDevedors(List<MpmDevedor> mpmDevedors) { this.mpmDevedors = mpmDevedors; }
 
+	public List<MpmApresentante> getMpmApresentantes() { return mpmApresentantes; }
+	public void setMpmApresentantes(List<MpmApresentante> mpmApresentantes) { 
+																this.mpmApresentantes = mpmApresentantes; }
+	
+	public List<MpmPessoaTitulo> getMpmPessoaTitulos() { return mpmPessoaTitulos; }
+	public void setMpmPessoaTitulos(List<MpmPessoaTitulo> mpmPessoaTitulos) { 
+																this.mpmPessoaTitulos = mpmPessoaTitulos; }
+	
 }

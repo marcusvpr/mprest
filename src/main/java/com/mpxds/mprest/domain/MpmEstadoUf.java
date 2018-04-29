@@ -3,6 +3,7 @@ package com.mpxds.mprest.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -11,7 +12,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "mpm_estado_uf")
+@Table(name = "mpadt_estado_uf")
 public class MpmEstadoUf extends MpEntity {
 	//
 	private static final long serialVersionUID = 1L;
@@ -20,10 +21,10 @@ public class MpmEstadoUf extends MpEntity {
 	private String sigla;
 
 	@Column(nullable = true, length = 30)
-	private String descricao;
+	private String nome;
 		
 	@JsonIgnore
-	@OneToMany(mappedBy="mpmEstadoUf")
+	@OneToMany(mappedBy = "mpmEstadoUf", cascade = CascadeType.ALL)
 	private List<MpmCidade> mpmCidades = new ArrayList<>();
 	
 	//
@@ -32,13 +33,13 @@ public class MpmEstadoUf extends MpEntity {
 		//
 	}
 
-	public MpmEstadoUf(Integer id, String sigla, String descricao) {
+	public MpmEstadoUf(Integer id, String sigla, String nome) {
 		//
 		super();
 		
 		this.id = id;
 		this.sigla = sigla;
-		this.descricao = descricao;
+		this.nome = nome;
 	}
 
 	//
@@ -46,8 +47,8 @@ public class MpmEstadoUf extends MpEntity {
 	public String getSigla() { return sigla; }
 	public void setSigla(String sigla) { this.sigla = sigla; }
 	
-	public String getDescricao() { return descricao; }
-	public void setDescricao(String descricao) { this.descricao = descricao; }
+	public String getNome() { return nome; }
+	public void setNome(String nome) { this.nome = nome; }
 	
 	public List<MpmCidade> getMpmCidades() { return mpmCidades; }
 	public void setMpmCidades(List<MpmCidade> mpmCidades) { this.mpmCidades = mpmCidades; }

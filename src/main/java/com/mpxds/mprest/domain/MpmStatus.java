@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "mpm_status")
+@Table(name = "mpadt_status")
 public class MpmStatus extends MpEntity {
 	//
 	private static final long serialVersionUID = 1L;

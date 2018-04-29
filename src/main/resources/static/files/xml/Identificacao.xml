@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataroot xmlns:od="urn:schemas-microsoft-com:officedata">
+<Identificacao>
+<Cod_Identificacao>1</Cod_Identificacao>
+<Dsc_Identificacao>DEVEDOR</Dsc_Identificacao>
+</Identificacao>
+<Identificacao>
+<Cod_Identificacao>2</Cod_Identificacao>
+<Dsc_Identificacao>AVALISTA</Dsc_Identificacao>
+</Identificacao>
+<Identificacao>
+<Cod_Identificacao>3</Cod_Identificacao>
+<Dsc_Identificacao>ENDOSSANTE</Dsc_Identificacao>
+</Identificacao>
+<Identificacao>
+<Cod_Identificacao>4</Cod_Identificacao>
+<Dsc_Identificacao>BCO SACADO</Dsc_Identificacao>
+</Identificacao>
+<Identificacao>
+<Cod_Identificacao>5</Cod_Identificacao>
+<Dsc_Identificacao>FIADOR</Dsc_Identificacao>
+</Identificacao>
+<Identificacao>
+<Cod_Identificacao>6</Cod_Identificacao>
+<Dsc_Identificacao>PORTADOR</Dsc_Identificacao>
+</Identificacao>
+</dataroot>

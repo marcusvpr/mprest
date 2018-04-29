@@ -18,9 +18,9 @@ public class MpmEspecieResource {
 	private MpmEspecieService mpService;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
+	public ResponseEntity<?> findId(@PathVariable Integer id) {
 		//
-		MpmEspecie mpObj = mpService.buscar(id);
+		MpmEspecie mpObj = mpService.buscarId(id);
 		//
 		return ResponseEntity.ok().body(mpObj);
 	}

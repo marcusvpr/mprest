@@ -2,10 +2,12 @@ package com.mpxds.mprest.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Version;
 
 @MappedSuperclass
 public abstract class MpEntity implements Serializable {
@@ -16,6 +18,10 @@ public abstract class MpEntity implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	protected Integer id;
 		
+	@Version
+	@Column(columnDefinition = "integer DEFAULT 0", nullable = false)
+	private Long version = 0L;
+
 	// 
 	
 	public MpEntity() {
@@ -34,6 +40,9 @@ public abstract class MpEntity implements Serializable {
 	public Integer getId() { return id; }
 	public void setId(Integer id) { this.id = id; }
 
+    public Long getVersion() { return this.version; }
+    public void setVersion(Long newVersion) { this.version = newVersion; }
+	
 	// ---
 
 	@Override

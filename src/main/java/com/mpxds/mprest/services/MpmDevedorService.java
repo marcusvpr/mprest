@@ -14,7 +14,7 @@ public class MpmDevedorService {
 	@Autowired
 	private MpmDevedorRepository mpRepo;
 	
-	public MpmDevedor buscar(Integer id) {
+	public MpmDevedor buscarId(Integer id) {
 		//
 		Optional<MpmDevedor> mpObj = mpRepo.findById(id);
 		//

@@ -14,9 +14,16 @@ public class MpmEstadoUfService {
 	@Autowired
 	private MpmEstadoUfRepository mpRepo;
 	
-	public MpmEstadoUf buscar(Integer id) {
+	public MpmEstadoUf buscarId(Integer id) {
 		//
 		Optional<MpmEstadoUf> mpObj = mpRepo.findById(id);
+		//
+		return mpObj.orElse(null);
+	}
+	
+	public MpmEstadoUf buscarSigla(String sigla) {
+		//
+		Optional<MpmEstadoUf> mpObj = mpRepo.findBySigla(sigla);
 		//
 		return mpObj.orElse(null);
 	}

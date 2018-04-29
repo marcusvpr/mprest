@@ -18,9 +18,9 @@ public class MpmAlineaResource {
 	private MpmAlineaService mpService;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
+	public ResponseEntity<?> findId(@PathVariable Integer id) {
 		//
-		MpmAlinea mpObj = mpService.buscar(id);
+		MpmAlinea mpObj = mpService.buscarId(id);
 		//
 		return ResponseEntity.ok().body(mpObj);
 	}

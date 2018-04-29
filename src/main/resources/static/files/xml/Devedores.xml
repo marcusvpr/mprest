@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataroot xmlns:od="urn:schemas-microsoft-com:officedata">
+<Devedores>
+<Dt_Protocolo>2017-03-08T00:00:00</Dt_Protocolo>
+<No_Protocolo>016172</No_Protocolo>
+<Cod_Identificacao>1</Cod_Identificacao>
+<Cod_Devedor>6</Cod_Devedor>
+<Tp_Documento>CPF</Tp_Documento>
+<No_Documento>66404223791</No_Documento>
+<Nome><![CDATA[RAUL SOARES CARNEIRO NETO                    ]]></Nome>
+<Endereco>O PORTADOR DECLARA ENDERECO DESCONHECIDO OU NAO SA</Endereco>
+<Numero></Numero>
+<Complemento></Complemento>
+<Bairro></Bairro>
+<Cidade><![CDATA[RIO DE JANEIRO      ]]></Cidade>
+<Uf>RJ</Uf>
+<Cep>00000-000</Cep>
+</Devedores>
+<Devedores>
+<Dt_Protocolo>2017-03-08T00:00:00</Dt_Protocolo>
+<No_Protocolo>016172</No_Protocolo>
+<Cod_Identificacao>4</Cod_Identificacao>
+<Cod_Devedor>7</Cod_Devedor>
+<Tp_Documento>CGC</Tp_Documento>
+<No_Documento>33479023000180</No_Documento>
+<Nome>BANCO CITYBANK S.A.   AG 0075</Nome>
+<Endereco>AV PAULISTA</Endereco>
+<Numero>1111</Numero>
+<Complemento>2 ANDAR</Complemento>
+<Bairro>BELA VISTA</Bairro>
+<Cidade>SAO PAULO</Cidade>
+<Uf>SP</Uf>
+<Cep>01311-920</Cep>
+</Devedores>
+</dataroot>

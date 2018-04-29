@@ -14,7 +14,7 @@ public class MpmTituloProtestadoService {
 	@Autowired
 	private MpmTituloProtestadoRepository mpRepo;
 	
-	public MpmTituloProtestado buscar(Integer id) {
+	public MpmTituloProtestado buscarId(Integer id) {
 		//
 		Optional<MpmTituloProtestado> mpObj = mpRepo.findById(id);
 		//

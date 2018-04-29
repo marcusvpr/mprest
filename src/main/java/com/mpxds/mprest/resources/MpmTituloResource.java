@@ -18,9 +18,9 @@ public class MpmTituloResource {
 	private MpmTituloService mpService;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
+	public ResponseEntity<?> findId(@PathVariable Integer id) {
 		//
-		MpmTitulo mpObj = mpService.buscar(id);
+		MpmTitulo mpObj = mpService.buscarId(id);
 		//
 		return ResponseEntity.ok().body(mpObj);
 	}
