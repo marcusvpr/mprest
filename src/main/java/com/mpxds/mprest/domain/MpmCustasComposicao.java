@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -14,8 +15,12 @@ import javax.persistence.Table;
 
 import org.springframework.format.annotation.NumberFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+//@Table(name = "mpadt_custas_composicao", indexes = { // Verificar com PRISCO ???
+//		@Index(name = "index_mpadt_custas_composicao_mpmanoref_tab_it_subit_descr",
+//				columnList = "mpmAnoReferencia_id, tabela, item, subitem, descricao", unique = true)})
 @Table(name = "mpadt_custas_composicao")
 public class MpmCustasComposicao extends MpEntity {
 	//
@@ -25,13 +30,13 @@ public class MpmCustasComposicao extends MpEntity {
 	@JoinColumn(name="mpmAnoReferencia_id")
 	private MpmAnoReferencia mpmAnoReferencia; 
 
-	@Column(nullable = true, length = 4)
+	@Column(nullable = false, length = 4)
 	private String tabela;
 	
-	@Column(nullable = true, length = 4)
+	@Column(nullable = false, length = 4)
 	private String item;
 
-	@Column(nullable = true, length = 4)
+	@Column(nullable = false, length = 4)
 	private String subItem;
 
 	@Column(nullable = true, length = 35)
@@ -67,6 +72,7 @@ public class MpmCustasComposicao extends MpEntity {
 	@Column(name = "id_clone", nullable = true)
 	private Integer idClone;
 
+	@JsonIgnore
 	@OneToMany(mappedBy="mpmCustasComposicao")
 	private List<MpmAtoComposicao> mpmAtoComposicaos = new ArrayList<>();
 	

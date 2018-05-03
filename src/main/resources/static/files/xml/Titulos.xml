@@ -5,14 +5,14 @@
 <No_Protocolo>016172</No_Protocolo>
 <Dt_Ate>2017-03-13T00:00:00</Dt_Ate>
 <Cod_Apresentante>999999</Cod_Apresentante>
-<Convenio><![CDATA[ ]]></Convenio>
+<Convenio> ></Convenio>
 <Empresa></Empresa>
 <Dt_Distribuicao>2017-03-07T00:00:00</Dt_Distribuicao>
 <No_Distribuicao>0064689</No_Distribuicao>
 <Dt_Emissao>2016-06-03T00:00:00</Dt_Emissao>
 <Dt_Vencto>2016-06-03T00:00:00</Dt_Vencto>
-<No_Titulo><![CDATA[000109     ]]></No_Titulo>
-<No_Banco><![CDATA[               ]]></No_Banco>
+<No_Titulo>000109     </No_Titulo>
+<No_Banco>               </No_Banco>
 <Cod_Endosso>S</Cod_Endosso>
 <AgenciaCedente>00001</AgenciaCedente>
 <Valor>1000</Valor>
@@ -65,7 +65,7 @@
 <Tit_ResSP></Tit_ResSP>
 <Tit_VlReembEdital>0</Tit_VlReembEdital>
 <No_Cliente></No_Cliente>
-<NomeApresentante><![CDATA[CODERE DO BRASIL ENTRETENIMENTO LTDA         ]]></NomeApresentante>
+<NomeApresentante>CODERE DO BRASIL ENTRETENIMENTO LTDA         ></NomeApresentante>
 <EnderecoApresentante>RUA DA CONCEICAO</EnderecoApresentante>
 <NumeroApresentante>27</NumeroApresentante>
 <ComplementoApresentante></ComplementoApresentante>
@@ -73,7 +73,7 @@
 <CidadeApresentante>NITEROI</CidadeApresentante>
 <UfApresentante>RJ</UfApresentante>
 <CepApresentante>24020-080</CepApresentante>
-<NomeFavorecido><![CDATA[CODERE DO BRASIL ENTRETENIMENTO LTDA         ]]></NomeFavorecido>
+<NomeFavorecido>CODERE DO BRASIL ENTRETENIMENTO LTDA         ></NomeFavorecido>
 <EnderecoFavorecido></EnderecoFavorecido>
 <NumeroFavorecido></NumeroFavorecido>
 <ComplementoFavorecido></ComplementoFavorecido>

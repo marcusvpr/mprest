@@ -7,9 +7,12 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
+import com.mpxds.mprest.domain.MpmCidade;
+import com.mpxds.mprest.domain.MpmEstadoUf;
 import com.mpxds.mprest.domain.xml.MpmAlineaXML;
 import com.mpxds.mprest.domain.xml.MpmAlineasXML;
 import com.mpxds.mprest.domain.xml.MpmAtoComposicaoXML;
@@ -18,13 +21,30 @@ import com.mpxds.mprest.domain.xml.MpmAtoXML;
 import com.mpxds.mprest.domain.xml.MpmAtosXML;
 import com.mpxds.mprest.domain.xml.MpmDevedorXML;
 import com.mpxds.mprest.domain.xml.MpmDevedorsXML;
-import com.mpxds.mprest.domain.xml.MpmIdentificacaoXML;
-import com.mpxds.mprest.domain.xml.MpmIdentificacaosXML;
+import com.mpxds.mprest.domain.xml.MpmEditalXML;
+import com.mpxds.mprest.domain.xml.MpmEditalsXML;
 import com.mpxds.mprest.domain.xml.MpmEndossoXML;
 import com.mpxds.mprest.domain.xml.MpmEndossosXML;
+import com.mpxds.mprest.domain.xml.MpmEspecieXML;
+import com.mpxds.mprest.domain.xml.MpmEspeciesXML;
+import com.mpxds.mprest.domain.xml.MpmIdentificacaoXML;
+import com.mpxds.mprest.domain.xml.MpmIdentificacaosXML;
+import com.mpxds.mprest.domain.xml.MpmMotivoEditalXML;
+import com.mpxds.mprest.domain.xml.MpmMotivoEditalsXML;
+import com.mpxds.mprest.domain.xml.MpmObservacaoXML;
+import com.mpxds.mprest.domain.xml.MpmObservacaosXML;
+import com.mpxds.mprest.domain.xml.MpmTituloXML;
+import com.mpxds.mprest.domain.xml.MpmTitulosXML;
+import com.mpxds.mprest.domain.xml.MpmTransacaoXML;
+import com.mpxds.mprest.domain.xml.MpmTransacaosXML;
+import com.mpxds.mprest.repositories.MpmCidadeRepository;
+import com.mpxds.mprest.repositories.MpmEstadoUfRepository;
+import com.mpxds.mprest.services.MpmCidadeService;
+import com.mpxds.mprest.services.MpmEstadoUfService;
 
 public class MpTesteXML {
 	//
+
 	public static void main(String[] args) {
 		//
 //		trataAlineasXML();
@@ -32,7 +52,13 @@ public class MpTesteXML {
 //  	trataAtoComposicaoXML();
 //		trataDevedorXML();
 //		trataIdentificacaoXML();
-		trataEndossoXML();
+//		trataEndossoXML();
+//		trataEditalXML();
+//		trataMotivoEditalXML();
+//		trataObservacaoXML();
+//		trataTransacaoXML();
+//		trataEspecieXML();
+		trataTituloXML();
 	}
 	
 	private static void trataAlineasXML() {
@@ -186,5 +212,156 @@ public class MpTesteXML {
 			e.printStackTrace();
 		}
 	}
+	
+	private static void trataEditalXML() {
+		//
+		try {
+			Resource resource = new ClassPathResource("static/files/xml/Edital.xml");
+			
+			File file = resource.getFile();
+	
+			JAXBContext jaxbContext = JAXBContext.newInstance(MpmEditalsXML.class);
+	
+			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+			MpmEditalsXML mpmEditalsXML = (MpmEditalsXML) jaxbUnmarshaller.unmarshal(file);
+			
+			System.out.println(mpmEditalsXML.getMpmEditalXMLs().size());
+	
+			for (MpmEditalXML mpmEditalXML : mpmEditalsXML.getMpmEditalXMLs()) {
+				System.out.println(mpmEditalXML);
+			}
+			//
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private static void trataMotivoEditalXML() {
+		//
+		try {
+			Resource resource = new ClassPathResource("static/files/xml/MotivoEdital.xml");
+			
+			File file = resource.getFile();
+	
+			JAXBContext jaxbContext = JAXBContext.newInstance(MpmMotivoEditalsXML.class);
+	
+			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+			MpmMotivoEditalsXML mpmMotivoEditalsXML = (MpmMotivoEditalsXML) jaxbUnmarshaller.unmarshal(file);
+			
+			System.out.println(mpmMotivoEditalsXML.getMpmMotivoEditalXMLs().size());
+	
+			for (MpmMotivoEditalXML mpmMotivoEditalXML : mpmMotivoEditalsXML.getMpmMotivoEditalXMLs()) {
+				System.out.println(mpmMotivoEditalXML);
+			}
+			//
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private static void trataObservacaoXML() {
+		//
+		try {
+			Resource resource = new ClassPathResource("static/files/xml/Observacoes.xml");
+			
+			File file = resource.getFile();
+	
+			JAXBContext jaxbContext = JAXBContext.newInstance(MpmObservacaosXML.class);
+	
+			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+			MpmObservacaosXML mpmObservacaosXML = (MpmObservacaosXML) jaxbUnmarshaller.unmarshal(file);
+			
+			System.out.println(mpmObservacaosXML.getMpmObservacaoXMLs().size());
+	
+			for (MpmObservacaoXML mpmObservacaoXML : mpmObservacaosXML.getMpmObservacaoXMLs()) {
+				System.out.println(mpmObservacaoXML);
+			}
+			//
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
+	private static void trataTransacaoXML() {
+		//
+		try {
+			Resource resource = new ClassPathResource("static/files/xml/Transacao.xml");
+			
+			File file = resource.getFile();
+	
+			JAXBContext jaxbContext = JAXBContext.newInstance(MpmTransacaosXML.class);
+	
+			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+			MpmTransacaosXML mpmTransacaosXML = (MpmTransacaosXML) jaxbUnmarshaller.unmarshal(file);
+			
+			System.out.println(mpmTransacaosXML.getMpmTransacaoXMLs().size());
+	
+			for (MpmTransacaoXML mpmTransacaoXML : mpmTransacaosXML.getMpmTransacaoXMLs()) {
+				System.out.println(mpmTransacaoXML);
+			}
+			//
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private static void trataEspecieXML() {
+		//
+		try {
+			Resource resource = new ClassPathResource("static/files/xml/Especies.xml");
+			
+			File file = resource.getFile();
+	
+			JAXBContext jaxbContext = JAXBContext.newInstance(MpmEspeciesXML.class);
+	
+			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+			MpmEspeciesXML mpmEspeciesXML = (MpmEspeciesXML) jaxbUnmarshaller.unmarshal(file);
+			
+			System.out.println(mpmEspeciesXML.getMpmEspecieXMLs().size());
+	
+			for (MpmEspecieXML mpmEspecieXML : mpmEspeciesXML.getMpmEspecieXMLs()) {
+				System.out.println(mpmEspecieXML);
+			}
+			//
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private static void trataTituloXML() {
+		//
+		try {
+			Resource resource = new ClassPathResource("static/files/xml/Titulos.xml");
+			
+			File file = resource.getFile();
+	
+			JAXBContext jaxbContext = JAXBContext.newInstance(MpmTitulosXML.class);
+	
+			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+			MpmTitulosXML mpmTitulosXML = (MpmTitulosXML) jaxbUnmarshaller.unmarshal(file);
+			
+			System.out.println(mpmTitulosXML.getMpmTituloXMLs().size());
+	
+			for (MpmTituloXML mpmTituloXML : mpmTitulosXML.getMpmTituloXMLs()) {
+				//
+				System.out.println(mpmTituloXML);				
+			}
+			//
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }

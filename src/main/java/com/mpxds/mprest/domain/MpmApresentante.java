@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -17,12 +18,13 @@ import org.springframework.format.annotation.NumberFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "mpadt_apresentante")
+@Table(name = "mpadt_apresentante", indexes = {
+		@Index(name = "index_mpadt_apresentante_codigo", columnList = "codigo", unique = true)})
 public class MpmApresentante extends MpEntity {
 	//
 	private static final long serialVersionUID = 1L;
 		
-	@Column(nullable = true, length = 7)
+	@Column(nullable = false, length = 7)
 	private String codigo;
 	
 	@Column(nullable = true, length = 135)

@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -15,7 +16,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "mpadt_titulo_status")
+@Table(name = "mpadt_titulo_status", indexes = {
+		@Index(name = "index_mpadt_titulo_status_dat_cod",
+										columnList = "data_ocorrencia, codigo", unique = true)})
 public class MpmTituloStatus extends MpEntity {
 	//
 	private static final long serialVersionUID = 1L;
@@ -40,6 +43,10 @@ public class MpmTituloStatus extends MpEntity {
 	@ManyToOne
 	@JoinColumn(name="mpmTituloProtestado_id")
 	private MpmTituloProtestado mpmTituloProtestado;
+	
+	@ManyToOne
+	@JoinColumn(name="mpmStatus_id")
+	private MpmStatus mpmStatus;
 
 	@JsonIgnore
 	@ManyToOne
@@ -54,7 +61,7 @@ public class MpmTituloStatus extends MpEntity {
 
 	public MpmTituloStatus(Integer id, Date dataOcorrencia, String codigo, String motivo_protesto,
 							String observacao, Boolean indBloqueado, MpmTitulo mpmTitulo,
-							MpmTituloProtestado mpmTituloProtestado) {
+							MpmTituloProtestado mpmTituloProtestado, MpmStatus mpmStatus) {
 		//
 		super();
 		
@@ -66,6 +73,7 @@ public class MpmTituloStatus extends MpEntity {
 		this.indBloqueado = indBloqueado;
 		this.mpmTitulo = mpmTitulo;
 		this.mpmTituloProtestado = mpmTituloProtestado;
+		this.mpmStatus = mpmStatus;
 	}
 
 	//
@@ -91,5 +99,8 @@ public class MpmTituloStatus extends MpEntity {
 	public MpmTituloProtestado getMpmTituloProtestado() { return mpmTituloProtestado; }
 	public void setMpmTituloProtestado(MpmTituloProtestado mpmTituloProtestado) { 
 															this.mpmTituloProtestado = mpmTituloProtestado; }
+
+	public MpmStatus getMpmStatus() { return mpmStatus; }
+	public void setMpmStatus(MpmStatus mpmStatus) { this.mpmStatus = mpmStatus; }
 	
 }

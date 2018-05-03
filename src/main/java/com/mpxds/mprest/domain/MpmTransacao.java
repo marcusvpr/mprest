@@ -20,51 +20,142 @@ public class MpmTransacao extends MpEntity {
   	@Column(name = "numero_codigo_portador", nullable = true, length = 3)
 	private String numeroCodigoPortador;
 
+  	@Column(name = "agencia_cod_cedente", nullable = true, length = 15)
 	private String agenciaCodCedente;
+	
+  	@Column(name = "nome_ced_fav", nullable = true, length = 45)
 	private String nomeCedFav;
+	
+  	@Column(name = "nome_sacador", nullable = true, length = 45)
 	private String nomeSacador;
+	
+  	@Column(name = "documento_sacador", nullable = true, length = 14)
 	private String documentoSacador;
+	
+  	@Column(name = "endereco_sacador", nullable = true, length = 45)
 	private String enderecoSacador;
+	
+  	@Column(name = "cep_sacador", nullable = true, length = 8)
 	private String cepSacador;
+	
+  	@Column(name = "cidade_sacador", nullable = true, length = 20)
 	private String cidadeSacador;
+	
+  	@Column(name = "uf_sacador", nullable = true, length = 2)
 	private String ufSacador;
+	
+  	@Column(name = "nosso_numero", nullable = true, length = 15)
 	private String nossoNumero;
+	
+  	@Column(name = "specie_titulo", nullable = true, length = 3)
 	private String especieTitulo;
+	
+  	@Column(name = "numero_titulo", nullable = true, length = 11)
 	private String numeroTitulo;
+	
+  	@Column(name = "data_emissao_titulo", nullable = true, length = 8)
 	private String dataEmissaoTitulo;
+	
+  	@Column(name = "data_vencimento_titulo", nullable = true, length = 8)
 	private String dataVencimentoTitulo;
+	
+  	@Column(name = "tipo_moeda", nullable = true, length = 3)
 	private String tipoMoeda;
+	
+  	@Column(name = "valor_titulo", nullable = true, length = 14)
 	private String valorTitulo;
+	
+  	@Column(name = "saldo_titulo", nullable = true, length = 14)
 	private String saldoTitulo;
+	
+  	@Column(name = "praca_pagamento", nullable = true, length = 20)
 	private String pracaPagamento;
+	
+  	@Column(name = "tipo_endosso", nullable = true, length = 1)
 	private String tipoEndosso;
+	
+  	@Column(name = "informacao_aceite", nullable = true, length = 1)
 	private String informacaoAceite;
+	
+  	@Column(name = "numero_controle_devedor", nullable = true, length = 1)
 	private String numeroControleDevedor;
+	
+  	@Column(name = "nome_devedor", nullable = true, length = 45)
 	private String nomeDevedor;
+	
+  	@Column(name = "tipo_ident_devedor", nullable = true, length = 3)
 	private String tipoIdentDevedor;
+	
+  	@Column(name = "numero_ident_devedor", nullable = true, length = 14)
 	private String numeroIdentDevedor;
+	
+  	@Column(name = "documento_devedor", nullable = true, length = 11)
 	private String documentoDevedor;
+	
+  	@Column(name = "endereco_devedor", nullable = true, length = 45)
 	private String enderecoDevedor;
+	
+  	@Column(name = "cep_devedor", nullable = true, length = 8)
 	private String cepDevedor;
+	
+  	@Column(name = "cidade_devedor", nullable = true, length = 20)
 	private String cidadeDevedor;
+	
+  	@Column(name = "uf_devedor", nullable = true, length =2)
 	private String ufDevedor;
+	
+  	@Column(name = "numero_cartorio", nullable = true, length = 2)
 	private String numeroCartorio;
+	
+  	@Column(name = "numero_protocolo_cartorio", nullable = true, length = 10)
 	private String numeroProtocoloCartorio;
+	
+  	@Column(name = "tipo_ocorrencia", nullable = true, length = 1)
 	private String tipoOcorrencia;
+	
+  	@Column(name = "data_protocolo_cartorio", nullable = true, length = 8)
 	private String dataProtocoloCartorio;
+	
+  	@Column(name = "valor_custas_cartorio", nullable = true, length = 14)
 	private String valorCustasCartorio;
+	
+  	@Column(name = "declaracao_portador", nullable = true, length = 1)
 	private String declaracaoPortador;
+	
+  	@Column(name = "data_ocorrencia_cartorio", nullable = true, length = 8)
 	private String dataOcorrenciaCartorio;
+	
+  	@Column(name = "codigo_irregularidade", nullable = true, length = 2)
 	private String codigoIrregularidade;
+	
+  	@Column(name = "bairro_devedor", nullable = true, length = 20)
 	private String bairroDevedor;
+	
+  	@Column(name = "valor_custas_cartorio_dist", nullable = true, length = 14)
 	private String valorCustasCartorioDist;
+	
+  	@Column(name = "nome_portador", nullable = true, length = 45)
 	private String nomePortador;
+	
+  	@Column(name = "numero_distribuicao", nullable = true, length = 7)
 	private String numeroDistribuicao;
+	
+  	@Column(name = "complemento_registro", nullable = true, length = 1)
 	private String complementoRegistro;
+	
+  	@Column(name = "selo_distribuidor", nullable = true, length = 12)
 	private String seloDistribuidor;
+	
+  	@Column(name = "fins_falimentares", nullable = true, length = 1)
 	private String finsFAlimentares;
+	
+  	@Column(nullable = true, length = 1)
 	private String convenio;
+	
+  	@Column(nullable = true, length = 1)
 	private String empresa;
+	
+  	@Column(name = "numero_seq_Registro", nullable = true, length = 4)
 	private String numeroSeqRegistro;	
 
 	// ---

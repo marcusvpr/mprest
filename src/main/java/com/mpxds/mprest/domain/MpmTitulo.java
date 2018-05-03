@@ -23,9 +23,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class MpmTitulo extends MpEntity {
 	//
 	private static final long serialVersionUID = 1L;
-		
-	@Column(name = "nome_arquivo", nullable = true, length = 40)
-	private String nomeArquivo;	
 	
 	@Column(name = "fins_falimentares", nullable = true, length = 1)
 	private String finsFAlimentares;
@@ -48,12 +45,6 @@ public class MpmTitulo extends MpEntity {
 	@Column(nullable = true, length = 1)
 	private String nihil;
 	
-	@Column(nullable = true, length = 1)
-	private String digital;
-	
-	@Column(nullable = true, length = 255)
-	private String observacao;
-	
 	@Column(name = "total_pagar", nullable = true, length = 10)
 	private String totalPagar;
 	
@@ -68,15 +59,12 @@ public class MpmTitulo extends MpEntity {
 	
 	@Column(nullable = true, length = 10)
 	private String valor;
-	
-	@Column(name = "agencia_cedente", nullable = true, length = 28)
-	private String agenciaCedente;
-	
-	@Column(nullable = true, length = 1)
-	private String endosso;
-	
-	@Column(name = "numero_banco", nullable = true, length = 46)
-	private String numeroBanco;
+//	
+//	@Column(name = "agencia_cedente", nullable = true, length = 28)
+//	private String agenciaCedente;
+//	
+//	@Column(name = "numero_banco", nullable = true, length = 46)
+//	private String numeroBanco;
 	
 	@Column(name = "numero_titulo", nullable = true, length = 46)
 	private String numeroTitulo;
@@ -90,17 +78,14 @@ public class MpmTitulo extends MpEntity {
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_emissao", nullable = true)
 	private Date dataEmissao;
-
-	@Column(name = "numero_distribuicao", nullable = true, length = 18)
-	private String numeroDistribuicao;
-
-	@JsonFormat(pattern="dd/MM/yyyy hh:mm")
-	@Temporal(TemporalType.DATE)
-	@Column(name = "data_distribuicao", nullable = true)
-	private Date dataDistribuicao;
-	
-	@Column(name = "codigo_apresentante", nullable = true, length = 13)
-	private String codigoApresentante;
+//
+//	@Column(name = "numero_distribuicao", nullable = true, length = 18)
+//	private String numeroDistribuicao;
+//
+//	@JsonFormat(pattern="dd/MM/yyyy hh:mm")
+//	@Temporal(TemporalType.DATE)
+//	@Column(name = "data_distribuicao", nullable = true)
+//	private Date dataDistribuicao;
 
 	@JsonFormat(pattern="dd/MM/yyyy hh:mm")
 	@Temporal(TemporalType.DATE)
@@ -130,6 +115,14 @@ public class MpmTitulo extends MpEntity {
 	@JoinColumn(name="mpmEndosso_id")
 	private MpmEndosso mpmEndosso;
 	
+	@ManyToOne
+	@JoinColumn(name="mpmObservacao_id")
+	private MpmObservacao mpmObservacao;
+	
+	@ManyToOne
+	@JoinColumn(name="mpmSeloDistribuidor_id")
+	private MpmSeloDistribuidor mpmSeloDistribuidor;
+	
 	@OneToMany(mappedBy="mpmTitulo")
 	private List<MpmTituloStatus> mpmTituloStatuss = new ArrayList<>();
 			
@@ -158,19 +151,20 @@ public class MpmTitulo extends MpEntity {
 		//
 	}
 	
-	public MpmTitulo(Integer id, String nomeArquivo, String finsFAlimentares,
-			String aceite, String numeroTalao3oficio,
-			String convenioNumeroLivro, String talaoNumeroLivro, String aVista, String nihil, String digital,
-			String observacao, String totalPagar, String totalDeposito, String valorDistribuicao, String saldo,
-			String valor, String agenciaCedente, String endosso, String numeroBanco, String numeroTitulo,
-			Date dataVencimento, Date dataEmissao, String numeroDistribuicao, Date dataDistribuicao,
-			String codigoApresentante, Date dataAte, String numeroProtocolo, Date dataProtocolo, String faixa,
-			MpmAlinea mpmAlinea, MpmEspecie mpmEspecie, MpmEndosso mpmEndosso) {
+	public MpmTitulo(Integer id, String finsFAlimentares, String aceite, String numeroTalao3oficio,
+			String convenioNumeroLivro, String talaoNumeroLivro, String aVista, String nihil, 
+			String totalPagar, String totalDeposito, String valorDistribuicao, String saldo,
+//			String valor, String agenciaCedente, String numeroBanco, String numeroTitulo,
+			String valor, String numeroTitulo,
+//			Date dataVencimento, Date dataEmissao, String numeroDistribuicao, Date dataDistribuicao,
+			Date dataVencimento, Date dataEmissao, 
+			Date dataAte, String numeroProtocolo, Date dataProtocolo, String faixa,
+			MpmAlinea mpmAlinea, MpmEspecie mpmEspecie, MpmEndosso mpmEndosso, MpmObservacao mpmObservacao,
+			MpmSeloDistribuidor mpmSeloDistribuidor) {
 		//
 		super();
 		
 		this.id = id;
-		this.nomeArquivo = nomeArquivo;
 		this.finsFAlimentares = finsFAlimentares;
 		this.aceite = aceite;
 		this.numeroTalao3oficio = numeroTalao3oficio;
@@ -178,37 +172,32 @@ public class MpmTitulo extends MpEntity {
 		this.talaoNumeroLivro = talaoNumeroLivro;
 		this.aVista = aVista;
 		this.nihil = nihil;
-		this.digital = digital;
-		this.observacao = observacao;
 		this.totalPagar = totalPagar;
 		this.totalDeposito = totalDeposito;
 		this.valorDistribuicao = valorDistribuicao;
 		this.saldo = saldo;
 		this.valor = valor;
-		this.agenciaCedente = agenciaCedente;
-		this.endosso = endosso;
-		this.numeroBanco = numeroBanco;
+//		this.agenciaCedente = agenciaCedente;
+//		this.numeroBanco = numeroBanco;
 		this.numeroTitulo = numeroTitulo;
 		this.dataVencimento = dataVencimento;
 		this.dataEmissao = dataEmissao;
-		this.numeroDistribuicao = numeroDistribuicao;
-		this.dataDistribuicao = dataDistribuicao;
-		this.codigoApresentante = codigoApresentante;
+//		this.numeroDistribuicao = numeroDistribuicao;
+//		this.dataDistribuicao = dataDistribuicao;
 		this.dataAte = dataAte;
 		this.numeroProtocolo = numeroProtocolo;
 		this.dataProtocolo = dataProtocolo;
 		this.faixa = faixa;
-		
+		//
 		this.mpmAlinea = mpmAlinea;
 		this.mpmEspecie = mpmEspecie;
 		this.mpmEndosso = mpmEndosso;
+		this.mpmObservacao = mpmObservacao;
+		this.mpmSeloDistribuidor = mpmSeloDistribuidor;
 	}
 
 	//
 	
-	public String getNomeArquivo() { return nomeArquivo; }
-	public void setNomeArquivo(String nomeArquivo) { this.nomeArquivo = nomeArquivo; }
-
 	public String getFinsFAlimentares() { return finsFAlimentares; }
 	public void setFinsFAlimentares(String finsFAlimentares) { this.finsFAlimentares = finsFAlimentares; }
 
@@ -232,12 +221,6 @@ public class MpmTitulo extends MpEntity {
 	public String getNihil() { return nihil;}
 	public void setNihil(String nihil) { this.nihil = nihil; }
 
-	public String getDigital() { return digital; }
-	public void setDigital(String digital) { this.digital = digital; }
-
-	public String getObservacao() { return observacao; }
-	public void setObservacao(String observacao) { this.observacao = observacao; }
-
 	public String getTotalPagar() { return totalPagar; }
 	public void setTotalPagar(String totalPagar) { this.totalPagar = totalPagar; }
 
@@ -253,15 +236,12 @@ public class MpmTitulo extends MpEntity {
 
 	public String getValor() { return valor; }
 	public void setValor(String valor) { this.valor = valor; }
-
-	public String getAgenciaCedente() { return agenciaCedente; }
-	public void setAgenciaCedente(String agenciaCedente) { this.agenciaCedente = agenciaCedente; }
-
-	public String getEndosso() { return endosso; }
-	public void setEndosso(String endosso) { this.endosso = endosso; }
-
-	public String getNumeroBanco() { return numeroBanco; }
-	public void setNumeroBanco(String numeroBanco) { this.numeroBanco = numeroBanco; }
+//
+//	public String getAgenciaCedente() { return agenciaCedente; }
+//	public void setAgenciaCedente(String agenciaCedente) { this.agenciaCedente = agenciaCedente; }
+//
+//	public String getNumeroBanco() { return numeroBanco; }
+//	public void setNumeroBanco(String numeroBanco) { this.numeroBanco = numeroBanco; }
 
 	public String getNumeroTitulo() { return numeroTitulo; }
 	public void setNumeroTitulo(String numeroTitulo) { this.numeroTitulo = numeroTitulo; }
@@ -272,16 +252,12 @@ public class MpmTitulo extends MpEntity {
 	public Date getDataEmissao() { return dataEmissao; }
 	public void setDataEmissao(Date dataEmissao) { this.dataEmissao = dataEmissao; }
 
-	public String getNumeroDistribuicao() { return numeroDistribuicao; }
-	public void setNumeroDistribuicao(String numeroDistribuicao) { 
-															this.numeroDistribuicao = numeroDistribuicao; }
-
-	public Date getDataDistribuicao() { return dataDistribuicao; }
-	public void setDataDistribuicao(Date dataDistribuicao) { this.dataDistribuicao = dataDistribuicao; }
-
-	public String getCodigoApresentante() { return codigoApresentante; }
-	public void setCodigoApresentante(String codigoApresentante) { 
-															this.codigoApresentante = codigoApresentante; }
+//	public String getNumeroDistribuicao() { return numeroDistribuicao; }
+//	public void setNumeroDistribuicao(String numeroDistribuicao) { 
+//															this.numeroDistribuicao = numeroDistribuicao; }
+//
+//	public Date getDataDistribuicao() { return dataDistribuicao; }
+//	public void setDataDistribuicao(Date dataDistribuicao) { this.dataDistribuicao = dataDistribuicao; }
 
 	public Date getDataAte() { return dataAte; }
 	public void setDataAte(Date dataAte) { this.dataAte = dataAte; }
@@ -303,6 +279,13 @@ public class MpmTitulo extends MpEntity {
 
 	public MpmEndosso getMpmEndosso() { return mpmEndosso; }
 	public void setMpmEndosso(MpmEndosso mpmEndosso) { this.mpmEndosso = mpmEndosso; }
+
+	public MpmObservacao getMpmObservacao() { return mpmObservacao; }
+	public void setMpmObservacao(MpmObservacao mpmObservacao) { this.mpmObservacao = mpmObservacao; }
+
+	public MpmSeloDistribuidor getMpmSeloDistribuidor() { return mpmSeloDistribuidor; }
+	public void setMpmSeloDistribuidor(MpmSeloDistribuidor mpmSeloDistribuidor) { 
+																this.mpmSeloDistribuidor = mpmSeloDistribuidor; }
 	
 	public List<MpmTituloStatus> getMpmTituloStatuss() { return mpmTituloStatuss; }
 	public void setMpmTituloStatuss(List<MpmTituloStatus> mpmTituloStatuss) { 

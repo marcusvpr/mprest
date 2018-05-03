@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -14,24 +15,26 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "mpadt_endereco")
+@Table(name = "mpadt_endereco", indexes = {
+		@Index(name = "index_mpadt_endereco_logr_num_comp_cep_bair_cida",
+				columnList = "logradouro, numero, complemento, cep, bairro, mpmCidade_id", unique = true)})
 public class MpmEndereco extends MpEntity {
 	//
 	private static final long serialVersionUID = 1L;
 		
-	@Column(nullable = true, length = 50)
+	@Column(nullable = false, length = 50)
 	private String logradouro;
 	
-	@Column(nullable = true, length = 10)
+	@Column(nullable = false, length = 10)
 	private String numero;
 	
-	@Column(nullable = true, length = 20)
+	@Column(nullable = false, length = 20)
 	private String complemento;
 	
-	@Column(nullable = true, length = 9)
+	@Column(nullable = false, length = 9)
 	private String cep;
 
-	@Column(nullable = true, length = 30)
+	@Column(nullable = false, length = 30)
 	private String bairro;
 	
 	@ManyToOne

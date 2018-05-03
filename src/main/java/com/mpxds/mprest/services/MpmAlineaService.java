@@ -20,5 +20,12 @@ public class MpmAlineaService {
 		//
 		return mpObj.orElse(null);
 	}
+	
+	public MpmAlinea buscarCodigo(Integer codigo) {
+		//
+		Optional<MpmAlinea> mpObj = mpRepo.findByCodigo(codigo);
+		//
+		return mpObj.orElse(null);
+	}
 
 }

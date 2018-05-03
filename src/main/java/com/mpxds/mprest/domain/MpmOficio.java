@@ -2,10 +2,12 @@ package com.mpxds.mprest.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "mpadt_oficio")
+@Table(name = "mpadt_oficio", indexes = {
+		@Index(name = "index_mpadt_oficio_num_cart", columnList = "numero_cartorio", unique = true)})
 public class MpmOficio extends MpEntity {
 	//
 	private static final long serialVersionUID = 1L;

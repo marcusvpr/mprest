@@ -20,5 +20,12 @@ public class MpmTituloProtestadoService {
 		//
 		return mpObj.orElse(null);
 	}
+	
+	public MpmTituloProtestado buscarNumeroLivroAndNumeroFolha(Integer numeroLivro, Integer numeroFolha) {
+		//
+		Optional<MpmTituloProtestado> mpObj = mpRepo.findByNumeroLivroAndNumeroFolha(numeroLivro, numeroFolha);
+		//
+		return mpObj.orElse(null);
+	}
 
 }

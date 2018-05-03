@@ -6,18 +6,21 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "mpadt_banco")
+@Table(name = "mpadt_banco", indexes = {
+		@Index(name = "index_mpadt_banco_codigo_agencia_nome",
+												columnList = "codigo, agencia", unique = true)})
 public class MpmBanco extends MpEntity {
 	//
 	private static final long serialVersionUID = 1L;
 		
-	@Column(nullable = true, length = 7)
+	@Column(nullable = false, length = 7)
 	private String codigo;
 
 	@Column(nullable = true, length = 11)

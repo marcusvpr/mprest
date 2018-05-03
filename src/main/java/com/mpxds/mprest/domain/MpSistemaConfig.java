@@ -2,6 +2,7 @@ package com.mpxds.mprest.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
@@ -9,7 +10,8 @@ import javax.validation.constraints.NotNull;
 import com.mpxds.mprest.domain.enums.MpTipoCampo;
 
 @Entity
-@Table(name="mpadt_sistema_config")
+@Table(name="mpadt_sistema_config", indexes = {
+		@Index(name = "index_mpadt_sistema_config_parametro", columnList = "parametro", unique = true)})
 public class MpSistemaConfig extends MpEntity {
 	//
 	private static final long serialVersionUID = 1L;

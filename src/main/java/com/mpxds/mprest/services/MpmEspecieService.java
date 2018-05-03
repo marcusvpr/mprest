@@ -20,5 +20,12 @@ public class MpmEspecieService {
 		//
 		return mpObj.orElse(null);
 	}
+	
+	public MpmEspecie buscarCodigo(String codigo) {
+		//
+		Optional<MpmEspecie> mpObj = mpRepo.findByCodigo(codigo);
+		//
+		return mpObj.orElse(null);
+	}
 
 }

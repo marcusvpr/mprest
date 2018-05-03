@@ -11,5 +11,5 @@ import com.mpxds.mprest.domain.MpmEstadoUf;
 @Repository
 public interface MpmCidadeRepository extends JpaRepository<MpmCidade, Integer> {
 	//
-	Optional<MpmCidade> findByDescricaoAndMpmEstadoUf(String descricao,MpmEstadoUf mpmEstadoUf);
+	Optional<MpmCidade> findByNomeAndMpmEstadoUf(String nome, MpmEstadoUf mpmEstadoUf);
 }

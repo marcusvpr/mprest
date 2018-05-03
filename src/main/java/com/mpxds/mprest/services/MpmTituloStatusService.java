@@ -1,5 +1,6 @@
 package com.mpxds.mprest.services;
 
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,13 @@ public class MpmTituloStatusService {
 	public MpmTituloStatus buscarId(Integer id) {
 		//
 		Optional<MpmTituloStatus> mpObj = mpRepo.findById(id);
+		//
+		return mpObj.orElse(null);
+	}
+	
+	public MpmTituloStatus buscarDataOcorrenciaAndCodigo(Date dataOcoreencia, String codigo) {
+		//
+		Optional<MpmTituloStatus> mpObj = mpRepo.findByDataOcorrenciaAndCodigo(dataOcoreencia, codigo);
 		//
 		return mpObj.orElse(null);
 	}

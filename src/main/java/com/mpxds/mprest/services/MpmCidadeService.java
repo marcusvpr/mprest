@@ -22,9 +22,9 @@ public class MpmCidadeService {
 		return mpObj.orElse(null);
 	}
 	
-	public MpmCidade buscarDescricaoAndMpmEstadoUf(String descricao, MpmEstadoUf mpmEstadoUf) {
+	public MpmCidade buscarNomeAndMpmEstadoUf(String nome, MpmEstadoUf mpmEstadoUf) {
 		//
-		Optional<MpmCidade> mpObj = mpRepo.findByDescricaoAndMpmEstadoUf(descricao, mpmEstadoUf);
+		Optional<MpmCidade> mpObj = mpRepo.findByNomeAndMpmEstadoUf(nome, mpmEstadoUf);
 		//
 		return mpObj.orElse(null);
 	}

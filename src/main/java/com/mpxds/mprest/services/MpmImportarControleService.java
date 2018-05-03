@@ -1,5 +1,6 @@
 package com.mpxds.mprest.services;
 
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,13 @@ public class MpmImportarControleService {
 	public MpmImportarControle buscarId(Integer id) {
 		//
 		Optional<MpmImportarControle> mpObj = mpRepo.findById(id);
+		//
+		return mpObj.orElse(null);
+	}
+	
+	public MpmImportarControle buscarDataDistribuicao(Date dataDistribuicao) {
+		//
+		Optional<MpmImportarControle> mpObj = mpRepo.findByDataDistribuicao(dataDistribuicao);
 		//
 		return mpObj.orElse(null);
 	}

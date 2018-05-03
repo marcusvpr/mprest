@@ -6,13 +6,15 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "mpadt_especie")
+@Table(name = "mpadt_especie", indexes = {
+		@Index(name = "index_mpadt_especie_codigo", columnList = "codigo", unique = true)})
 public class MpmEspecie extends MpEntity {
 	//
 	private static final long serialVersionUID = 1L;

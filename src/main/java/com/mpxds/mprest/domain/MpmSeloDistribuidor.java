@@ -1,17 +1,25 @@
 package com.mpxds.mprest.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Index;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "mpadt_selo_distribuidor")
+@Table(name = "mpadt_selo_distribuidor", indexes = {
+		@Index(name = "index_mpadt_selo_distribuidor_dataDistr",
+										columnList = "data_distribuicao, numero_distribuicao", unique = true)})
 public class MpmSeloDistribuidor extends MpEntity {
 	//
 	private static final long serialVersionUID = 1L;
@@ -26,6 +34,11 @@ public class MpmSeloDistribuidor extends MpEntity {
 	
 	@Column(name = "selo_completo", nullable = true, length = 50)
 	private String seloCompleto;
+
+		
+	@JsonIgnore
+	@OneToMany(mappedBy = "mpmSeloDistribuidor", cascade = CascadeType.ALL)
+	private List<MpmTitulo> mpmTitulos = new ArrayList<>();
 
 	//
 	
@@ -57,5 +70,8 @@ public class MpmSeloDistribuidor extends MpEntity {
 
 	public String getSeloCompleto() { return this.seloCompleto; }
 	public void setSeloCompleto(String seloCompleto) { this.seloCompleto = seloCompleto; }
+	
+	public List<MpmTitulo> getMpmTitulos() { return mpmTitulos; }
+	public void setMpmTitulos(List<MpmTitulo> mpmTitulos) { this.mpmTitulos = mpmTitulos; }
 
 }

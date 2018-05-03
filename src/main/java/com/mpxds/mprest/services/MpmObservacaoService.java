@@ -20,5 +20,19 @@ public class MpmObservacaoService {
 		//
 		return mpObj.orElse(null);
 	}
+	
+	public MpmObservacao buscarTipo(String tipo) {
+		//
+		Optional<MpmObservacao> mpObj = mpRepo.findByTipo(tipo);
+		//
+		return mpObj.orElse(null);
+	}
+	
+	public MpmObservacao buscarDescricao(String descricao) {
+		//
+		Optional<MpmObservacao> mpObj = mpRepo.findByDescricao(descricao);
+		//
+		return mpObj.orElse(null);
+	}
 
 }

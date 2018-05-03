@@ -4,34 +4,34 @@
 <DataImportar>2017-03-07T00:00:00</DataImportar>
 <NomeArquivo>Z30703172</NomeArquivo>
 <IdentificacaoRegistro>1</IdentificacaoRegistro>
-<NumeroCodigoPortador><![CDATA[   ]]></NumeroCodigoPortador>
-<AgenciaCodCedente><![CDATA[               ]]></AgenciaCodCedente>
-<NomeCedFav><![CDATA[CODERE DO BRASIL ENTRETENIMENTO LTDA         ]]></NomeCedFav>
-<NomSacador><![CDATA[CODERE DO BRASIL ENTRETENIMENTO LTDA         ]]></NomSacador>
+<NumeroCodigoPortador>   </NumeroCodigoPortador>
+<AgenciaCodCedente>               </AgenciaCodCedente>
+<NomeCedFav>CODERE DO BRASIL ENTRETENIMENTO LTDA         </NomeCedFav>
+<NomSacador>CODERE DO BRASIL ENTRETENIMENTO LTDA         </NomSacador>
 <DocumentoSacador></DocumentoSacador>
 <EnderecSacador></EnderecSacador>
 <CeSacador></CeSacador>
 <CidadSacador></CidadSacador>
 <USacador></USacador>
-<NossoNumero><![CDATA[               ]]></NossoNumero>
-<EspecieTitulo><![CDATA[CH ]]></EspecieTitulo>
-<NumeroTitulo><![CDATA[000109     ]]></NumeroTitulo>
+<NossoNumero>               </NossoNumero>
+<EspecieTitulo>CH </EspecieTitulo>
+<NumeroTitulo>000109     </NumeroTitulo>
 <DataEmissaoTitulo>03061600</DataEmissaoTitulo>
 <DataVencimentoTitulo>03061600</DataVencimentoTitulo>
-<TipoMoeda><![CDATA[   ]]></TipoMoeda>
+<TipoMoeda>   </TipoMoeda>
 <ValorTitulo>00000000100000</ValorTitulo>
 <SaldoTitulo>00000000100000</SaldoTitulo>
-<PracaPagamento><![CDATA[                    ]]></PracaPagamento>
-<TipoEndosso><![CDATA[ ]]></TipoEndosso>
-<InformacaoAceite><![CDATA[ ]]></InformacaoAceite>
+<PracaPagamento>                    </PracaPagamento>
+<TipoEndosso> </TipoEndosso>
+<InformacaoAceite> </InformacaoAceite>
 <NumeroControleDevedor>0</NumeroControleDevedor>
-<NomeDevedor><![CDATA[RAUL SOARES CARNEIRO NETO                    ]]></NomeDevedor>
+<NomeDevedor>RAUL SOARES CARNEIRO NETO                    </NomeDevedor>
 <TipoIdentDevedor>CPF</TipoIdentDevedor>
-<NumeroIdentDevedor><![CDATA[   66404223791]]></NumeroIdentDevedor>
-<DocumentoDevedor><![CDATA[           ]]></DocumentoDevedor>
-<EnderecoDevedor><![CDATA[ENDERECO DESCONHECIDO                        ]]></EnderecoDevedor>
-<CepDevedor><![CDATA[        ]]></CepDevedor>
-<CidadeDevedor><![CDATA[RIO DE JANEIRO      ]]></CidadeDevedor>
+<NumeroIdentDevedor>   66404223791</NumeroIdentDevedor>
+<DocumentoDevedor>           </DocumentoDevedor>
+<EnderecoDevedor>ENDERECO DESCONHECIDO                        </EnderecoDevedor>
+<CepDevedor>        </CepDevedor>
+<CidadeDevedor>RIO DE JANEIRO      </CidadeDevedor>
 <UfDevedor>RJ</UfDevedor>
 <NumeroCartorio>03</NumeroCartorio>
 <NumeroProtocoloCartorio>0000016172</NumeroProtocoloCartorio>
@@ -43,12 +43,12 @@
 <CodigoIrregularidade></CodigoIrregularidade>
 <BairroDevedor></BairroDevedor>
 <ValorCustasCartorioDist>0000009438</ValorCustasCartorioDist>
-<NomePortador><![CDATA[CODERE DO BRASIL ENTRETENIMENTO LTDA         ]]></NomePortador>
+<NomePortador>CODERE DO BRASIL ENTRETENIMENTO LTDA         </NomePortador>
 <NumeroDistribuicao>0064689</NumeroDistribuicao>
 <ComplementoRegistro></ComplementoRegistro>
 <SeloDistribuidor>EBXT14273NIR</SeloDistribuidor>
 <FinsFalimentares></FinsFalimentares>
-<Convenio><![CDATA[ ]]></Convenio>
+<Convenio> </Convenio>
 <Empresa></Empresa>
 <NumeroSeqRegistro>0006</NumeroSeqRegistro>
 </Transacao>

@@ -20,5 +20,12 @@ public class MpmBancoService {
 		//
 		return mpObj.orElse(null);
 	}
+	
+	public MpmBanco buscarCodigoAndAgencia(String codigo, Integer agencia) {
+		//
+		Optional<MpmBanco> mpObj = mpRepo.findByCodigoAndAgencia(codigo, agencia);
+		//
+		return mpObj.orElse(null);
+	}
 
 }

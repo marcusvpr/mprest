@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -16,7 +17,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "mpadt_importar_controle")
+@Table(name = "mpadt_importar_controle", indexes = {
+		@Index(name = "index_mpadt_importar_controle_dat_distrib",
+						columnList = "data_distribuicao", unique = true)})
 public class MpmImportarControle extends MpEntity {
 	//
 	private static final long serialVersionUID = 1L;

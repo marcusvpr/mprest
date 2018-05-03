@@ -20,5 +20,12 @@ public class MpmApresentanteService {
 		//
 		return mpObj.orElse(null);
 	}
+	
+	public MpmApresentante buscarCodigo(String codigo) {
+		//
+		Optional<MpmApresentante> mpObj = mpRepo.findByCodigo(codigo);
+		//
+		return mpObj.orElse(null);
+	}
 
 }

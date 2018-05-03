@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -11,7 +12,8 @@ import javax.persistence.TemporalType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-@Table(name = "mpadt_feriado")
+@Table(name = "mpadt_feriado", indexes = {
+		@Index(name = "index_mpadt_feriado_data_feriado", columnList = "data_feriado", unique = true)})
 public class MpmFeriado extends MpEntity {
 	//
 	private static final long serialVersionUID = 1L;

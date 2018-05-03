@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -14,8 +15,10 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="mpadt_remessa") // ?? Verificar com Prisco PT05 ???
-public class MpmRemessa extends MpEntity {
+@Table(name="mpadt_remessa", indexes = {
+		@Index(name = "index_mpadt_remessa_ic_arq", 
+				columnList = "mpmImportarControle_id, nome_arquivo", unique = true)})
+public class MpmRemessa extends MpEntity { // ?? Verificar com Prisco PT05 ???
 	//
 	private static final long serialVersionUID = 1L;
 	

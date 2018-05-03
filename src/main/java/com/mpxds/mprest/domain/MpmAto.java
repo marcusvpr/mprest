@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -15,7 +16,9 @@ import javax.persistence.Table;
 import org.springframework.format.annotation.NumberFormat;
 
 @Entity
-@Table(name = "mpadt_ato")
+@Table(name = "mpadt_ato", indexes = {
+		@Index(name = "index_mpadt_ato_mpmAnoReferencia_codato_atoseq",
+								columnList = "mpmAnoReferencia_id, codigo_ato, ato_sequencia", unique = true)})
 public class MpmAto extends MpEntity {
 	//
 	private static final long serialVersionUID = 1L;
@@ -24,10 +27,10 @@ public class MpmAto extends MpEntity {
 	@JoinColumn(name="mpmAnoReferencia_id")
 	private MpmAnoReferencia mpmAnoReferencia; 
 
-	@Column(name = "codigo_ato", nullable = true, length = 4)
+	@Column(name = "codigo_ato", nullable = false, length = 4)
 	private String codigoAto;
 
-	@Column(name = "ato_sequencia", nullable = true, length = 1)
+	@Column(name = "ato_sequencia", nullable = false, length = 1)
 	private String atoSequencia;
 	
 	@Column(name = "descricao_ato", nullable = true, length = 100)

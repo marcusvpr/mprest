@@ -20,5 +20,12 @@ public class MpmStatusService {
 		//
 		return mpObj.orElse(null);
 	}
+	
+	public MpmStatus buscarCodigo(Integer codigo) {
+		//
+		Optional<MpmStatus> mpObj = mpRepo.findByCodigo(codigo);
+		//
+		return mpObj.orElse(null);
+	}
 
 }

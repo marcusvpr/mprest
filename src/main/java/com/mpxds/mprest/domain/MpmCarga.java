@@ -16,7 +16,7 @@ public class MpmCarga extends MpEntity {
 	//
 	private static final long serialVersionUID = 1L;
 		
-	@Column(nullable = true, length = 500)
+	@Column(nullable = true, length = 1000)
 	private String descricao;
 		
 	//
