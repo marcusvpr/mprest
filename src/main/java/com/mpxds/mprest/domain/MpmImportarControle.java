@@ -1,9 +1,9 @@
 package com.mpxds.mprest.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -43,6 +44,9 @@ public class MpmImportarControle extends MpEntity {
 	@OneToMany(mappedBy="mpmImportarControle")
 	private List<MpmRemessa> mpmRemessas = new ArrayList<>();
 
+	@Transient
+	private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+	
 	//
 	
 	public MpmImportarControle() {
@@ -70,5 +74,16 @@ public class MpmImportarControle extends MpEntity {
 
 	public List<MpmRemessa> getMpmRemessas() { return this.mpmRemessas; }
 	public void setMpmRemessas(List<MpmRemessa> mpmRemessas) { this.mpmRemessas = mpmRemessas; }
+	
+	// ---
 
+	@Transient
+	public String getDataDistribuicaoSDF() { return this.sdf.format(this.dataDistribuicao); }
+
+	@Transient
+	public String getDataProtocoloSDF() { return this.sdf.format(this.dataProtocolo); }
+
+	@Transient
+	public String getDataAteSDF() { return this.sdf.format(this.dataAte); }
+		
 }

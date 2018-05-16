@@ -1,10 +1,7 @@
 package com.mpxds.mprest.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.util.ArrayList;
 import java.util.List;
-
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "mpadt_pessoa_titulo")
@@ -31,11 +30,17 @@ public class MpmPessoaTitulo extends MpEntity {
 	@Column(name = "ind_favorecido", nullable = true)
 	private Boolean indFavorecido;
 
+	@Column(name = "ind_sacador", nullable = true)
+	private Boolean indSacador;
+
 	@Column(nullable = true, length = 11)
 	private Integer agencia;
 
 	@Column(nullable = true, length = 1)
 	private String convenio;
+
+	@Column(nullable = true, length = 1) // F=Favorecido/S=Sacador ????
+	private String tipoPessoa;
 	
 	@Column(name = "forma_repasse", nullable = true, length = 1)
 	private String formaRepasse;
@@ -58,7 +63,7 @@ public class MpmPessoaTitulo extends MpEntity {
 	}
 
 	public MpmPessoaTitulo(Integer id, String nome, String tipoDocumento, String numeroDocumento, 
-							Boolean indFavorecido, Integer agencia, String convenio, 
+							Boolean indFavorecido, Boolean indSacador, Integer agencia, String convenio,
 							String formaRepasse, Boolean indChequeAdmTed, MpmEndereco mpmEndereco) {
 		//
 		super();
@@ -68,6 +73,7 @@ public class MpmPessoaTitulo extends MpEntity {
 		this.tipoDocumento = tipoDocumento;
 		this.numeroDocumento = numeroDocumento;
 		this.indFavorecido = indFavorecido;
+		this.indSacador = indSacador;
 		this.agencia = agencia;
 		this.convenio = convenio;
 		this.formaRepasse = formaRepasse;
@@ -90,10 +96,28 @@ public class MpmPessoaTitulo extends MpEntity {
 	public Boolean getIndFavorecido() { return indFavorecido; }
 	public void setIndFavorecido(Boolean indFavorecido) { this.indFavorecido = indFavorecido; }
 
+	public Boolean getIndSacador() { return indSacador; }
+	public void setIndSacador(Boolean indSacador) { this.indSacador = indSacador; }
+
 	public List<MpmTitulo> getMpmTitulos() { return mpmTitulos; }
 	public void setMpmTitulos(List<MpmTitulo> mpmTitulos) { this.mpmTitulos = mpmTitulos; }
 	
 	public MpmEndereco getMpmEndereco() { return mpmEndereco; }
 	public void setMpmEndereco(MpmEndereco mpmEndereco) { this.mpmEndereco = mpmEndereco; }
+
+	public Integer getAgencia() { return agencia; }
+	public void setAgencia(Integer agencia) { this.agencia = agencia; }
+
+	public String getConvenio() { return convenio; }
+	public void setConvenio(String convenio) { this.convenio = convenio; }
+
+	public String getTipoPessoa() { return tipoPessoa; }
+	public void setTipoPessoa(String tipoPessoa) { this.tipoPessoa = tipoPessoa; }
+
+	public String getFormaRepasse() { return formaRepasse; }
+	public void setFormaRepasse(String formaRepasse) { this.formaRepasse = formaRepasse; }
+
+	public Boolean getIndChequeAdmTed() { return indChequeAdmTed; }
+	public void setIndChequeAdmTed(Boolean indChequeAdmTed) { this.indChequeAdmTed = indChequeAdmTed; }
 
 }

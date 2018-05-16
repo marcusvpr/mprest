@@ -6,23 +6,19 @@
 </Alinea>
 <Alinea>
 <CodigoAlinea>12</CodigoAlinea>
-<DescricaoAlinea>CONTA ENCERRADA</DescricaoAlinea>
+<DescricaoAlinea>SEM FUNDOS 2ª APRESENTAÇÃ</DescricaoAlinea>
 </Alinea>
 <Alinea>
 <CodigoAlinea>13</CodigoAlinea>
-<DescricaoAlinea>A</DescricaoAlinea>
+<DescricaoAlinea>CONTA ENCERRADA</DescricaoAlinea>
 </Alinea>
 <Alinea>
 <CodigoAlinea>14</CodigoAlinea>
-<DescricaoAlinea>.</DescricaoAlinea>
-</Alinea>
-<Alinea>
-<CodigoAlinea>19</CodigoAlinea>
-<DescricaoAlinea>NAO SEI</DescricaoAlinea>
+<DescricaoAlinea>PRATICA ESPURIA</DescricaoAlinea>
 </Alinea>
 <Alinea>
 <CodigoAlinea>20</CodigoAlinea>
-<DescricaoAlinea>.</DescricaoAlinea>
+<DescricaoAlinea>SUSTADO OU REVOGADO</DescricaoAlinea>
 </Alinea>
 <Alinea>
 <CodigoAlinea>21</CodigoAlinea>
@@ -33,8 +29,12 @@
 <DescricaoAlinea>DIVERGENCIA,INS ASS</DescricaoAlinea>
 </Alinea>
 <Alinea>
+<CodigoAlinea>23</CodigoAlinea>
+<DescricaoAlinea>ENTIDADES E ÓRGÃOS DA ADM</DescricaoAlinea>
+</Alinea>
+<Alinea>
 <CodigoAlinea>24</CodigoAlinea>
-<DescricaoAlinea>BLOQ JUD OU DETERMIN BC</DescricaoAlinea>
+<DescricaoAlinea>BLOQ JUDICIAL/DETER.BACEN</DescricaoAlinea>
 </Alinea>
 <Alinea>
 <CodigoAlinea>25</CodigoAlinea>
@@ -42,35 +42,63 @@
 </Alinea>
 <Alinea>
 <CodigoAlinea>26</CodigoAlinea>
-<DescricaoAlinea>INOPERANCIA TEMP TRANSPOR</DescricaoAlinea>
+<DescricaoAlinea>INOPERANCIA TEMPORA TRANS</DescricaoAlinea>
+</Alinea>
+<Alinea>
+<CodigoAlinea>27</CodigoAlinea>
+<DescricaoAlinea>FERIADO MUNIC N PREVISTO</DescricaoAlinea>
 </Alinea>
 <Alinea>
 <CodigoAlinea>28</CodigoAlinea>
-<DescricaoAlinea>NAO SEI</DescricaoAlinea>
+<DescricaoAlinea>CHEQ SUSTADO ROUBO</DescricaoAlinea>
 </Alinea>
 <Alinea>
-<CodigoAlinea>29</CodigoAlinea>
-<DescricaoAlinea>N SEI</DescricaoAlinea>
+<CodigoAlinea>30</CodigoAlinea>
+<DescricaoAlinea>FURTO OU ROUBO DE CHEQUE</DescricaoAlinea>
 </Alinea>
 <Alinea>
 <CodigoAlinea>31</CodigoAlinea>
-<DescricaoAlinea>.</DescricaoAlinea>
+<DescricaoAlinea>ERRO FORMAL</DescricaoAlinea>
+</Alinea>
+<Alinea>
+<CodigoAlinea>32</CodigoAlinea>
+<DescricaoAlinea>AUSENCIA OU IR AP CARIM C</DescricaoAlinea>
+</Alinea>
+<Alinea>
+<CodigoAlinea>33</CodigoAlinea>
+<DescricaoAlinea>DIVERGENCIA DE ENDOSSO</DescricaoAlinea>
 </Alinea>
 <Alinea>
 <CodigoAlinea>34</CodigoAlinea>
-<DescricaoAlinea>NAO SEI</DescricaoAlinea>
+<DescricaoAlinea>CHQ APRES P/PARTQ N IND N</DescricaoAlinea>
 </Alinea>
 <Alinea>
 <CodigoAlinea>35</CodigoAlinea>
 <DescricaoAlinea>CHEQUE FRAUDADO</DescricaoAlinea>
 </Alinea>
 <Alinea>
+<CodigoAlinea>37</CodigoAlinea>
+<DescricaoAlinea>REGISTRO INCONSISTENTE</DescricaoAlinea>
+</Alinea>
+<Alinea>
+<CodigoAlinea>38</CodigoAlinea>
+<DescricaoAlinea>AS DIGITAL AUSENTE /INVAL</DescricaoAlinea>
+</Alinea>
+<Alinea>
+<CodigoAlinea>39</CodigoAlinea>
+<DescricaoAlinea>IMAG FORA PADRAO</DescricaoAlinea>
+</Alinea>
+<Alinea>
 <CodigoAlinea>40</CodigoAlinea>
-<DescricaoAlinea>NAO SEI NAO</DescricaoAlinea>
+<DescricaoAlinea>MOEDA INVALIDA</DescricaoAlinea>
 </Alinea>
 <Alinea>
 <CodigoAlinea>41</CodigoAlinea>
-<DescricaoAlinea>NAO SEI O Q SIGNIF</DescricaoAlinea>
+<DescricaoAlinea>CH APRES A BCO QUE N/O SA</DescricaoAlinea>
+</Alinea>
+<Alinea>
+<CodigoAlinea>42</CodigoAlinea>
+<DescricaoAlinea>CHQ N COMPENSÁVEL NA SESS</DescricaoAlinea>
 </Alinea>
 <Alinea>
 <CodigoAlinea>43</CodigoAlinea>
@@ -82,14 +110,26 @@
 </Alinea>
 <Alinea>
 <CodigoAlinea>48</CodigoAlinea>
-<DescricaoAlinea>CH  SP 100 S/IDENT CREDOR</DescricaoAlinea>
+<DescricaoAlinea>VLR ACIMA 100,00 S/ID BEN</DescricaoAlinea>
 </Alinea>
 <Alinea>
 <CodigoAlinea>49</CodigoAlinea>
-<DescricaoAlinea><![CDATA[REMESSA NULA ]]></DescricaoAlinea>
+<DescricaoAlinea>REMESSA NULA</DescricaoAlinea>
 </Alinea>
 <Alinea>
 <CodigoAlinea>61</CodigoAlinea>
-<DescricaoAlinea>PAPEL NAO COMPENSÁVEL</DescricaoAlinea>
+<DescricaoAlinea>PAPEL NAO COMPENSAVEL</DescricaoAlinea>
+</Alinea>
+<Alinea>
+<CodigoAlinea>70</CodigoAlinea>
+<DescricaoAlinea>SUST OU REVOGACAO PROVISO</DescricaoAlinea>
+</Alinea>
+<Alinea>
+<CodigoAlinea>71</CodigoAlinea>
+<DescricaoAlinea>CONT DE COMPEN ENCERRADO</DescricaoAlinea>
+</Alinea>
+<Alinea>
+<CodigoAlinea>72</CodigoAlinea>
+<DescricaoAlinea>CONTRATO COMP ENCERRADO</DescricaoAlinea>
 </Alinea>
 </dataroot>

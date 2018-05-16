@@ -1,5 +1,6 @@
 package com.mpxds.mprest.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,11 @@ public class MpmTransacaoService {
 		Optional<MpmTransacao> mpObj = mpRepo.findById(id);
 		//
 		return mpObj.orElse(null);
+	}
+	
+	public List<MpmTransacao> findAll() {
+		//
+		return mpRepo.findAllByOrderByNumeroProtocoloCartorio();
 	}
 
 }

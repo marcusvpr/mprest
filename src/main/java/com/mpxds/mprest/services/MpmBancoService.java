@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mpxds.mprest.domain.MpmAgencia;
 import com.mpxds.mprest.domain.MpmBanco;
 import com.mpxds.mprest.repositories.MpmBancoRepository;
 
@@ -21,9 +22,16 @@ public class MpmBancoService {
 		return mpObj.orElse(null);
 	}
 	
-	public MpmBanco buscarCodigoAndAgencia(String codigo, Integer agencia) {
+	public MpmBanco buscarCodigoAndMpmAgencia(String codigo, MpmAgencia mpmAgencia) {
 		//
-		Optional<MpmBanco> mpObj = mpRepo.findByCodigoAndAgencia(codigo, agencia);
+		Optional<MpmBanco> mpObj = mpRepo.findByCodigoAndMpmAgencia(codigo, mpmAgencia);
+		//
+		return mpObj.orElse(null);
+	}
+	
+	public MpmBanco buscarCodigo(String codigo) {
+		//
+		Optional<MpmBanco> mpObj = mpRepo.findByCodigo(codigo);
 		//
 		return mpObj.orElse(null);
 	}

@@ -9,6 +9,8 @@ import javax.persistence.Index;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "mpadt_status", indexes = {
 		@Index(name = "index_mpadt_status_codigo", columnList = "codigo", unique = true),
@@ -23,6 +25,7 @@ public class MpmStatus extends MpEntity {
 	@Column(nullable = true, length = 25)
 	private String descricao;
 		
+	@JsonIgnore
 	@OneToMany(mappedBy="mpmStatus")
 	private List<MpmTituloStatus> mpmTituloStatuss = new ArrayList<>();
 	

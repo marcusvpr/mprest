@@ -3,7 +3,6 @@ package com.mpxds.mprest.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Index;
@@ -28,12 +27,12 @@ public class MpmRemessa extends MpEntity { // ?? Verificar com Prisco PT05 ???
 
   	@Column(name = "nome_arquivo", nullable = false, length = 50) // Was=11???
 	private String nomeArquivo;
-
-  	@Column(name = "protocolo_inicial", nullable = false, length = 6)
-  	private String protocoloInicial;  
-	
-	@Column(name = "protocolo_final", nullable = false, length = 6)
-  	private String protocoloFinal; 
+//
+//  @Column(name = "protocolo_inicial", nullable = false, length = 6) // Vrf.Prisco ???
+//  private String protocoloInicial;  
+//	
+//	@Column(name = "protocolo_final", nullable = false, length = 6) // Vrf.Prisco ???
+//  	private String protocoloFinal; 
 
 	@JsonIgnore
 	@OneToMany(mappedBy="mpmRemessa")
@@ -55,8 +54,8 @@ public class MpmRemessa extends MpEntity { // ?? Verificar com Prisco PT05 ???
 
   	public MpmRemessa(Integer id, MpmImportarControle mpmImportarControle
              , String nomeArquivo
-             , String protocoloInicial
-             , String protocoloFinal
+//             , String protocoloInicial
+//             , String protocoloFinal
              ) {
   		//
 		super();
@@ -64,8 +63,8 @@ public class MpmRemessa extends MpEntity { // ?? Verificar com Prisco PT05 ???
 		this.id = id;
   		this.mpmImportarControle = mpmImportarControle;
   		this.nomeArquivo = nomeArquivo;
-  		this.protocoloInicial = protocoloInicial;
-  		this.protocoloFinal = protocoloFinal;
+//  		this.protocoloInicial = protocoloInicial;
+//  		this.protocoloFinal = protocoloFinal;
   	}
   	
   	// ---
@@ -77,11 +76,11 @@ public class MpmRemessa extends MpEntity { // ?? Verificar com Prisco PT05 ???
 	public String getNomeArquivo() { return nomeArquivo; }
 	public void setNomeArquivo(String nomeArquivo) { this.nomeArquivo = nomeArquivo; }
 
-	public String getProtocoloInicial() { return protocoloInicial; }
-	public void setProtocoloInicial(String protocoloInicial) { this.protocoloInicial = protocoloInicial; }
-
-	public String getProtocoloFinal() { return protocoloFinal; }
-	public void setProtocoloFinal(String protocoloFinal) { this.protocoloFinal = protocoloFinal; }
+//	public String getProtocoloInicial() { return protocoloInicial; }
+//	public void setProtocoloInicial(String protocoloInicial) { this.protocoloInicial = protocoloInicial; }
+//
+//	public String getProtocoloFinal() { return protocoloFinal; }
+//	public void setProtocoloFinal(String protocoloFinal) { this.protocoloFinal = protocoloFinal; }
 
 	public List<MpmHeader> getMpmHeaders() { return mpmHeaders; }
 	public void setMpmHeaders(List<MpmHeader> mpmHeaders) { this.mpmHeaders = mpmHeaders; }

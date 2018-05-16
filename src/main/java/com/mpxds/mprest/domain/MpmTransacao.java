@@ -47,16 +47,16 @@ public class MpmTransacao extends MpEntity {
   	@Column(name = "nosso_numero", nullable = true, length = 15)
 	private String nossoNumero;
 	
-  	@Column(name = "specie_titulo", nullable = true, length = 3)
+  	@Column(name = "especie_titulo", nullable = true, length = 3)
 	private String especieTitulo;
 	
   	@Column(name = "numero_titulo", nullable = true, length = 11)
 	private String numeroTitulo;
 	
-  	@Column(name = "data_emissao_titulo", nullable = true, length = 8)
+  	@Column(name = "data_emissao_titulo", nullable = true, length = 10)
 	private String dataEmissaoTitulo;
 	
-  	@Column(name = "data_vencimento_titulo", nullable = true, length = 8)
+  	@Column(name = "data_vencimento_titulo", nullable = true, length = 10)
 	private String dataVencimentoTitulo;
 	
   	@Column(name = "tipo_moeda", nullable = true, length = 3)
@@ -113,7 +113,7 @@ public class MpmTransacao extends MpEntity {
   	@Column(name = "tipo_ocorrencia", nullable = true, length = 1)
 	private String tipoOcorrencia;
 	
-  	@Column(name = "data_protocolo_cartorio", nullable = true, length = 8)
+  	@Column(name = "data_protocolo_cartorio", nullable = true, length = 10)
 	private String dataProtocoloCartorio;
 	
   	@Column(name = "valor_custas_cartorio", nullable = true, length = 14)
@@ -122,13 +122,13 @@ public class MpmTransacao extends MpEntity {
   	@Column(name = "declaracao_portador", nullable = true, length = 1)
 	private String declaracaoPortador;
 	
-  	@Column(name = "data_ocorrencia_cartorio", nullable = true, length = 8)
+  	@Column(name = "data_ocorrencia_cartorio", nullable = true, length = 10)
 	private String dataOcorrenciaCartorio;
 	
   	@Column(name = "codigo_irregularidade", nullable = true, length = 2)
 	private String codigoIrregularidade;
 	
-  	@Column(name = "bairro_devedor", nullable = true, length = 20)
+  	@Column(name = "bairro_devedor", nullable = true, length = 25)
 	private String bairroDevedor;
 	
   	@Column(name = "valor_custas_cartorio_dist", nullable = true, length = 14)
@@ -157,6 +157,9 @@ public class MpmTransacao extends MpEntity {
 	
   	@Column(name = "numero_seq_Registro", nullable = true, length = 4)
 	private String numeroSeqRegistro;	
+	
+  	@Column(name = "tipo_movimento", nullable = true, length = 10)
+	private String tipoMovimento;	
 
 	// ---
 	
@@ -181,7 +184,8 @@ public class MpmTransacao extends MpEntity {
 			String codigoIrregularidade, String bairroDevedor, 
 			String valorCustasCartorioDist, String nomePortador, 
 			String numeroDistribuicao, String complementoRegistro, String seloDistribuidor,
-			String finsFAlimentares, String convenio, String empresa, String numeroSeqRegistro) {
+			String finsFAlimentares, String convenio, String empresa,
+			String numeroSeqRegistro, String tipoMovimento) {
 		//
 		super();
 		
@@ -233,9 +237,8 @@ public class MpmTransacao extends MpEntity {
 		this.convenio = convenio;
 		this.empresa = empresa;
 		this.numeroSeqRegistro = numeroSeqRegistro;
+		this.tipoMovimento = tipoMovimento;
 	}
-
-
 
 	// ---	
 
@@ -244,200 +247,158 @@ public class MpmTransacao extends MpEntity {
 
 	public String getNumeroCodigoPortador() { return numeroCodigoPortador; }
 	public void setNumeroCodigoPortador(String numeroCodigoPortador) { 
-															this.numeroCodigoPortador = numeroCodigoPortador; }
+																this.numeroCodigoPortador = numeroCodigoPortador; }
 
-  	@Column(name = "agencia_cod_cedente", nullable = true, length = 15)
 	public String getAgenciaCodCedente() { return agenciaCodCedente; }
 	public void setAgenciaCodCedente(String agenciaCodCedente) { this.agenciaCodCedente = agenciaCodCedente; }
 
-  	@Column(name = "nome_ced_fav", nullable = true, length = 45)
 	public String getNomeCedFav() { return nomeCedFav; }
 	public void setNomeCedFav(String nomeCedFav) { this.nomeCedFav = nomeCedFav; }
 
-  	@Column(name = "nome_sacador", nullable = true, length = 45)
 	public String getNomeSacador() { return nomeSacador; }
 	public void setNomeSacador(String nomeSacador) { this.nomeSacador = nomeSacador; }
 
-  	@Column(name = "documento_sacador", nullable = true, length = 14)
 	public String getDocumentoSacador() { return documentoSacador; }
 	public void setDocumentoSacador(String documentoSacador) { this.documentoSacador = documentoSacador; }
 
-  	@Column(name = "endereco_sacador", nullable = true, length = 45)
 	public String getEnderecoSacador() { return enderecoSacador; }
 	public void setEnderecoSacador(String enderecoSacador) { this.enderecoSacador = enderecoSacador; }
 
-  	@Column(name = "cep_sacador", nullable = true, length = 8)
 	public String getCepSacador() { return cepSacador; }
 	public void setCepSacador(String cepSacador) { this.cepSacador = cepSacador; }
 
- 	@Column(name = "cidade_sacador", nullable = true, length = 20)
 	public String getCidadeSacador() { return cidadeSacador; }
 	public void setCidadeSacador(String cidadeSacador) { this.cidadeSacador = cidadeSacador; }
 
-  	@Column(name = "uf_sacador", nullable = true, length = 2)
 	public String getUfSacador() { return ufSacador; }
 	public void setUfSacador(String ufSacador) { this.ufSacador = ufSacador; }
 
-  	@Column(name = "nosso_numero", nullable = true, length = 15)
 	public String getNossoNumero() { return nossoNumero; }
 	public void setNossoNumero(String nossoNumero) { this.nossoNumero = nossoNumero; }
 
-  	@Column(name = "especie_titulo", nullable = true, length = 3)
 	public String getEspecieTitulo() { return especieTitulo; }
 	public void setEspecieTitulo(String especieTitulo) { this.especieTitulo = especieTitulo; }
 
- 	@Column(name = "numero_titulo", nullable = true, length = 11)
 	public String getNumeroTitulo() { return numeroTitulo; }
 	public void setNumeroTitulo(String numeroTitulo) { this.numeroTitulo = numeroTitulo; }
 
-  	@Column(name = "data_emissao_titulo", nullable = true, length = 8)
 	public String getDataEmissaoTitulo() { return dataEmissaoTitulo; }
 	public void setDataEmissaoTitulo(String dataEmissaoTitulo) { this.dataEmissaoTitulo = dataEmissaoTitulo; }
 
-  	@Column(name = "data_vencimento_titulo", nullable = true, length = 8)
 	public String getDataVencimentoTitulo() { return dataVencimentoTitulo; }
 	public void setDataVencimentoTitulo(String dataVencimentoTitulo) { 
 															this.dataVencimentoTitulo = dataVencimentoTitulo; }
 
-  	@Column(name = "tipo_moeda", nullable = true, length = 3)
 	public String getTipoMoeda() { return tipoMoeda; }
 	public void setTipoMoeda(String tipoMoeda) { this.tipoMoeda = tipoMoeda; }
 
-  	@Column(name = "valor_titulo", nullable = true, length = 14)
 	public String getValorTitulo() { return valorTitulo; }
 	public void setValorTitulo(String valorTitulo) { this.valorTitulo = valorTitulo; }
 
-  	@Column(name = "saldo_titulo", nullable = true, length = 14)
 	public String getSaldoTitulo() { return saldoTitulo; }
 	public void setSaldoTitulo(String saldoTitulo) { this.saldoTitulo = saldoTitulo; }
 
-  	@Column(name = "praca_pagamento", nullable = true, length = 20)
 	public String getPracaPagamento() { return pracaPagamento; }
 	public void setPracaPagamento(String pracaPagamento) { this.pracaPagamento = pracaPagamento; }
 
-  	@Column(name = "tipo_endosso", nullable = true, length = 1)
 	public String getTipoEndosso() { return tipoEndosso; }
 	public void setTipoEndosso(String tipoEndosso) { this.tipoEndosso = tipoEndosso; }
 
-  	@Column(name = "informacao_aceite", nullable = true, length = 1)
 	public String getInformacaoAceite() { return informacaoAceite; }
 	public void setInformacaoAceite(String informacaoAceite) { this.informacaoAceite = informacaoAceite; }
 
-  	@Column(name = "numero_controle_devedor", nullable = true, length = 1)
 	public String getNumeroControleDevedor() { return numeroControleDevedor; }
 	public void setNumeroControleDevedor(String numeroControleDevedor) { 
 														this.numeroControleDevedor = numeroControleDevedor;	}
 
-  	@Column(name = "nome_devedor", nullable = true, length = 45)
 	public String getNomeDevedor() { return nomeDevedor; }
 	public void setNomeDevedor(String nomeDevedor) { this.nomeDevedor = nomeDevedor; }
 
-  	@Column(name = "tipo_ident_devedor", nullable = true, length = 3)
 	public String getTipoIdentDevedor() { return tipoIdentDevedor; }
 	public void setTipoIdentDevedor(String tipoIdentDevedor) { this.tipoIdentDevedor = tipoIdentDevedor; }
 
-  	@Column(name = "numero_ident_devedor", nullable = true, length = 14)
 	public String getNumeroIdentDevedor() { return numeroIdentDevedor; }
 	public void setNumeroIdentDevedor(String numeroIdentDevedor) { 
 															this.numeroIdentDevedor = numeroIdentDevedor; }
 
-  	@Column(name = "documento_devedor", nullable = true, length = 11)
 	public String getDocumentoDevedor() { return documentoDevedor; }
 	public void setDocumentoDevedor(String documentoDevedor) { this.documentoDevedor = documentoDevedor; }
 
-  	@Column(name = "endereco_devedor", nullable = true, length = 45)
 	public String getEnderecoDevedor() { return enderecoDevedor; }
 	public void setEnderecoDevedor(String enderecoDevedor) { this.enderecoDevedor = enderecoDevedor; }
 
-  	@Column(name = "cep_devedor", nullable = true, length = 8)
 	public String getCepDevedor() { return cepDevedor; }
 	public void setCepDevedor(String cepDevedor) { this.cepDevedor = cepDevedor; }
 
-  	@Column(name = "cidade_devedor", nullable = true, length = 20)
 	public String getCidadeDevedor() { return cidadeDevedor;}
 	public void setCidadeDevedor(String cidadeDevedor) { this.cidadeDevedor = cidadeDevedor; }
 
-  	@Column(name = "uf_devedor", nullable = true, length = 2)
 	public String getUfDevedor() { return ufDevedor; }
 	public void setUfDevedor(String ufDevedor) { this.ufDevedor = ufDevedor; }
 
-  	@Column(name = "numero_cartorio", nullable = true, length = 2)
 	public String getNumeroCartorio() { return numeroCartorio; }
 	public void setNumeroCartorio(String numeroCartorio) { this.numeroCartorio = numeroCartorio; }
 
-  	@Column(name = "numero_protocolo_cartorio", nullable = true, length = 10)
 	public String getNumeroProtocoloCartorio() { return numeroProtocoloCartorio; }
 	public void setNumeroProtocoloCartorio(String numeroProtocoloCartorio) { 
 													this.numeroProtocoloCartorio = numeroProtocoloCartorio;	}
 
-  	@Column(name = "tipo_ocorrencia", nullable = true, length = 1)
 	public String getTipoOcorrencia() { return tipoOcorrencia; }
 	public void setTipoOcorrencia(String tipoOcorrencia) { this.tipoOcorrencia = tipoOcorrencia; }
 
-  	@Column(name = "data_protocolo_cartorio", nullable = true, length = 8)
 	public String getDataProtocoloCartorio() { return dataProtocoloCartorio; }
 	public void setDataProtocoloCartorio(String dataProtocoloCartorio) { 
 															this.dataProtocoloCartorio = dataProtocoloCartorio; }
 
-  	@Column(name = "valor_custas_cartorio", nullable = true, length = 14)
 	public String getValorCustasCartorio() { return valorCustasCartorio; }
 	public void setValorCustasCartorio(String valorCustasCartorio) { 
 															this.valorCustasCartorio = valorCustasCartorio; }
 
-  	@Column(name = "declaracao_portador", nullable = true, length = 1)
 	public String getDeclaracaoPortador() { return declaracaoPortador; }
 	public void setDeclaracaoPortador(String declaracaoPortador) { 
 															this.declaracaoPortador = declaracaoPortador; }
 
-  	@Column(name = "data_ocorrencia_cartorio", nullable = true, length = 8)
 	public String getDataOcorrenciaCartorio() {	return dataOcorrenciaCartorio; }
 	public void setDataOcorrenciaCartorio(String dataOcorrenciaCartorio) {
 														this.dataOcorrenciaCartorio = dataOcorrenciaCartorio; }
 
-  	@Column(name = "codigo_irregularidade", nullable = true, length = 2)
 	public String getCodigoIrregularidade() { return codigoIrregularidade; }
 	public void setCodigoIrregularidade(String codigoIrregularidade) { 
 															this.codigoIrregularidade = codigoIrregularidade; }
 
-  	@Column(name = "bairro_devedor", nullable = true, length = 20)
 	public String getBairroDevedor() { return bairroDevedor; }
 	public void setBairroDevedor(String bairroDevedor) { this.bairroDevedor = bairroDevedor; }
 
-  	@Column(name = "valor_custas_cartorio_dist", nullable = true, length = 14)
 	public String getValorCustasCartorioDist() { return valorCustasCartorioDist; }
 	public void setValorCustasCartorioDist(String valorCustasCartorioDist) {
 													this.valorCustasCartorioDist = valorCustasCartorioDist; }
 
-  	@Column(name = "nome_portador", nullable = true, length = 45)
 	public String getNomePortador() { return nomePortador; }
 	public void setNomePortador(String nomePortador) { this.nomePortador = nomePortador; }
 
-  	@Column(name = "numero_distribuicao", nullable = true, length = 7)
 	public String getNumeroDistribuicao() { return numeroDistribuicao; }
 	public void setNumeroDistribuicao(String numeroDistribuicao) { this.numeroDistribuicao = numeroDistribuicao; }
 
-  	@Column(name = "complemento_registro", nullable = true, length = 1)
 	public String getComplementoRegistro() { return complementoRegistro; }
 	public void setComplementoRegistro(String complementoRegistro) { 
 																this.complementoRegistro = complementoRegistro;	}
 
- 	@Column(name = "selo_distribuidor", nullable = true, length = 12)
 	public String getSeloDistribuidor() { return seloDistribuidor; }
 	public void setSeloDistribuidor(String seloDistribuidor) { this.seloDistribuidor = seloDistribuidor; }
 
-  	@Column(name = "fins_f_alimentares", nullable = true, length = 1)
 	public String getFinsFAlimentares() { return finsFAlimentares; }
 	public void setFinsFAlimentares(String finsFAlimentares) { this.finsFAlimentares = finsFAlimentares; }
 
-  	@Column(nullable = true, length = 1)
 	public String getConvenio() { return convenio; }
 	public void setConvenio(String convenio) { this.convenio = convenio; }
 
-  	@Column(nullable = true, length = 1)
 	public String getEmpresa() { return empresa; }
 	public void setEmpresa(String empresa) { this.empresa = empresa; }
 
-  	@Column(name = "numero_seq_registro", nullable = true, length = 4)
 	public String getNumeroSeqRegistro() { return numeroSeqRegistro; }
-	public void setNumeroSeqRegistro(String numeroSeqRegistro) { this.numeroSeqRegistro = numeroSeqRegistro; }		
+	public void setNumeroSeqRegistro(String numeroSeqRegistro) { this.numeroSeqRegistro = numeroSeqRegistro; }
+
+	public String getTipoMovimento() { return tipoMovimento; }
+	public void setTipoMovimento(String tipoMovimento) { this.tipoMovimento = tipoMovimento; }
+
 }

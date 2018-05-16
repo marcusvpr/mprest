@@ -31,6 +31,9 @@ public class MpmTrailler extends MpEntity {
 	
   	@Column(name = "numero_seq_registro", nullable = false, length = 4)
   	private String numeroSeqRegistro;
+	
+  	@Column(name = "tipo_movimento", nullable = true, length = 10)
+	private String tipoMovimento;	
 
 	// ----------
 	
@@ -44,6 +47,7 @@ public class MpmTrailler extends MpEntity {
              , String somaSegValRemessa
              , String complementoRegistro
              , String numeroSeqRegistro
+             , String tipoMovimento
              ) {
 		//
 		super();
@@ -55,6 +59,7 @@ public class MpmTrailler extends MpEntity {
   		this.somaSegValRemessa = somaSegValRemessa;
   		this.complementoRegistro = complementoRegistro;
   		this.numeroSeqRegistro = numeroSeqRegistro;
+		this.tipoMovimento = tipoMovimento;
   	}
   	
   	// ---
@@ -77,5 +82,8 @@ public class MpmTrailler extends MpEntity {
 
 	public String getNumeroSeqRegistro() { return numeroSeqRegistro; } 
 	public void setNumeroSeqRegistro(String numeroSeqRegistro) { this.numeroSeqRegistro = numeroSeqRegistro; }
+
+	public String getTipoMovimento() { return tipoMovimento; }
+	public void setTipoMovimento(String tipoMovimento) { this.tipoMovimento = tipoMovimento; }
    	  	
 }

@@ -47,11 +47,14 @@ public class MpmHeader extends MpEntity {
   	@Column(name = "versao_layout", nullable = false, length = 3)
 	private String versaoLayout;
 	
-  	@Column(name = "complemento_registro", nullable = false, length = 1)
+  	@Column(name = "complemento_registro", nullable = false, length = 500)
 	private String complementoRegistro;
 	
   	@Column(name = "numero_seq_registro", nullable = false, length = 4)
 	private String numeroSeqRegistro;	
+	
+  	@Column(name = "tipo_movimento", nullable = true, length = 10)
+	private String tipoMovimento;	
 	
 	// 
 	
@@ -62,7 +65,7 @@ public class MpmHeader extends MpEntity {
 	public MpmHeader(Integer id, MpmRemessa mpmRemessa, String idenTransRemetente, String idenTransDestinatario,
 			String idenTransTipo, String numeroSeqRemessa, String qtdRegRemessa, String qtdTitRemessa,
 			String qtdIndRemessa, String qtdOrigRemessa, String agenciaCentralizadora, String versaoLayout,
-			String complementoRegistro, String numeroSeqRegistro) {
+			String complementoRegistro, String numeroSeqRegistro, String tipoMovimento) {
 		//
 		super();
 		
@@ -80,6 +83,7 @@ public class MpmHeader extends MpEntity {
 		this.versaoLayout = versaoLayout;
 		this.complementoRegistro = complementoRegistro;
 		this.numeroSeqRegistro = numeroSeqRegistro;
+		this.tipoMovimento = tipoMovimento;
 	}
 
 
@@ -90,8 +94,7 @@ public class MpmHeader extends MpEntity {
 	public void setMpmRemessa(MpmRemessa mpmRemessa) { this.mpmRemessa = mpmRemessa; }
 
 	public String getIdenTransRemetente() { return idenTransRemetente; }
-	public void setIdenTransRemetente(String idenTransRemetente) { 
-														this.idenTransRemetente = idenTransRemetente; }
+	public void setIdenTransRemetente(String idenTransRemetente) {this.idenTransRemetente = idenTransRemetente; }
 
 	public String getIdenTransDestinatario() { return idenTransDestinatario; }
 	public void setIdenTransDestinatario(String idenTransDestinatario) { 
@@ -123,10 +126,12 @@ public class MpmHeader extends MpEntity {
 	public void setVersaoLayout(String versaoLayout) { this.versaoLayout = versaoLayout; }
 
 	public String getComplementoRegistro() { return complementoRegistro; }
-	public void setComplementoRegistro(String complementoRegistro) { 
-														this.complementoRegistro = complementoRegistro; }
+	public void setComplementoRegistro(String complementoRegistro) {this.complementoRegistro = complementoRegistro; }
 
 	public String getNumeroSeqRegistro() { return numeroSeqRegistro; }
 	public void setNumeroSeqRegistro(String numeroSeqRegistro) { this.numeroSeqRegistro = numeroSeqRegistro; }
+
+	public String getTipoMovimento() { return tipoMovimento; }
+	public void setTipoMovimento(String tipoMovimento) { this.tipoMovimento = tipoMovimento; }
 
 }

@@ -6,7 +6,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Index;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -25,7 +25,7 @@ public class MpmAlinea extends MpEntity {
 	private String descricao;
 		
 	@JsonIgnore
-	@OneToMany(mappedBy="mpmAlinea")
+	@ManyToMany(mappedBy="mpmAlineas")
 	private List<MpmTitulo> mpmTitulos = new ArrayList<>();
 	
 	//

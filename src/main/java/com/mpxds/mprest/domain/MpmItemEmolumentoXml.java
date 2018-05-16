@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -14,7 +15,9 @@ import org.springframework.format.annotation.NumberFormat;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-@Table(name = "mpadt_item_emolumento_xml")
+@Table(name = "mpadt_item_emolumento_xml", 
+			indexes = {@Index(name = "index_mpadt_item_emol_xml_cod_atoSeq_numC",
+										columnList = "codigo_ato, ato_sequencia, numero_controle", unique = false)})
 public class MpmItemEmolumentoXml extends MpEntity {
 	//
 	private static final long serialVersionUID = 1L;

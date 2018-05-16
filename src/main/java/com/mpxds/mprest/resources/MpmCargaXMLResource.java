@@ -5,8 +5,10 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -23,12 +25,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mpxds.mprest.domain.MpCategoria;
 import com.mpxds.mprest.domain.MpSistemaConfig;
+import com.mpxds.mprest.domain.MpmAgencia;
 import com.mpxds.mprest.domain.MpmAlinea;
 import com.mpxds.mprest.domain.MpmAnoReferencia;
 import com.mpxds.mprest.domain.MpmApresentante;
 import com.mpxds.mprest.domain.MpmAto;
 import com.mpxds.mprest.domain.MpmAtoComposicao;
 import com.mpxds.mprest.domain.MpmBanco;
+import com.mpxds.mprest.domain.MpmBancoSistema;
 import com.mpxds.mprest.domain.MpmCarga;
 import com.mpxds.mprest.domain.MpmCidade;
 import com.mpxds.mprest.domain.MpmControleOficio;
@@ -54,10 +58,12 @@ import com.mpxds.mprest.domain.MpmRemessa;
 import com.mpxds.mprest.domain.MpmSeloDistribuidor;
 import com.mpxds.mprest.domain.MpmStatus;
 import com.mpxds.mprest.domain.MpmTitulo;
+import com.mpxds.mprest.domain.MpmTituloAto;
 import com.mpxds.mprest.domain.MpmTituloProtestado;
 import com.mpxds.mprest.domain.MpmTituloStatus;
 import com.mpxds.mprest.domain.MpmTrailler;
 import com.mpxds.mprest.domain.MpmTransacao;
+import com.mpxds.mprest.domain.enums.MpBancoCodigo;
 import com.mpxds.mprest.domain.enums.MpTipoCampo;
 import com.mpxds.mprest.domain.xml.MpmAlineaXML;
 import com.mpxds.mprest.domain.xml.MpmAlineasXML;
@@ -65,6 +71,10 @@ import com.mpxds.mprest.domain.xml.MpmAtoComposicaoXML;
 import com.mpxds.mprest.domain.xml.MpmAtoComposicaosXML;
 import com.mpxds.mprest.domain.xml.MpmAtoXML;
 import com.mpxds.mprest.domain.xml.MpmAtosXML;
+import com.mpxds.mprest.domain.xml.MpmBancoXML;
+import com.mpxds.mprest.domain.xml.MpmBancosXML;
+import com.mpxds.mprest.domain.xml.MpmCustasComposicaoXML;
+import com.mpxds.mprest.domain.xml.MpmCustasComposicaosXML;
 import com.mpxds.mprest.domain.xml.MpmDevedorXML;
 import com.mpxds.mprest.domain.xml.MpmDevedorsXML;
 import com.mpxds.mprest.domain.xml.MpmEditalXML;
@@ -75,22 +85,28 @@ import com.mpxds.mprest.domain.xml.MpmEspecieXML;
 import com.mpxds.mprest.domain.xml.MpmEspeciesXML;
 import com.mpxds.mprest.domain.xml.MpmIdentificacaoXML;
 import com.mpxds.mprest.domain.xml.MpmIdentificacaosXML;
+import com.mpxds.mprest.domain.xml.MpmImportarControleXML;
+import com.mpxds.mprest.domain.xml.MpmImportarControlesXML;
 import com.mpxds.mprest.domain.xml.MpmMotivoEditalXML;
 import com.mpxds.mprest.domain.xml.MpmMotivoEditalsXML;
 import com.mpxds.mprest.domain.xml.MpmObservacaoXML;
 import com.mpxds.mprest.domain.xml.MpmObservacaosXML;
+import com.mpxds.mprest.domain.xml.MpmRemessaXML;
+import com.mpxds.mprest.domain.xml.MpmRemessasXML;
 import com.mpxds.mprest.domain.xml.MpmTituloXML;
 import com.mpxds.mprest.domain.xml.MpmTitulosXML;
 import com.mpxds.mprest.domain.xml.MpmTransacaoXML;
 import com.mpxds.mprest.domain.xml.MpmTransacaosXML;
 import com.mpxds.mprest.repositories.MpCategoriaRepository;
 import com.mpxds.mprest.repositories.MpSistemaConfigRepository;
+import com.mpxds.mprest.repositories.MpmAgenciaRepository;
 import com.mpxds.mprest.repositories.MpmAlineaRepository;
 import com.mpxds.mprest.repositories.MpmAnoReferenciaRepository;
 import com.mpxds.mprest.repositories.MpmApresentanteRepository;
 import com.mpxds.mprest.repositories.MpmAtoComposicaoRepository;
 import com.mpxds.mprest.repositories.MpmAtoRepository;
 import com.mpxds.mprest.repositories.MpmBancoRepository;
+import com.mpxds.mprest.repositories.MpmBancoSistemaRepository;
 import com.mpxds.mprest.repositories.MpmCargaRepository;
 import com.mpxds.mprest.repositories.MpmCidadeRepository;
 import com.mpxds.mprest.repositories.MpmControleOficioRepository;
@@ -115,20 +131,24 @@ import com.mpxds.mprest.repositories.MpmPessoaTituloRepository;
 import com.mpxds.mprest.repositories.MpmRemessaRepository;
 import com.mpxds.mprest.repositories.MpmSeloDistribuidorRepository;
 import com.mpxds.mprest.repositories.MpmStatusRepository;
+import com.mpxds.mprest.repositories.MpmTituloAtoRepository;
 import com.mpxds.mprest.repositories.MpmTituloProtestadoRepository;
 import com.mpxds.mprest.repositories.MpmTituloRepository;
 import com.mpxds.mprest.repositories.MpmTituloStatusRepository;
 import com.mpxds.mprest.repositories.MpmTraillerRepository;
 import com.mpxds.mprest.repositories.MpmTransacaoRepository;
+import com.mpxds.mprest.services.MpmAgenciaService;
 import com.mpxds.mprest.services.MpmAlineaService;
 import com.mpxds.mprest.services.MpmAnoReferenciaService;
 import com.mpxds.mprest.services.MpmApresentanteService;
 import com.mpxds.mprest.services.MpmAtoService;
-import com.mpxds.mprest.services.MpmBancoService;
+//import com.mpxds.mprest.services.MpmBancoService;
+import com.mpxds.mprest.services.MpmBancoSistemaService;
 import com.mpxds.mprest.services.MpmCargaService;
 import com.mpxds.mprest.services.MpmCidadeService;
-import com.mpxds.mprest.services.MpmDevedorService;
-import com.mpxds.mprest.services.MpmEditalService;
+import com.mpxds.mprest.services.MpmCustasComposicaoService;
+//import com.mpxds.mprest.services.MpmDevedorService;
+//import com.mpxds.mprest.services.MpmEditalService;
 import com.mpxds.mprest.services.MpmEnderecoService;
 import com.mpxds.mprest.services.MpmEndossoService;
 import com.mpxds.mprest.services.MpmEspecieService;
@@ -141,7 +161,9 @@ import com.mpxds.mprest.services.MpmPessoaTituloService;
 import com.mpxds.mprest.services.MpmRemessaService;
 import com.mpxds.mprest.services.MpmSeloDistribuidorService;
 import com.mpxds.mprest.services.MpmStatusService;
+//import com.mpxds.mprest.services.MpmTituloAtoService;
 import com.mpxds.mprest.services.MpmTituloProtestadoService;
+import com.mpxds.mprest.services.MpmTituloService;
 import com.mpxds.mprest.services.MpmTituloStatusService;
 
 @RestController
@@ -188,8 +210,8 @@ public class MpmCargaXMLResource {
 	private MpmEnderecoService mpmEnderecoService;
 	@Autowired
 	private MpmDevedorRepository mpmDevedorRepository;
-	@Autowired
-	private MpmDevedorService mpmDevedorService;
+//	@Autowired
+//	private MpmDevedorService mpmDevedorService;
 	@Autowired
 	private MpmApresentanteRepository mpmApresentanteRepository;
 	@Autowired
@@ -200,6 +222,12 @@ public class MpmCargaXMLResource {
 	private MpmPessoaTituloService mpmPessoaTituloService;
 	@Autowired
 	private MpmTituloRepository mpmTituloRepository;
+	@Autowired
+	private MpmTituloService mpmTituloService;
+	@Autowired
+	private MpmTituloAtoRepository mpmTituloAtoRepository;
+//	@Autowired
+//	private MpmTituloAtoService mpmTituloAtoService;
 	@Autowired
 	private MpSistemaConfigRepository mpSistemaConfigRepository;
 	@Autowired
@@ -217,9 +245,19 @@ public class MpmCargaXMLResource {
 	@Autowired
 	private MpmCustasComposicaoRepository mpmCustasComposicaoRepository;
 	@Autowired
-	private MpmBancoRepository mpmBancoRepository;
+	private MpmCustasComposicaoService mpmCustasComposicaoService;
 	@Autowired
-	private MpmBancoService mpmBancoService;
+	private MpmBancoSistemaRepository mpmBancoSistemaRepository;
+	@Autowired
+	private MpmBancoSistemaService mpmBancoSistemaService;
+	@Autowired
+	private MpmAgenciaRepository mpmAgenciaRepository;
+	@Autowired
+	private MpmAgenciaService mpmAgenciaService;
+	@Autowired
+	private MpmBancoRepository mpmBancoRepository;
+//	@Autowired
+//	private MpmBancoService mpmBancoService;
 	@Autowired
 	private MpmControleOficioRepository mpmControleOficioRepository;
 	@Autowired
@@ -260,8 +298,8 @@ public class MpmCargaXMLResource {
 	private MpmEndossoService mpmEndossoService;
 	@Autowired
 	private MpmEditalRepository mpmEditalRepository;
-	@Autowired
-	private MpmEditalService mpmEditalService;
+//	@Autowired
+//	private MpmEditalService mpmEditalService;
 	@Autowired
 	private MpmMotivoEditalRepository mpmMotivoEditalRepository;
 	@Autowired
@@ -270,36 +308,50 @@ public class MpmCargaXMLResource {
 	@Autowired
 	private MpmCargaService mpmCargaService;
 
-	//
-
+	// ---
+	private MpmAnoReferencia mpmAnoRef;
+	
 	private Boolean indXml_01_Alinea = true;
-	private Boolean indXml_02_Ato = true;
-	private Boolean indXml_03_AtoComposicao = true;
-	private Boolean indXml_04_Identificacao = true;
-	private Boolean indXml_05_Devedor = true;
-	private Boolean indXml_06_Endosso = true;
-	private Boolean indXml_07_Edital = true;
-	private Boolean indXml_08_MotivoEdital = true;
-	private Boolean indXml_09_Observacao = true;
-	private Boolean indXml_10_Transacao = true;
-	private Boolean indXml_11_Especie = true;
-	private Boolean indXml_12_Titulo = true;
+	private Boolean indXml_02_ImportarControle = true;
+	private Boolean indXml_03_CustasComposicao = true;
+	private Boolean indXml_04_Ato = true;
+	private Boolean indXml_05_AtoComposicao = true;
+	private Boolean indXml_06_Identificacao = true;
+	private Boolean indXml_07_Endosso = true;
+	private Boolean indXml_08_Edital = true;
+	private Boolean indXml_09_MotivoEdital = true;
+	private Boolean indXml_10_Observacao = true;
+	private Boolean indXml_11_Remessa = true;
+	private Boolean indXml_12_Transacao = true;
+	private Boolean indXml_13_Especie = true;
+	private Boolean indXml_14_Banco = true;
+	private Boolean indXml_15_Titulo = true;
+	private Boolean indXml_16_Devedor = true;
 
 	private Boolean indCarga = false;
 	private String logCarga = "";
 	
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-	//
+	
+	// ---
+	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<?> findId(@PathVariable Integer id) {
-		//
+		// Captura MpmAnoReferencia ...
+		this.mpmAnoRef = this.mpmAnoReferenciaService.buscarAnoReferencia("2018");
+		if (null == this.mpmAnoRef) {
+			this.mpmAnoRef = new MpmAnoReferencia(null, "2018", "ANO 2018", true);
+			this.mpmAnoRef = this.mpmAnoReferenciaRepository.saveAndFlush(this.mpmAnoRef);
+		}
+		
 		try {
 			this.trataCargaXML();
+			//
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		//
-		MpmCarga mpObj = this.mpmCargaService.buscarId(id);
+		MpmCarga mpObj = this.mpmCargaService.buscarCodigo("MpmCargaXML");
 		//
 		return ResponseEntity.ok().body(mpObj);
 	}
@@ -308,33 +360,41 @@ public class MpmCargaXMLResource {
 		//
 		if (this.indXml_01_Alinea)
 			this.trataCargaAlineaXML();
-		if (this.indXml_02_Ato)
+		if (this.indXml_02_ImportarControle)
+			this.trataCargaImportarControleXML();
+		if (this.indXml_03_CustasComposicao)
+			this.trataCargaCustasComposicaoXML();
+		if (this.indXml_04_Ato)
 			this.trataCargaAtoXML();
-		if (this.indXml_03_AtoComposicao)
+		if (this.indXml_05_AtoComposicao)
 			this.trataCargaAtoComposicaoXML();
-		if (this.indXml_04_Identificacao)
+		if (this.indXml_06_Identificacao)
 			this.trataCargaIdentificacaoXML();
-		if (this.indXml_05_Devedor)
-			this.trataCargaDevedorXML();
-		if (this.indXml_06_Endosso)
+		if (this.indXml_07_Endosso)
 			this.trataCargaEndossoXML();
-		if (this.indXml_07_Edital)
+		if (this.indXml_08_Edital)
 			this.trataCargaEditalXML();
-		if (this.indXml_08_MotivoEdital)
+		if (this.indXml_09_MotivoEdital)
 			this.trataCargaMotivoEditalXML();
-		if (this.indXml_09_Observacao)
+		if (this.indXml_10_Observacao)
 			this.trataCargaObservacaoXML();
-		if (this.indXml_10_Transacao)
+		if (this.indXml_11_Remessa)
+			this.trataCargaRemessaXML();
+		if (this.indXml_12_Transacao)
 			this.trataCargaTransacaoXML();
-		if (this.indXml_11_Especie)
+		if (this.indXml_13_Especie)
 			this.trataCargaEspecieXML();
-		if (this.indXml_12_Titulo)
+		if (this.indXml_14_Banco)
+			this.trataCargaBancoXML();
+		if (this.indXml_15_Titulo)
 			this.trataCargaTituloXML();
-
+		if (this.indXml_16_Devedor)
+			this.trataCargaDevedorXML();
+		//
 		if (this.indCarga)
 			this.trataCarga();
 		//
-		MpmCarga mpmCarga = new MpmCarga(null, logCarga);
+		MpmCarga mpmCarga = new MpmCarga(null, "MpmCargaXML", logCarga);
 		
 		this.mpmCargaRepository.saveAndFlush(mpmCarga);
 	}
@@ -372,6 +432,94 @@ public class MpmCargaXMLResource {
 			e.printStackTrace();
 		}
 	}
+
+	public void trataCargaImportarControleXML() throws ParseException {
+		//
+		try {
+			Resource resource = new ClassPathResource("static/files/xml/ImportarControle.xml");
+
+			File file = resource.getFile();
+
+			JAXBContext jaxbContext = JAXBContext.newInstance(MpmImportarControlesXML.class);
+
+			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+			MpmImportarControlesXML mpmImportarControlesXML = (MpmImportarControlesXML) jaxbUnmarshaller.
+																							unmarshal(file);
+
+			//
+			this.mpmImportarControleRepository.deleteAll();
+			
+			for (MpmImportarControleXML mpmImportarControleXML : mpmImportarControlesXML.
+																			getMpmImportarControleXMLs()) {
+				//
+				MpmImportarControle mpmImportarControle = new MpmImportarControle(null,
+						sdf.parse(mpmImportarControleXML.getDataImportar().replace("T", " ")),
+						sdf.parse(mpmImportarControleXML.getDataProtocolo().replace("T", " ")),
+						sdf.parse(mpmImportarControleXML.getDataAte().replace("T", " ")));
+				//
+				mpmImportarControle = this.mpmImportarControleRepository.saveAndFlush(mpmImportarControle);
+			}
+			//
+			this.logCarga = this.logCarga + " ( TrataCargaImportarControleXML() = " + 
+										mpmImportarControlesXML.getMpmImportarControleXMLs().size() + " ) ";
+			//
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void trataCargaCustasComposicaoXML() {
+		//
+		try {
+			Resource resource = new ClassPathResource("static/files/xml/CustasComposicao.xml");
+
+			File file = resource.getFile();
+
+			JAXBContext jaxbContext = JAXBContext.newInstance(MpmCustasComposicaosXML.class);
+
+			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+			MpmCustasComposicaosXML mpmCustasComposicaosXML = (MpmCustasComposicaosXML) 
+																		jaxbUnmarshaller.unmarshal(file);
+
+			//
+			this.mpmCustasComposicaoRepository.deleteAll();
+			
+			for (MpmCustasComposicaoXML mpmCustasComposicaoXML : mpmCustasComposicaosXML.
+																			getMpmCustasComposicaoXMLs()) {
+				//
+				String anoTabItSubIt = this.mpmAnoRef.getAno() + mpmCustasComposicaoXML.getxTabela() + 
+							mpmCustasComposicaoXML.getxItem() + mpmCustasComposicaoXML.getxSubItem() ;
+
+				MpmCustasComposicao mpmCustasComposicao = new MpmCustasComposicao(null, this.mpmAnoRef,
+						mpmCustasComposicaoXML.getxTabela(),
+						mpmCustasComposicaoXML.getxItem(),
+						mpmCustasComposicaoXML.getxSubItem(),
+						mpmCustasComposicaoXML.getxDescricaoTab(),
+						mpmCustasComposicaoXML.getxComplemento(),
+						mpmCustasComposicaoXML.getxExcessao(),
+						new BigDecimal(mpmCustasComposicaoXML.getxValorCusta().replace(",", ".")),
+						mpmCustasComposicaoXML.getxCodigoAto(),
+						mpmCustasComposicaoXML.getxCodigoAtoC(),
+						new BigDecimal(mpmCustasComposicaoXML.getxDe().replace(",", ".")),
+						new BigDecimal(mpmCustasComposicaoXML.getxAte().replace(",", ".")),
+						anoTabItSubIt, // Função ????
+						null);
+
+				mpmCustasComposicao = this.mpmCustasComposicaoRepository.saveAndFlush(mpmCustasComposicao);						
+				//
+			}
+			//
+			this.logCarga = this.logCarga + " ( TrataCargaCustasComposicaoXML() = " + 
+											mpmCustasComposicaosXML.getMpmCustasComposicaoXMLs().size() + " ) ";
+			//
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public void trataCargaAtoXML() {
 		//
@@ -384,24 +532,19 @@ public class MpmCargaXMLResource {
 
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			MpmAtosXML mpmAtosXML = (MpmAtosXML) jaxbUnmarshaller.unmarshal(file);
-
-			MpmAnoReferencia mpmAnoRef = this.mpmAnoReferenciaService.buscarAnoReferencia("2018");
-			if (null == mpmAnoRef) {
-				mpmAnoRef = new MpmAnoReferencia(null, "2018", "ANO 2018", true);
-				mpmAnoRef = this.mpmAnoReferenciaRepository.saveAndFlush(mpmAnoRef);
-			}
 			//
 			this.mpmAtoRepository.deleteAll();
 
 			for (MpmAtoXML mpmAtoXML : mpmAtosXML.getMpmAtoXMLs()) {
 				//
 				MpmAto mpmAto = new MpmAto(null,
-						mpmAnoRef,
+						this.mpmAnoRef,
 						mpmAtoXML.getCodigoAto(),
 						mpmAtoXML.getAtoSequencia(),
 						mpmAtoXML.getDescricaoAto(),
 						mpmAtoXML.getTipoSelo(),
 						new BigDecimal(mpmAtoXML.getEmolumento().replace(",", ".")),
+						new BigDecimal(mpmAtoXML.getVl_Variavel().replace(",", ".")),
 						new BigDecimal(mpmAtoXML.getLei3217().replace(",", ".")), 
 						new BigDecimal(mpmAtoXML.getLei4664().replace(",", ".")),
 						new BigDecimal(mpmAtoXML.getLei111().replace(",", ".")),
@@ -438,48 +581,40 @@ public class MpmCargaXMLResource {
 
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			MpmAtoComposicaosXML mpmAtoComposicaosXML = (MpmAtoComposicaosXML) jaxbUnmarshaller.unmarshal(file);
-
-			MpmAnoReferencia mpmAnoRef = this.mpmAnoReferenciaService.buscarAnoReferencia("2018");
-			if (null == mpmAnoRef) {
-				mpmAnoRef = new MpmAnoReferencia(null, "2018", "ANO 2018", true);
-				mpmAnoRef = this.mpmAnoReferenciaRepository.saveAndFlush(mpmAnoRef);
-			}
 			//
 			this.mpmAtoComposicaoRepository.deleteAll();
 
 			for (MpmAtoComposicaoXML mpmAtoComposicaoXML : mpmAtoComposicaosXML.getMpmAtoComposicaoXMLs()) {
 				//
-				String anoTabItSubIt = mpmAnoRef.getAno() + mpmAtoComposicaoXML.getTabela() + 
-						mpmAtoComposicaoXML.getItem() + mpmAtoComposicaoXML.getSubItem() ;
+//				String anoTabItSubIt = this.mpmAnoRef.getAno() + mpmAtoComposicaoXML.getTabela() + 
+//						mpmAtoComposicaoXML.getItem() + mpmAtoComposicaoXML.getSubItem() ;
 				
-				MpmAto mpmAto = this.mpmAtoService.buscarMpmAnoReferenciaAndCodigoAtoAndAtoSequencia(mpmAnoRef, 
+				MpmAto mpmAto = this.mpmAtoService.buscarMpmAnoReferenciaAndCodigoAtoAndAtoSequencia(
+									this.mpmAnoRef, 
 									mpmAtoComposicaoXML.getCodigoAto(), mpmAtoComposicaoXML.getAtoSequencia());
 				if (null == mpmAto) {
 					this.logCarga = this.logCarga + 
 									" ( TrataCargaAtoComposicaoXML() - Error ... Não Existe MpmAto = " + 
-									mpmAnoRef.getAno() + "(" + mpmAnoRef.getId() + ")" + " / " +
+									this.mpmAnoRef.getAno() + "(" + this.mpmAnoRef.getId() + ")" + " / " +
 									mpmAtoComposicaoXML.getCodigoAto() + " / " +
 									mpmAtoComposicaoXML.getAtoSequencia();
 					continue; // break
 				}
 				//
-				MpmCustasComposicao mpmCustasComposicao = new MpmCustasComposicao(null, mpmAnoRef,
-											mpmAtoComposicaoXML.getTabela(),
-											mpmAtoComposicaoXML.getItem(),
-											mpmAtoComposicaoXML.getSubItem(),
-											mpmAtoComposicaoXML.getDescricaoTab(),
-											mpmAtoComposicaoXML.getComplemento(),
-											mpmAtoComposicaoXML.getExcessao(),
-											new BigDecimal(mpmAtoComposicaoXML.getValorCusta().replace(",", ".")),
-											mpmAtoComposicaoXML.getCodigoAto(),
-											"?", // CodigoAtoC (Prisco???)
-											new BigDecimal("0"), // De (Prisco???)
-											new BigDecimal("0"), // Ate (Prisco???)
-											anoTabItSubIt, // Função ????
-											null);
-
-				mpmCustasComposicao = this.mpmCustasComposicaoRepository.saveAndFlush(mpmCustasComposicao);						
-				//				
+				MpmCustasComposicao mpmCustasComposicao = mpmCustasComposicaoService.
+														buscarMpmAnoReferenciaAndTabelaAndItemAndSubItem(
+																	this.mpmAnoRef,
+																	mpmAtoComposicaoXML.getTabela(),
+																	mpmAtoComposicaoXML.getItem(),
+																	mpmAtoComposicaoXML.getSubItem());
+				if (null == mpmCustasComposicao) {
+					//
+					this.logCarga = this.logCarga + " ( TrataCargaAtoComposicaoXML() Error.CustasCompos. = " +
+								this.mpmAnoRef.getAno() + " / " + mpmAtoComposicaoXML.getTabela() + " / " +
+								mpmAtoComposicaoXML.getItem() + " / " + mpmAtoComposicaoXML.getSubItem();
+					continue;
+				}
+				//
 				MpmAtoComposicao mpmAtoComposicao = new MpmAtoComposicao(null,
 											mpmAto,
 											mpmCustasComposicao,
@@ -536,7 +671,7 @@ public class MpmCargaXMLResource {
 		}
 	}
 			
-	private void trataCargaDevedorXML() {
+	private void trataCargaDevedorXML() throws ParseException {
 		//
 		try {
 			Resource resource = new ClassPathResource("static/files/xml/Devedores.xml");
@@ -552,57 +687,53 @@ public class MpmCargaXMLResource {
 
 			for (MpmDevedorXML mpmDevedorXML : mpmDevedorsXML.getMpmDevedorXMLs()) {
 				// Trata Estado ...
-				MpmEstadoUf mpmEstadoUf = this.mpmEstadoUfService.buscarSigla(mpmDevedorXML.getxUf());
-				if (null == mpmEstadoUf) {
-					//
-					String nomeEstado = "NOME ???";
-					if (mpmDevedorXML.getxUf().toUpperCase().equals("RJ"))
-						nomeEstado = "RIO DE JANEIRO";
-					else
-					if (mpmDevedorXML.getxUf().toUpperCase().equals("SP"))
-						nomeEstado = "SÃO PAULO";
-					//
-					mpmEstadoUf = new MpmEstadoUf(null, mpmDevedorXML.getxUf(), nomeEstado);
-					mpmEstadoUf = this.mpmEstadoUfRepository.saveAndFlush(mpmEstadoUf);
-				}
+				MpmEstadoUf mpmEstadoUf = this.mpmEstadoUfService.buscarGravarMpmEstadoUfBySigla(
+																					mpmDevedorXML.getxUf());
 				// Trata Cidade ...
-				MpmCidade mpmCidade = this.mpmCidadeService.buscarNomeAndMpmEstadoUf(
+				MpmCidade mpmCidade = this.mpmCidadeService.buscarGravarMpmCidadeByNomeAndMpmEstadoUF(
 																	mpmDevedorXML.getxCidade(), mpmEstadoUf);
-				if (null == mpmCidade) {
-					//
-					mpmCidade = new MpmCidade(null, mpmDevedorXML.getxCidade(), mpmEstadoUf);					
-					mpmCidade = this.mpmCidadeRepository.saveAndFlush(mpmCidade);
-					
-					mpmEstadoUf.getMpmCidades().addAll(Arrays.asList(mpmCidade));
-					mpmEstadoUf = this.mpmEstadoUfRepository.saveAndFlush(mpmEstadoUf);
-				}
 				// Trata Endereco ...
 				MpmEndereco mpmEndereco = this.mpmEnderecoService.
-											buscarLogradouroAndNumeroAndComplementoAndCepAndBairroAndMpmCidade(
+							buscarGravarMpmEnderecoByLogradouroAndNumeroAndComplementoAndCepAndBairroAndMpmCidade(
 													mpmDevedorXML.getxEndereco(), mpmDevedorXML.getxNumero(), 
 													mpmDevedorXML.getxComplemento(), mpmDevedorXML.getxCep(),
 													mpmDevedorXML.getxBairro(), mpmCidade);
-				if (null == mpmEndereco) {
-					//
-					mpmEndereco = new MpmEndereco(null, mpmDevedorXML.getxEndereco(), 
-													mpmDevedorXML.getxNumero(),	mpmDevedorXML.getxComplemento(),
-													mpmDevedorXML.getxCep(), mpmDevedorXML.getxBairro(),
-													mpmCidade);				
-					mpmEndereco = this.mpmEnderecoRepository.saveAndFlush(mpmEndereco);
-				}
 				// Trata Identificacao ...
 				MpmIdentificacao mpmIdentificacao = this.mpmIdentificacaoService.buscarCodigo(
 													Integer.parseInt(mpmDevedorXML.getxCod_Identificacao()));
 				if (null == mpmIdentificacao) {
 					//
-					this.logCarga = this.logCarga + " ( TrataCargaIdentificacaoXML() Error.Codigo = " +
+					this.logCarga = this.logCarga + " ( TrataCargaDevedorXML() Error.Codigo.Identif. = " +
 																		mpmDevedorXML.getxCod_Identificacao();
 					continue;
 				}
 				// Trata Devedor ...
-				MpmDevedor mpmDevedor = new MpmDevedor(null, mpmDevedorXML.getxNome(), 0,
-																			mpmIdentificacao, mpmEndereco);
+				MpmDevedor mpmDevedor = new MpmDevedor(null, mpmDevedorXML.getxNome(), 
+							Integer.parseInt(mpmDevedorXML.getxCod_Devedor()), 
+							mpmDevedorXML.getxTp_Documento(),
+							mpmDevedorXML.getxNo_Documento(),
+							mpmIdentificacao, mpmEndereco);
 				mpmDevedor = this.mpmDevedorRepository.saveAndFlush(mpmDevedor);
+				
+				// Capturar Titulos ???
+				MpmTitulo mpmTitulo = mpmTituloService.buscarDataProtocoloAndNumeroProtocolo(
+											sdf.parse(mpmDevedorXML.getxDt_Protocolo().replace("T", " ")),
+											mpmDevedorXML.getxNo_Protocolo());
+				if (null == mpmTitulo) {
+					//
+					this.logCarga = this.logCarga + " ( TrataCargaDevedorXML() Error.DatNum.Protoc. = " +
+								sdf.parse(mpmDevedorXML.getxDt_Protocolo().replace("T", " ")) + " / " +
+								mpmDevedorXML.getxNo_Protocolo();
+					continue;
+				} else {
+					//
+					mpmTitulo.getMpmDevedors().addAll(Arrays.asList(mpmDevedor));
+					mpmTitulo = this.mpmTituloRepository.saveAndFlush(mpmTitulo);
+
+					mpmDevedor.getMpmTitulos().addAll(Arrays.asList(mpmTitulo));
+					mpmDevedor = this.mpmDevedorRepository.saveAndFlush(mpmDevedor);
+				}
+				
 				// Trata Relations ...
 				mpmIdentificacao.getMpmDevedors().addAll(Arrays.asList(mpmDevedor));
 				mpmIdentificacao = this.mpmIdentificacaoRepository.saveAndFlush(mpmIdentificacao);
@@ -742,12 +873,76 @@ public class MpmCargaXMLResource {
 				//
 				MpmObservacao mpmObservacao = new MpmObservacao(null,
 						mpmObservacaoXML.getTpObservacao(), mpmObservacaoXML.getDscObservacao());
+				// Trata Motivo Edital !
+				if (!mpmObservacaoXML.getObsEdital().trim().equals("0")) {
+					//
+					String codObsEdital = mpmObservacaoXML.getObsEdital().trim();					
+					if (codObsEdital.length()==1)
+						codObsEdital = "0" + codObsEdital;						
+					//
+					MpmMotivoEdital mpmMotivoEdital = mpmMotivoEditalService.buscarCodigo(codObsEdital);
+					if (null == mpmMotivoEdital) 
+						this.logCarga = this.logCarga + " ( TrataCargaObservacaoXML() - Erro.Edital = " +
+																			mpmObservacaoXML.getObsEdital();
+					else
+						mpmObservacao.setMpmMotivoEdital(mpmMotivoEdital);
+					// 
+					mpmObservacao = this.mpmObservacaoRepository.saveAndFlush(mpmObservacao);
+					// Relations ...
+					mpmMotivoEdital.getMpmObservacaos().addAll(Arrays.asList(mpmObservacao));
+					mpmMotivoEdital = this.mpmMotivoEditalRepository.saveAndFlush(mpmMotivoEdital);
+				} else
+					mpmObservacao = this.mpmObservacaoRepository.saveAndFlush(mpmObservacao);
 				//
-				mpmObservacao = this.mpmObservacaoRepository.saveAndFlush(mpmObservacao);
+				
 			}
 			//
 			this.logCarga = this.logCarga + " ( TrataCargaObservacaoXML() = " + 
 													mpmObservacaosXML.getMpmObservacaoXMLs().size() + " ) ";
+			//
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void trataCargaRemessaXML() throws ParseException {
+		//
+		try {
+			Resource resource = new ClassPathResource("static/files/xml/Remessa.xml");
+
+			File file = resource.getFile();
+
+			JAXBContext jaxbContext = JAXBContext.newInstance(MpmRemessasXML.class);
+
+			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+			MpmRemessasXML mpmRemessasXML = (MpmRemessasXML) jaxbUnmarshaller.unmarshal(file);
+
+			//
+			this.mpmRemessaRepository.deleteAll();
+			
+			for (MpmRemessaXML mpmRemessaXML : mpmRemessasXML.getMpmRemessaXMLs()) {
+				// Trata MpmImportarControle ...
+				MpmImportarControle mpmImportarControle = mpmImportarControleService.buscarDataDistribuicao(
+												sdf.parse(mpmRemessaXML.getDataImportar().replace("T", " ")));
+				if (null == mpmImportarControle) {
+					//
+					this.logCarga = this.logCarga + " ( TrataCargaRemessaXML() = Erro ImportarControle " + 
+												sdf.parse(mpmRemessaXML.getDataImportar().replace("T", " "));
+					continue;
+				}
+				//
+				MpmRemessa mpmRemessa = new MpmRemessa(null, mpmImportarControle,
+										mpmRemessaXML.getNomeArquivo());
+//										mpmRemessaXML.getProtocoloInicial(),
+//										mpmRemessaXML.getProtocoloFinal());
+				//
+				mpmRemessa = this.mpmRemessaRepository.saveAndFlush(mpmRemessa);
+			}
+			//
+			this.logCarga = this.logCarga + " ( TrataCargaRemessaXML() = " + 
+														mpmRemessasXML.getMpmRemessaXMLs().size() + " ) ";
 			//
 		} catch (JAXBException e) {
 			e.printStackTrace();
@@ -777,78 +972,88 @@ public class MpmCargaXMLResource {
 											sdf.parse(mpmTransacaoXML.getxDataImportar().replace("T", " ")));
 				if (null == mpmImportarControle) {
 					//
-					mpmImportarControle = new MpmImportarControle(null, 
-						sdf.parse(mpmTransacaoXML.getxDataImportar().replace("T", " ")), // Dt.Distrib.?
-						sdf.parse(mpmTransacaoXML.getxDataImportar().replace("T", " ")), // Dt.Protocolo ?
-						sdf.parse(mpmTransacaoXML.getxDataImportar().replace("T", " "))) ; // Dt.Ate ?
-					//
-					mpmImportarControle = this.mpmImportarControleRepository.saveAndFlush(mpmImportarControle);
+					this.logCarga = this.logCarga + " ( TrataCargaTransacaoXML() Err.MpmImportarControle = " 
+																		+ mpmTransacaoXML.getxDataImportar();
+					continue;
 				}
 				// Trata MpmRemessa ...
 				MpmRemessa mpmRemessa = mpmRemessaService.buscarMpmImportarControleAndNomeArquivo(
 													mpmImportarControle, mpmTransacaoXML.getxNomeArquivo());
 				if (null == mpmRemessa) {
 					//
-					mpmRemessa = new MpmRemessa(null, mpmImportarControle,
-							mpmTransacaoXML.getxNomeArquivo(),
-							"?Carga", // Protoc.Inicial
-							"?Carga"); // Protoc.Final
-					//
-					mpmRemessa = this.mpmRemessaRepository.saveAndFlush(mpmRemessa);
+					this.logCarga = this.logCarga + " ( TrataCargaTransacaoXML() Err.MpmRemessa = " + 
+																mpmTransacaoXML.getxDataImportar() + " / " +
+																mpmTransacaoXML.getxNomeArquivo();
+					continue;
 				}
+				
+				// Trata MpmSeloDistribuidor ...
+				MpmSeloDistribuidor mpmSeloDistribuidor = 
+								mpmSeloDistribuidorService.buscarDataDistribuicaoAndNumeroDistribuicao(
+											sdf.parse(mpmTransacaoXML.getxDataImportar().replace("T", " ")),
+											mpmTransacaoXML.getxNumeroDistribuicao());
+				if (null == mpmSeloDistribuidor) {
+					//
+					mpmSeloDistribuidor = new MpmSeloDistribuidor(null,
+											sdf.parse(mpmTransacaoXML.getxDataImportar().replace("T", " ")),
+											mpmTransacaoXML.getxNumeroDistribuicao(),
+											mpmTransacaoXML.getxSeloDistribuidor());
+					mpmSeloDistribuidor = this.mpmSeloDistribuidorRepository.saveAndFlush(mpmSeloDistribuidor);
+				}				
 				
 				// Trata MpmTransacao ...
 				MpmTransacao mpmTransacao = new MpmTransacao(null, mpmRemessa,
-						mpmTransacaoXML.getxNumeroCodigoPortador(),
-						mpmTransacaoXML.getxAgenciaCodCedente(),
-						mpmTransacaoXML.getxNomeCedFav(),
-						mpmTransacaoXML.getxNomSacador(),
-						mpmTransacaoXML.getxDocumentoSacador(),
-						mpmTransacaoXML.getxEnderecSacador(),
-						mpmTransacaoXML.getxCeSacador(),
-						mpmTransacaoXML.getxCidadSacador(),
-						mpmTransacaoXML.getxUSacador(),
-						mpmTransacaoXML.getxNossoNumero(),
-						mpmTransacaoXML.getxEspecieTitulo(),
-						mpmTransacaoXML.getxNumeroTitulo(),
-						mpmTransacaoXML.getxDataEmissaoTitulo(),
-						mpmTransacaoXML.getxDataVencimentoTitulo(),
-						mpmTransacaoXML.getxTipoMoeda(),
-						mpmTransacaoXML.getxValorTitulo(),
-						mpmTransacaoXML.getxSaldoTitulo(),
-						mpmTransacaoXML.getxPracaPagamento(),
-						mpmTransacaoXML.getxTipoEndosso(),
-						mpmTransacaoXML.getxInformacaoAceite(),
-						mpmTransacaoXML.getxNumeroControleDevedor(),
-						mpmTransacaoXML.getxNomeDevedor(),
-						mpmTransacaoXML.getxTipoIdentDevedor(),
-						mpmTransacaoXML.getxNumeroIdentDevedor(),
-						mpmTransacaoXML.getxDocumentoDevedor(),
-						mpmTransacaoXML.getxEnderecoDevedor(),
-						mpmTransacaoXML.getxCepDevedor(),
-						mpmTransacaoXML.getxCidadeDevedor(),
-						mpmTransacaoXML.getxUfDevedor(),
-						mpmTransacaoXML.getxNumeroCartorio(),
-						mpmTransacaoXML.getxNumeroProtocoloCartorio(),
-						mpmTransacaoXML.getxTipoOcorrencia(),
-						mpmTransacaoXML.getxDataProtocoloCartorio(),
-						mpmTransacaoXML.getxValorCustasCartorio(),
-						mpmTransacaoXML.getxDeclaracaoPortador(),
-						mpmTransacaoXML.getxDataOcorrenciaCartorio(),
-						mpmTransacaoXML.getxCodigoIrregularidade(),
-						mpmTransacaoXML.getxBairroDevedor(),
-						mpmTransacaoXML.getxValorCustasCartorioDist(),
-						mpmTransacaoXML.getxNomePortador(),
-						mpmTransacaoXML.getxNumeroDistribuicao(),
-						mpmTransacaoXML.getxComplementoRegistro(),
-						mpmTransacaoXML.getxSeloDistribuidor(),
-						mpmTransacaoXML.getxFinsFalimentares(),
-						mpmTransacaoXML.getxConvenio(),
-						mpmTransacaoXML.getxEmpresa(),
-						mpmTransacaoXML.getxNumeroSeqRegistro());
+														mpmTransacaoXML.getxNumeroCodigoPortador(),
+														mpmTransacaoXML.getxAgenciaCodCedente(),
+														mpmTransacaoXML.getxNomeCedFav(),
+														mpmTransacaoXML.getxNomSacador(),
+														mpmTransacaoXML.getxDocumentoSacador(),
+														mpmTransacaoXML.getxEnderecSacador(),
+														mpmTransacaoXML.getxCeSacador(),
+														mpmTransacaoXML.getxCidadSacador(),
+														mpmTransacaoXML.getxUSacador(),
+														mpmTransacaoXML.getxNossoNumero(),
+														mpmTransacaoXML.getxEspecieTitulo(),
+														mpmTransacaoXML.getxNumeroTitulo(),
+														mpmTransacaoXML.getxDataEmissaoTitulo(),
+														mpmTransacaoXML.getxDataVencimentoTitulo(),
+														mpmTransacaoXML.getxTipoMoeda(),
+														mpmTransacaoXML.getxValorTitulo(),
+														mpmTransacaoXML.getxSaldoTitulo(),
+														mpmTransacaoXML.getxPracaPagamento(),
+														mpmTransacaoXML.getxTipoEndosso(),
+														mpmTransacaoXML.getxInformacaoAceite(),
+														mpmTransacaoXML.getxNumeroControleDevedor(),
+														mpmTransacaoXML.getxNomeDevedor(),
+														mpmTransacaoXML.getxTipoIdentDevedor(),
+														mpmTransacaoXML.getxNumeroIdentDevedor(),
+														mpmTransacaoXML.getxDocumentoDevedor(),
+														mpmTransacaoXML.getxEnderecoDevedor(),
+														mpmTransacaoXML.getxCepDevedor(),
+														mpmTransacaoXML.getxCidadeDevedor(),
+														mpmTransacaoXML.getxUfDevedor(),
+														mpmTransacaoXML.getxNumeroCartorio(),
+														mpmTransacaoXML.getxNumeroProtocoloCartorio(),
+														mpmTransacaoXML.getxTipoOcorrencia(),
+														mpmTransacaoXML.getxDataProtocoloCartorio(),
+														mpmTransacaoXML.getxValorCustasCartorio(),
+														mpmTransacaoXML.getxDeclaracaoPortador(),
+														mpmTransacaoXML.getxDataOcorrenciaCartorio(),
+														mpmTransacaoXML.getxCodigoIrregularidade(),
+														mpmTransacaoXML.getxBairroDevedor(),
+														mpmTransacaoXML.getxValorCustasCartorioDist(),
+														mpmTransacaoXML.getxNomePortador(),
+														mpmTransacaoXML.getxNumeroDistribuicao(),
+														mpmTransacaoXML.getxComplementoRegistro(),
+														mpmTransacaoXML.getxSeloDistribuidor(),
+														mpmTransacaoXML.getxFinsFalimentares(),
+														mpmTransacaoXML.getxConvenio(),
+														mpmTransacaoXML.getxEmpresa(),
+														mpmTransacaoXML.getxNumeroSeqRegistro(),
+														"CargaXML");
 
-//						mpmTransacaoXML.getxIdentificacaoRegistro(), ???
-//				//
+//														mpmTransacaoXML.getxIdentificacaoRegistro(), ???
+//				
 				mpmTransacao = this.mpmTransacaoRepository.saveAndFlush(mpmTransacao);
 			}
 			//
@@ -895,6 +1100,131 @@ public class MpmCargaXMLResource {
 		}
 	}
 	
+	private void trataCargaBancoXML() {
+		//
+		try {
+			Resource resource = new ClassPathResource("static/files/xml/Bancos.xml");
+			
+			File file = resource.getFile();
+	
+			JAXBContext jaxbContext = JAXBContext.newInstance(MpmBancosXML.class);
+	
+			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+			MpmBancosXML mpmBancosXML = (MpmBancosXML) jaxbUnmarshaller.unmarshal(file);
+			//
+			this.mpmBancoRepository.deleteAll();
+			
+			for (MpmBancoXML mpmBancoXML : mpmBancosXML.getMpmBancoXMLs()) {
+				// Trata indAntecipado + indPostecipado + indComissionado ...
+				Boolean indAntecipado = false;
+				if (mpmBancoXML.getxAntecipado().trim().equals("S")) indAntecipado = true;
+
+				Boolean indPostecipado = false;
+				if (mpmBancoXML.getxPostecipado().trim().equals("S")) indAntecipado = true;
+
+				Boolean indComissionado = false;
+				if (mpmBancoXML.getxComissionado().trim().equals("S")) indAntecipado = true;
+				// Trata MpmEStadoUf ....
+				MpmEstadoUf mpmEstadoUfBanco = mpmEstadoUfService.buscarGravarMpmEstadoUfBySigla(
+																			mpmBancoXML.getxUf().trim());
+				MpmCidade mpmCidadeBanco = mpmCidadeService.buscarGravarMpmCidadeByNomeAndMpmEstadoUF(
+														mpmBancoXML.getxCidade().trim(), mpmEstadoUfBanco);
+				MpmEndereco mpmEnderecoBanco = mpmEnderecoService.
+						buscarGravarMpmEnderecoByLogradouroAndNumeroAndComplementoAndCepAndBairroAndMpmCidade(
+																		mpmBancoXML.getxEndereco().trim(),
+																		mpmBancoXML.getxNumero().trim(),
+																		mpmBancoXML.getxComplemento().trim(),
+																		mpmBancoXML.getxCep().trim(),
+																		mpmBancoXML.getxBairro().trim(),
+																		mpmCidadeBanco);
+				// Relations ...
+				mpmEstadoUfBanco.getMpmCidades().addAll(Arrays.asList(mpmCidadeBanco));
+				mpmEstadoUfBanco = this.mpmEstadoUfRepository.saveAndFlush(mpmEstadoUfBanco);
+				// Trata BancoSistema ...
+				if (mpmBancoXML.getxBco().trim().toUpperCase().equals("S")) {
+					//
+					MpmBancoSistema mpmBancoSistema = mpmBancoSistemaService.buscarNome(mpmBancoXML.getxNome());
+					if (null == mpmBancoSistema) {
+						//
+						String codigoBanco = "";
+						
+						String nomeBanco = mpmBancoXML.getxNome().trim().replace("S/A.", "S.A.");
+						nomeBanco = nomeBanco.replace("S/A", "S.A.");
+						MpBancoCodigo mpBancoCodigo = MpBancoCodigo.fromNome(nomeBanco);
+						if (null == mpBancoCodigo)
+							codigoBanco = "???";
+						else
+							codigoBanco = mpBancoCodigo.getCodigo();
+						//
+						mpmBancoSistema = new MpmBancoSistema(null, codigoBanco, mpmBancoXML.getxNome());
+						mpmBancoSistema = this.mpmBancoSistemaRepository.saveAndFlush(mpmBancoSistema);
+					}
+					// Trata Agencia ...
+					MpmAgencia mpmAgencia = mpmAgenciaService.buscarNomeAndMpmBancoSistema("AGENCIA = " + 
+																mpmBancoXML.getxNome(), mpmBancoSistema);
+					if (null == mpmAgencia) {
+						//
+						String nomeAgencia = "AGENCIA = " + mpmBancoXML.getxNome(); 
+						mpmAgencia = new MpmAgencia(null, 
+													Integer.parseInt(mpmBancoXML.getxAgencia()),
+													nomeAgencia, // ??? Verificar Prisco ?
+													mpmEnderecoBanco, mpmBancoSistema);
+						mpmAgencia = this.mpmAgenciaRepository.saveAndFlush(mpmAgencia);
+						// Relations ...
+						mpmBancoSistema.getMpmAgencias().addAll(Arrays.asList(mpmAgencia));
+						mpmBancoSistema = this.mpmBancoSistemaRepository.saveAndFlush(mpmBancoSistema);
+						
+						mpmEnderecoBanco.getMpmAgencias().addAll(Arrays.asList(mpmAgencia));
+						mpmEnderecoBanco = this.mpmEnderecoRepository.saveAndFlush(mpmEnderecoBanco);
+					}
+					// Trata Banco ...
+					MpmBanco mpmBanco = new MpmBanco(null, mpmBancoXML.getxCodigo(), mpmBancoXML.getxNome(),
+												indAntecipado, indPostecipado, indComissionado, mpmAgencia);				
+					mpmBanco = this.mpmBancoRepository.saveAndFlush(mpmBanco);
+				} else {
+					// Trata Banco Sem Agencia ...
+					MpmBanco mpmBanco = new MpmBanco(null, mpmBancoXML.getxCodigo(), mpmBancoXML.getxNome(),
+															indAntecipado, indPostecipado, indComissionado);				
+					mpmBanco = this.mpmBancoRepository.saveAndFlush(mpmBanco);
+					// Trata MpmApresentante/Banco ( MpmEndereco + MpmCidade + MpmEstadoUF ) ...
+					MpmApresentante mpmApresentanteBanco = mpmApresentanteService.buscarNome(
+																					mpmBancoXML.getxNome());
+					if (null == mpmApresentanteBanco) {
+						//
+						Boolean indBanco = false;
+						if (mpmBancoXML.getxBco().equals("S"))
+							indBanco = true;
+						//
+						mpmApresentanteBanco = new MpmApresentante(null,
+									mpmBancoXML.getxCodigo().trim(),
+									mpmBancoXML.getxNome().trim(),
+									indBanco,
+									mpmBancoXML.getxTp_Documento().trim(),
+									mpmBancoXML.getxNo_Documento().trim(),
+									BigDecimal.valueOf(0.00), // valorReembolsoTed ???
+									mpmEnderecoBanco,
+									mpmBanco);
+						mpmApresentanteBanco = this.mpmApresentanteRepository.saveAndFlush(mpmApresentanteBanco);
+						}				
+						// Relations ...
+						mpmEnderecoBanco.getMpmApresentantes().addAll(Arrays.asList(mpmApresentanteBanco));
+						mpmEnderecoBanco = this.mpmEnderecoRepository.saveAndFlush(mpmEnderecoBanco);
+				
+						mpmBanco.getMpmApresentantes().addAll(Arrays.asList(mpmApresentanteBanco));
+						mpmBanco = this.mpmBancoRepository.saveAndFlush(mpmBanco);
+					}
+			}
+			//
+			this.logCarga = this.logCarga + " ( TrataCargaBancoXML() = " + 
+													mpmBancosXML.getMpmBancoXMLs().size() + " ) ";
+			//
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	private void trataCargaTituloXML() throws ParseException {
 		//
 		try {
@@ -911,15 +1241,49 @@ public class MpmCargaXMLResource {
 			
 			for (MpmTituloXML mpmTituloXML : mpmTitulosXML.getMpmTituloXMLs()) {
 				//
-				// Trata MpmAlinea ... Codigo = 11-12 ???
-				MpmAlinea mpmAlinea = mpmAlineaService.buscarCodigo(Integer.parseInt(
-													mpmTituloXML.getxCodigoAlinea().trim().substring(0,2)));
-				if (null == mpmAlinea) {
+				List<MpmAlinea> mpmAlineasX = new ArrayList<>();
+				// Trata MpmAlinea ... Codigo = 11-12-XX-YY ??? Vrf.Máximo Alineas com PRISCO = 4 Ok ! 
+				Integer contAlinea = 0;
+				if (mpmTituloXML.getxCodigoAlinea().trim().length() == 2)
+					contAlinea = 1;
+				else
+					if (mpmTituloXML.getxCodigoAlinea().trim().length() == 5)
+						contAlinea = 2;
+					else
+						if (mpmTituloXML.getxCodigoAlinea().trim().length() == 8)
+							contAlinea = 3;
+						else 
+							if (mpmTituloXML.getxCodigoAlinea().trim().length() == 11)
+								contAlinea = 4;
+							else 
+								if (mpmTituloXML.getxCodigoAlinea().trim().length() > 11) {
+									//
+									this.logCarga = this.logCarga + 
+													" ( TrataCargaTituloXML() Err.NumCodAlinea = " 
+													+ mpmTituloXML.getxCodigoAlinea().trim() + " Max.=4!";
+									continue;
+								}
+				//
+				if (contAlinea > 0) {
 					//
-					this.logCarga = this.logCarga + " ( TrataCargaTituloXML() Error.codigoAlinea = " +
+			        for(int iX = 0; iX < contAlinea; iX++) {
+			        	//
+			        	Integer posX = (3 * (iX+1)) - 3;
+			        	//
+			        	MpmAlinea mpmAlineaX = mpmAlineaService.buscarCodigo(Integer.parseInt(
+											mpmTituloXML.getxCodigoAlinea().trim().substring(posX, posX+2)));
+			        	if (null == mpmAlineaX) {
+			        		//
+			        		this.logCarga = this.logCarga + " ( TrataCargaTituloXML() Error.codigoAlinea = " +
 																	mpmTituloXML.getxCodigoAlinea().trim();
-					continue;
+			        		continue;
+			        	}
+			        	//
+			        	mpmAlineasX.add(mpmAlineaX);
+			        }
 				}
+				System.out.println("TrataCargaTituloXML() (Alineas.Size = " + mpmAlineasX.size());
+				//
 				// Trata MpmEspecie ... 
 				MpmEspecie mpmEspecie = mpmEspecieService.buscarCodigo(mpmTituloXML.getxEsp_Codigo().trim());
 				if (null == mpmEspecie) {
@@ -943,7 +1307,7 @@ public class MpmCargaXMLResource {
 				
 				Integer posX = mpmTituloXML.getxTit_Obs1().indexOf("(");
 				if (posX >= 0)
-					descricaoObs = mpmTituloXML.getxTit_Obs1().substring(0, posX);
+					descricaoObs = mpmTituloXML.getxTit_Obs1().substring(0, posX).trim();
 				
 				MpmObservacao mpmObservacao = mpmObservacaoService.buscarDescricao(descricaoObs);
 				if (null == mpmObservacao) {
@@ -954,14 +1318,20 @@ public class MpmCargaXMLResource {
 				}
 				
 				// Trata MpmApresentante ( MpmEndereco + MpmCidade + MpmEstadoUF ) ...
-				//
 				MpmEstadoUf mpmEstadoUfApresentante = mpmEstadoUfService.buscarSigla(
 																	mpmTituloXML.getxUfApresentante().trim());
 				if (null == mpmEstadoUfApresentante) {
 					//
+					String descricaoEstadoUf = "?????" ;
+					if (mpmTituloXML.getxUfApresentante().trim().equals("RJ")) 
+						descricaoEstadoUf = "Rio De Janeiro";
+					else
+					if (mpmTituloXML.getxUfApresentante().trim().equals("SP")) 
+						descricaoEstadoUf = "São Paulo";
+					//
 					mpmEstadoUfApresentante = new MpmEstadoUf(null,
 															mpmTituloXML.getxUfApresentante().trim(),
-															"?????");
+															descricaoEstadoUf);
 					mpmEstadoUfApresentante = this.mpmEstadoUfRepository.saveAndFlush(mpmEstadoUfApresentante);
 				}
 
@@ -999,43 +1369,166 @@ public class MpmCargaXMLResource {
 							mpmTituloXML.getxBairroApresentante().trim(),
 							mpmCidadeApresentante);
 					mpmEnderecoApresentante = this.mpmEnderecoRepository.saveAndFlush(mpmEnderecoApresentante);
-				}
-				
-				// 
-				MpmBanco mpmBancoApresentante = mpmBancoService.buscarCodigoAndAgencia(
-													mpmTituloXML.getxNo_Banco().trim(),
-													Integer.parseInt(mpmTituloXML.getxAgenciaCedente().trim()));
-				if (null == mpmBancoApresentante) {
-					//
-					mpmBancoApresentante = new MpmBanco(null,
-							mpmTituloXML.getxNo_Banco().trim(),
-							Integer.parseInt(mpmTituloXML.getxAgenciaCedente().trim()),
-							"???"); // Nome
-					mpmBancoApresentante = this.mpmBancoRepository.saveAndFlush(mpmBancoApresentante);
-				}
-				
+				}				
 				//
 				MpmApresentante mpmApresentante = mpmApresentanteService.buscarCodigo(
 																mpmTituloXML.getxCod_Apresentante().trim());
 				if (null == mpmApresentante) {
 					//
-					mpmApresentante = new MpmApresentante(null,
-							mpmTituloXML.getxCod_Apresentante().trim(),
-							mpmTituloXML.getxNomeApresentante().trim(),
-							false, // indBanco ???
-							mpmTituloXML.getxTp_DoctoApresentante().trim(),
-							mpmTituloXML.getxNo_DoctoApresentante().trim(),
-							BigDecimal.valueOf(0.00), // valorReembolsoTed ???
-							mpmEnderecoApresentante,
-							mpmBancoApresentante);
-					mpmApresentante = this.mpmApresentanteRepository.saveAndFlush(mpmApresentante);
+					this.logCarga = this.logCarga + " ( TrataTituloXML() Error.Apresentante = " +
+																mpmTituloXML.getxCod_Apresentante().trim();
+					continue;
+				}				
+				
+				// Trata MpmPessoaTitulo.Favorecido ( MpmEndereco + MpmCidade + MpmEstadoUF ) ...
+				MpmEstadoUf mpmEstadoUfFavorecido = null;
+				if (!mpmTituloXML.getxUfFavorecido().trim().isEmpty()) {
+					mpmEstadoUfFavorecido = mpmEstadoUfService.buscarSigla(
+																	mpmTituloXML.getxUfFavorecido().trim());
+					if (null == mpmEstadoUfFavorecido) {
+						//
+						mpmEstadoUfFavorecido = new MpmEstadoUf(null,
+															mpmTituloXML.getxUfFavorecido().trim(), "?????");
+						mpmEstadoUfFavorecido = this.mpmEstadoUfRepository.saveAndFlush(mpmEstadoUfFavorecido);
+					}
+				}
+				//
+				MpmCidade mpmCidadeFavorecido = null;
+				if (!mpmTituloXML.getxCidadeFavorecido().trim().isEmpty()) {
+					mpmCidadeFavorecido = mpmCidadeService.buscarNomeAndMpmEstadoUf(
+																	mpmTituloXML.getxCidadeFavorecido().trim(),
+																	mpmEstadoUfFavorecido);
+					if (null == mpmCidadeFavorecido) {
+						//
+						mpmCidadeFavorecido = new MpmCidade(null,
+															mpmTituloXML.getxCidadeFavorecido().trim(),
+															mpmEstadoUfFavorecido);
+						mpmCidadeFavorecido = this.mpmCidadeRepository.saveAndFlush(mpmCidadeFavorecido);
+					}
+				}
+				// Relations ...
+				if (null == mpmCidadeFavorecido)
+					assert(true); // nop
+				else {
+					mpmEstadoUfFavorecido.getMpmCidades().addAll(Arrays.asList(mpmCidadeFavorecido));
+					mpmEstadoUfFavorecido = this.mpmEstadoUfRepository.saveAndFlush(mpmEstadoUfFavorecido);					
+				}
+				//
+				MpmEndereco mpmEnderecoFavorecido = mpmEnderecoService.
+											buscarLogradouroAndNumeroAndComplementoAndCepAndBairroAndMpmCidade(
+													mpmTituloXML.getxEnderecoFavorecido().trim(),
+													mpmTituloXML.getxNumeroFavorecido().trim(),
+													mpmTituloXML.getxComplementoFavorecido().trim(),
+													mpmTituloXML.getxCepFavorecido().trim(),
+													mpmTituloXML.getxBairroFavorecido().trim(),
+													mpmCidadeFavorecido);
+				if (null == mpmEnderecoFavorecido) {
+					//
+					mpmEnderecoFavorecido = new MpmEndereco(null,
+							mpmTituloXML.getxEnderecoFavorecido().trim(),
+							mpmTituloXML.getxNumeroFavorecido().trim(),
+							mpmTituloXML.getxComplementoFavorecido().trim(),
+							mpmTituloXML.getxCepFavorecido().trim(),
+							mpmTituloXML.getxBairroFavorecido().trim(),
+							mpmCidadeFavorecido);
+					mpmEnderecoFavorecido = this.mpmEnderecoRepository.saveAndFlush(mpmEnderecoFavorecido);
+				}
+				//
+				MpmPessoaTitulo mpmPessoaTituloFavorecido = mpmPessoaTituloService.buscarNome(
+																	mpmTituloXML.getxNomeFavorecido().trim());
+				if (null == mpmPessoaTituloFavorecido) {
+					//
+					mpmPessoaTituloFavorecido = new MpmPessoaTitulo(null,
+							mpmTituloXML.getxNomeFavorecido().trim(),
+							mpmTituloXML.getxTp_DoctoFavorecido().trim(),
+							mpmTituloXML.getxNo_DoctoFavorecido().trim(),
+							true, // indFavorecido
+							false, // indSacador
+							0, // agencia
+							"?", // convenio
+							"?", // formaRepasse
+							false, // indChequeAdmTed ???
+							mpmEnderecoFavorecido);
+					mpmPessoaTituloFavorecido = this.mpmPessoaTituloRepository.saveAndFlush(
+																					mpmPessoaTituloFavorecido);
 				}				
 				// Relations ...
-				mpmEnderecoApresentante.getMpmApresentantes().addAll(Arrays.asList(mpmApresentante));
-				mpmEnderecoApresentante = this.mpmEnderecoRepository.saveAndFlush(mpmEnderecoApresentante);
-		
-				mpmBancoApresentante.getMpmApresentantes().addAll(Arrays.asList(mpmApresentante));
-				mpmBancoApresentante = this.mpmBancoRepository.saveAndFlush(mpmBancoApresentante);
+				mpmEnderecoFavorecido.getMpmPessoaTitulos().addAll(Arrays.asList(mpmPessoaTituloFavorecido));
+				mpmEnderecoFavorecido = this.mpmEnderecoRepository.saveAndFlush(mpmEnderecoFavorecido);
+				
+				// Trata MpmPessoaTitulo.Sacador ( MpmEndereco + MpmCidade + MpmEstadoUF ) ...
+				MpmEstadoUf mpmEstadoUfSacador = null;
+				if (!mpmTituloXML.getxUfSacador().trim().isEmpty()) {
+					mpmEstadoUfSacador = mpmEstadoUfService.buscarSigla(mpmTituloXML.getxUfSacador().trim());
+					if (null == mpmEstadoUfSacador) {
+						//
+						mpmEstadoUfSacador = new MpmEstadoUf(null,
+															mpmTituloXML.getxUfSacador().trim(), "?????");
+						mpmEstadoUfSacador = this.mpmEstadoUfRepository.saveAndFlush(mpmEstadoUfSacador);
+					}
+				}
+				//
+				MpmCidade mpmCidadeSacador = null;
+				if (!mpmTituloXML.getxCidadeSacador().trim().isEmpty()) {
+					mpmCidadeSacador = mpmCidadeService.buscarNomeAndMpmEstadoUf(
+																	mpmTituloXML.getxCidadeSacador().trim(),
+																	mpmEstadoUfSacador);
+					if (null == mpmCidadeSacador) {
+						//
+						mpmCidadeSacador = new MpmCidade(null,
+														mpmTituloXML.getxCidadeSacador().trim(),
+														mpmEstadoUfSacador);
+						mpmCidadeSacador = this.mpmCidadeRepository.saveAndFlush(mpmCidadeSacador);
+					}
+				}
+				// Relations ...
+				if (null == mpmCidadeSacador)
+					assert(true); // nop
+				else {
+					mpmEstadoUfSacador.getMpmCidades().addAll(Arrays.asList(mpmCidadeSacador));
+					mpmEstadoUfSacador = this.mpmEstadoUfRepository.saveAndFlush(mpmEstadoUfSacador);					
+				}
+				//
+				MpmEndereco mpmEnderecoSacador = mpmEnderecoService.
+											buscarLogradouroAndNumeroAndComplementoAndCepAndBairroAndMpmCidade(
+													mpmTituloXML.getxEnderecoSacador().trim(),
+													mpmTituloXML.getxNumeroSacador().trim(),
+													mpmTituloXML.getxComplementoSacador().trim(),
+													mpmTituloXML.getxCepSacador().trim(),
+													mpmTituloXML.getxBairroSacador().trim(),
+													mpmCidadeSacador);
+				if (null == mpmEnderecoSacador) {
+					//
+					mpmEnderecoSacador = new MpmEndereco(null,
+							mpmTituloXML.getxEnderecoSacador().trim(),
+							mpmTituloXML.getxNumeroSacador().trim(),
+							mpmTituloXML.getxComplementoSacador().trim(),
+							mpmTituloXML.getxCepSacador().trim(),
+							mpmTituloXML.getxBairroSacador().trim(),
+							mpmCidadeSacador);
+					mpmEnderecoSacador = this.mpmEnderecoRepository.saveAndFlush(mpmEnderecoSacador);
+				}
+				//
+				MpmPessoaTitulo mpmPessoaTituloSacador = mpmPessoaTituloService.buscarNome(
+																mpmTituloXML.getxNomeSacador().trim());
+				if (null == mpmPessoaTituloSacador) {
+					//
+					mpmPessoaTituloSacador = new MpmPessoaTitulo(null,
+							mpmTituloXML.getxNomeSacador().trim(),
+							mpmTituloXML.getxTp_DoctoSacador().trim(),
+							mpmTituloXML.getxNo_DoctoSacador().trim(),
+							false, // indFavorecido
+							true, // indSacador
+							0, // agencia
+							"?", // convenio
+							"?", // formaRepasse
+							false, // indChequeAdmTed ???
+							mpmEnderecoSacador);
+					mpmPessoaTituloSacador = this.mpmPessoaTituloRepository.saveAndFlush(mpmPessoaTituloSacador);
+				}				
+				// Relations ...
+				mpmEnderecoSacador.getMpmPessoaTitulos().addAll(Arrays.asList(mpmPessoaTituloSacador));
+				mpmEnderecoSacador = this.mpmEnderecoRepository.saveAndFlush(mpmEnderecoSacador);
 				
 				// Trata MpmSeloDistribuidor ...
 				MpmSeloDistribuidor mpmSeloDistribuidor = 
@@ -1044,11 +1537,10 @@ public class MpmCargaXMLResource {
 												mpmTituloXML.getxNo_Distribuicao());
 				if (null == mpmSeloDistribuidor) {
 					//
-					mpmSeloDistribuidor = new MpmSeloDistribuidor(null,
-							sdf.parse(mpmTituloXML.getxDt_Distribuicao().replace("T", " ")),
-							mpmTituloXML.getxNo_Distribuicao(),
-							"????");
-					mpmSeloDistribuidor = this.mpmSeloDistribuidorRepository.saveAndFlush(mpmSeloDistribuidor);
+					this.logCarga = this.logCarga + " ( TrataSeloDistribuidorXML() Error.DtNumDist = " +
+										sdf.parse(mpmTituloXML.getxDt_Distribuicao().replace("T", " ")) +
+										mpmTituloXML.getxNo_Distribuicao();
+					continue;
 				}				
 				
 				// Trata MpmTituloProtestado ...
@@ -1062,7 +1554,7 @@ public class MpmCargaXMLResource {
 																Integer.parseInt(mpmTituloXML.getxNo_Livro()),
 																Integer.parseInt(mpmTituloXML.getxNo_Folha()));
 					mpmTituloProtestado = this.mpmTituloProtestadoRepository.saveAndFlush(mpmTituloProtestado);
-				}				
+				}
 				
 				// Trata MpmTitulo ...
 				MpmTitulo mpmTitulo = new MpmTitulo(null,  
@@ -1073,11 +1565,11 @@ public class MpmCargaXMLResource {
 						mpmTituloXML.getxTalao_NoLivro(),
 						mpmTituloXML.getxAvista(),
 						mpmTituloXML.getxNihil(),
-						mpmTituloXML.getxTot_Pagar(),
-						mpmTituloXML.getxTot_Deposito(),
-						mpmTituloXML.getxDistribuicao(),
-						mpmTituloXML.getxSaldo(),
-						mpmTituloXML.getxValor(),
+						new BigDecimal(mpmTituloXML.getxTot_Pagar().replace(",", ".")),
+						new BigDecimal(mpmTituloXML.getxTot_Deposito().replace(",", ".")),
+						new BigDecimal(mpmTituloXML.getxSaldo().replace(",", ".")),
+						" ", // especieTitulo ??? Vrf.Prisco !
+						new BigDecimal(mpmTituloXML.getxValor().replace(",", ".")),
 						mpmTituloXML.getxNo_Titulo(),
 						sdf.parse(mpmTituloXML.getxDt_Vencto().replace("T", " ")),
 						sdf.parse(mpmTituloXML.getxDt_Emissao().replace("T", " ")),
@@ -1085,19 +1577,12 @@ public class MpmCargaXMLResource {
 						mpmTituloXML.getxNo_Protocolo(),
 						sdf.parse(mpmTituloXML.getxDt_Protocolo().replace("T", " ")),
 						mpmTituloXML.getxFaixa(),
-						mpmAlinea, mpmEspecie, mpmEndosso, mpmObservacao, mpmSeloDistribuidor);
-				
-				mpmTitulo = this.mpmTituloRepository.saveAndFlush(mpmTitulo);
-				
-						//
-//						mpmTituloXML.getxConvenio(),
-//						mpmTituloXML.getxEmpresa(),
-//						mpmTituloXML.getxTp_Apresentante(), // ???
+						mpmTituloXML.getxConvenio(), // Verificar Prisco ?
+						mpmTituloXML.getxEmpresa(),
+						mpmTituloXML.getxTp_Apresentante(), // ??? B=Banco / A=Avulso
+						" ", // mensagemApresentante ??? Vrf.Prisco !
 //						mpmTituloXML.getxEdital(),
 //						mpmTituloXML.getxMicroEmpresa(),
-//						mpmTituloXML.getxEmolumento(),
-//						mpmTituloXML.getxLei_489(),
-//						mpmTituloXML.getxLei_713(),
 //						mpmTituloXML.getxVl_Variavel(),
 //						mpmTituloXML.getxIntimacao(),
 //						mpmTituloXML.getxCoobrigado(),
@@ -1111,55 +1596,57 @@ public class MpmCargaXMLResource {
 //						mpmTituloXML.getxCco_Notif(),
 //						mpmTituloXML.getxCco_EndIgs(),
 //						mpmTituloXML.getxCco_EndDifs(),
-//						mpmTituloXML.getxUsr_Titulo(),
-//						mpmTituloXML.getxDt_Sist_Tit(),
-//						mpmTituloXML.getxNo_Cancelamento(),
-//						mpmTituloXML.getxDinChq(),
-//						mpmTituloXML.getxOco_Obs(),
-//						mpmTituloXML.getxOco_Bloqueia(),
-//						mpmTituloXML.getxOco_Usr(),
-//						mpmTituloXML.getxDt_Sist_Oco(),
-//						mpmTituloXML.getxTit_Chq_Rps(),
-//						mpmTituloXML.getxTit_Motivo(),
-//						mpmTituloXML.getxTit_CustasPg(),
-//						mpmTituloXML.getxTit_ResIntima(),
-//						mpmTituloXML.getxTit_ResCorreio(),
-//						mpmTituloXML.getxTit_DtEdital(),
-//						mpmTituloXML.getxTit_Intimado(),
-//						mpmTituloXML.getxTit_Respondido(),
-//						mpmTituloXML.getxTit_ResSE(),
-//						mpmTituloXML.getxTit_ResSP(),
-//						mpmTituloXML.getxTit_VlReembEdital(),
-//						mpmTituloXML.getxNo_Cliente(),
-//						mpmTituloXML.getxNomeFavorecido(),
-//						mpmTituloXML.getxEnderecoFavorecido(),
-//						mpmTituloXML.getxNumeroFavorecido(),
-//						mpmTituloXML.getxComplementoFavorecido(),
-//						mpmTituloXML.getxBairroFavorecido(),
-//						mpmTituloXML.getxCidadeFavorecido(),
-//						mpmTituloXML.getxUfFavorecido(),
-//						mpmTituloXML.getxCepFavorecido(),
-//						mpmTituloXML.getxNomeSacador(),
-//						mpmTituloXML.getxEnderecoSacador(),
-//						mpmTituloXML.getxNumeroSacador(),
-//						mpmTituloXML.getxComplementoSacador(),
-//						mpmTituloXML.getxBairroSacador(),
-//						mpmTituloXML.getxCidadeSacador(),
-//						mpmTituloXML.getxUfSacador(),
-//						mpmTituloXML.getxCepSacador(),
-//						mpmTituloXML.getxTp_DoctoFavorecido(),
-//						mpmTituloXML.getxNo_DoctoFavorecido(),
-//						mpmTituloXML.getxTp_DoctoSacador(),
-//						mpmTituloXML.getxNo_DoctoSacador(),
+						mpmTituloXML.getxUsr_Titulo(),
+						mpmTituloXML.getxDt_Sist_Tit(),
+						mpmTituloXML.getxNo_Cancelamento(),
+						mpmTituloXML.getxDinChq(),
+						mpmTituloXML.getxOco_Obs(),
+						mpmTituloXML.getxOco_Bloqueia(),
+						mpmTituloXML.getxOco_Usr(),
+						mpmTituloXML.getxDt_Sist_Oco(),
+						mpmTituloXML.getxTit_Chq_Rps(),
+						mpmTituloXML.getxTit_Motivo(),
+						mpmTituloXML.getxTit_CustasPg(),
+						mpmTituloXML.getxTit_ResIntima(),
+						mpmTituloXML.getxTit_ResCorreio(),
+						mpmTituloXML.getxTit_DtEdital(),
+						mpmTituloXML.getxTit_Intimado(),
+						mpmTituloXML.getxTit_Respondido(),
+						mpmTituloXML.getxTit_ResSE(),
+						mpmTituloXML.getxTit_ResSP(),
+						mpmTituloXML.getxTit_VlReembEdital(),
+						mpmTituloXML.getxNo_Cliente(),
 //						mpmTituloXML.getxEncerrado(),
-//						mpmTituloXML.getxCod_Irregularidade(),
-//						mpmTituloXML.getxRsDesiste(),
-//						mpmTituloXML.getxLei4664(),
-//						mpmTituloXML.getxLei111(),
-//						mpmTituloXML.getxLei3761(),
-//						mpmTituloXML.getxArquivamento(),
-//						mpmTituloXML.getxLei6281(),
+						mpmTituloXML.getxCod_Irregularidade(),
+						mpmTituloXML.getxRsDesiste(),
+						mpmTituloXML.getxArquivamento(),
+						mpmTituloXML.getxDistribuicao(),
+						mpmTituloXML.getxDt_Ocorrencia(), // ?
+						mpmTituloXML.getxOco_Codigo(),
+						mpmTituloXML.getxTot_Emolu(),
+						// ------------
+						mpmEspecie, mpmEndosso, mpmObservacao, mpmSeloDistribuidor);				
 
+				mpmTitulo = this.mpmTituloRepository.saveAndFlush(mpmTitulo);
+
+				// Trata MpmTituloAto ...
+				MpmTituloAto mpmTituloAto = new MpmTituloAto(null,
+										new BigDecimal(mpmTituloXML.getxEmolumento().replace(",", ".")),
+										new BigDecimal(mpmTituloXML.getxDistribuicao().replace(",", ".")),
+										new BigDecimal(mpmTituloXML.getxLei_489().replace(",", ".")),
+										new BigDecimal(mpmTituloXML.getxLei_713().replace(",", ".")),
+										new BigDecimal(mpmTituloXML.getxLei4664().replace(",", ".")),
+										new BigDecimal(mpmTituloXML.getxLei111().replace(",", ".")),
+										new BigDecimal(mpmTituloXML.getxLei3761().replace(",", ".")),
+										new BigDecimal(mpmTituloXML.getxLei6281().replace(",", ".")),
+										new BigDecimal(mpmTituloXML.getxVl_Variavel().replace(",", ".")),
+										new BigDecimal(mpmTituloXML.getxTot_Emolu().replace(",", ".")));
+				
+				// Relations .... MVPR
+				mpmTituloAto.setMpmTitulo(mpmTitulo);
+
+				mpmTituloAto = this.mpmTituloAtoRepository.saveAndFlush(mpmTituloAto);
+								
 				// Trata MpmStatus ...
 				MpmStatus mpmStatus = mpmStatusService.buscarCodigo(01); // Vrf.Key Prisco ??
 				if (null == mpmStatus) {
@@ -1186,19 +1673,35 @@ public class MpmCargaXMLResource {
 												mpmStatus);
 					mpmTituloStatus = this.mpmTituloStatusRepository.saveAndFlush(mpmTituloStatus);
 				}
-				// Retations ...
+				// Relations ...
 				mpmStatus.getMpmTituloStatuss().addAll(Arrays.asList(mpmTituloStatus));
-				mpmTitulo = this.mpmTituloRepository.saveAndFlush(mpmTitulo);
+				mpmStatus = this.mpmStatusRepository.saveAndFlush(mpmStatus);
 				
+				// Relations ...
+				mpmApresentante.getMpmTitulos().addAll(Arrays.asList(mpmTitulo));
+				mpmApresentante = this.mpmApresentanteRepository.saveAndFlush(mpmApresentante);
+
+				mpmPessoaTituloFavorecido.getMpmTitulos().addAll(Arrays.asList(mpmTitulo));
+				mpmPessoaTituloFavorecido = this.mpmPessoaTituloRepository.saveAndFlush(
+																					mpmPessoaTituloFavorecido);
+
+				mpmPessoaTituloSacador.getMpmTitulos().addAll(Arrays.asList(mpmTitulo));
+				mpmPessoaTituloSacador = this.mpmPessoaTituloRepository.saveAndFlush(mpmPessoaTituloSacador);
 
 				// Relations ...
 				mpmTitulo.getMpmApresentantes().addAll(Arrays.asList(mpmApresentante));
+				mpmTitulo.getMpmPessoaTitulos().addAll(Arrays.asList(mpmPessoaTituloFavorecido,
+																					mpmPessoaTituloSacador));
+				mpmTitulo.getMpmAlineas().addAll(mpmAlineasX);
 				mpmTitulo = this.mpmTituloRepository.saveAndFlush(mpmTitulo);
 				
 				// Trata Relations ...
-				mpmAlinea.getMpmTitulos().addAll(Arrays.asList(mpmTitulo));
-				mpmAlinea = this.mpmAlineaRepository.saveAndFlush(mpmAlinea);
-
+				for (MpmAlinea mpmAlineaXX : mpmAlineasX) {
+					//
+					mpmAlineaXX.getMpmTitulos().addAll(Arrays.asList(mpmTitulo));
+					mpmAlineaXX = this.mpmAlineaRepository.saveAndFlush(mpmAlineaXX);
+				}
+				//
 				mpmEspecie.getMpmTitulos().addAll(Arrays.asList(mpmTitulo));
 				mpmEspecie = this.mpmEspecieRepository.saveAndFlush(mpmEspecie);
 
@@ -1333,20 +1836,53 @@ public class MpmCargaXMLResource {
 		// Trata MpmTitulo ...
 		// ========================
 		MpmTitulo mpmTit1 = new MpmTitulo(null, "?", "?", "?", "?", "?", "?", "?",
-				"?", "?", "?", "?", "?", "?",dataX, dataX, dataX,
-				"?", dataX, "?", mpmAli1, mpmEsp1, mpmEndo1, mpmObs1, mpmSel1);
+				BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, "?", BigDecimal.ZERO,
+				"?", dataX, dataX, dataX, "?", dataX, "?", "?", "?",
+				"?", "?", "?", "?", "?", "?", "?", "?", "?", "?",
+				"?", "?", "?", "?", "?", "?", "?", "?", "?", "?",
+				"?", "?", "?", "?", "?", "?",  "?", "?", "?",
+				mpmEsp1, mpmEndo1, mpmObs1, mpmSel1);
 
 		MpmTitulo mpmTit2 = new MpmTitulo(null, "?", "?", "?", "?", "?", "?", "?",
-				"?", "?", "?", "?", "?", "?",dataX, dataX, dataX,
-				"?", dataX, "?", mpmAli1, mpmEsp1, mpmEndo1, mpmObs1, mpmSel1);
+				BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, "?", BigDecimal.ZERO,
+				"?", dataX, dataX, dataX, "?", dataX, "?", "?", "?",
+				"?", "?", "?", "?", "?", "?", "?", "?", "?", "?",
+				"?", "?", "?", "?", "?", "?", "?", "?", "?", "?",
+				"?", "?", "?", "?", "?", "?", "?", "?", "?",
+				mpmEsp1, mpmEndo1, mpmObs1, mpmSel1);
 
-		MpmTitulo mpmTit3 = new MpmTitulo(null, "?", "?", "?", "?", "?", "?", "?", 
-				"?", "?", "?", "?", "?", "?",dataX, dataX, dataX,
-				"?", dataX, "?", mpmAli3, mpmEsp3, mpmEndo3, mpmObs1, mpmSel1);
-		
+		MpmTitulo mpmTit3 = new MpmTitulo(null, "?", "?", "?", "?", "?", "?",  "?",
+				BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, "?", BigDecimal.ZERO,
+				"?", dataX, dataX, dataX, "?", dataX, "?", "?", "?",
+				"?", "?", "?", "?", "?", "?", "?", "?", "?", "?",
+				"?", "?", "?", "?", "?", "?", "?", "?", "?", "?",
+				"?", "?", "?", "?", "?", "?", "?", "?", "?",
+				mpmEsp3, mpmEndo3, mpmObs1, mpmSel1);
+
+		// ========================
+		// Trata MpmTituloAto ...
+		// ========================
+		MpmTituloAto mpmTitA1 = new MpmTituloAto(null, mpmTit1, BigDecimal.ONE, BigDecimal.ONE, BigDecimal.ONE,
+							BigDecimal.ONE, BigDecimal.ONE, BigDecimal.ONE, BigDecimal.ONE, BigDecimal.ONE,
+							BigDecimal.ONE, BigDecimal.ONE);
+		MpmTituloAto mpmTitA2 = new MpmTituloAto(null, mpmTit2, BigDecimal.ONE, BigDecimal.ONE, BigDecimal.ONE,
+							BigDecimal.ONE, BigDecimal.ONE, BigDecimal.ONE, BigDecimal.ONE, BigDecimal.ONE,
+							BigDecimal.ONE, BigDecimal.ONE);
+		MpmTituloAto mpmTitA3 = new MpmTituloAto(null, mpmTit3, BigDecimal.ONE, BigDecimal.ONE, BigDecimal.ONE,
+							BigDecimal.ONE, BigDecimal.ONE, BigDecimal.ONE, BigDecimal.ONE, BigDecimal.ONE,
+							BigDecimal.ONE, BigDecimal.ONE);
+		// Relations...
+		mpmTitA1.setMpmTitulo(mpmTit1);
+		mpmTitA2.setMpmTitulo(mpmTit2);
+		mpmTitA3.setMpmTitulo(mpmTit3);
+				
 		mpmTit1 = mpmTituloRepository.saveAndFlush(mpmTit1);
 		mpmTit2 = mpmTituloRepository.saveAndFlush(mpmTit2);
 		mpmTit3 = mpmTituloRepository.saveAndFlush(mpmTit3);
+
+		mpmTitA1 = mpmTituloAtoRepository.saveAndFlush(mpmTitA1);
+		mpmTitA2 = mpmTituloAtoRepository.saveAndFlush(mpmTitA2);
+		mpmTitA3 = mpmTituloAtoRepository.saveAndFlush(mpmTitA3);
 
 		// =============================
 		// Trata MpmTituloProtestado ...
@@ -1449,10 +1985,15 @@ public class MpmCargaXMLResource {
 		// ==========================
 		// Trata MpmBanco ... 
 		// ==========================
-		MpmBanco mpmBan1 = new MpmBanco(null, "1111", 1111111, "Banco.1"); 
-		MpmBanco mpmBan2 = new MpmBanco(null, "2222", 2222222, "Banco.2"); 
-		MpmBanco mpmBan3 = new MpmBanco(null, "3333", 3333333, "Banco.3"); 
-		MpmBanco mpmBan4 = new MpmBanco(null, "4444", 4444444, "Banco.4"); 
+		MpmBancoSistema mpmBanS1 = new MpmBancoSistema(null, "235", "BRADESCO");
+		mpmBanS1 = mpmBancoSistemaRepository.saveAndFlush(mpmBanS1);
+		MpmAgencia mpmAge1 = new MpmAgencia(null, 1234, "AGENCIA 1234", mpmEnd1, mpmBanS1);
+		mpmAge1 = mpmAgenciaRepository.saveAndFlush(mpmAge1);
+
+		MpmBanco mpmBan1 = new MpmBanco(null, "1111", "Banco.1", false, false, false, mpmAge1); 
+		MpmBanco mpmBan2 = new MpmBanco(null, "2222", "Banco.1", false, false, false, mpmAge1); 
+		MpmBanco mpmBan3 = new MpmBanco(null, "3333", "Banco.1", false, false, false, mpmAge1); 
+		MpmBanco mpmBan4 = new MpmBanco(null, "4444", "Banco.1", false, false, false, mpmAge1); 
 		
 		mpmBan1 = mpmBancoRepository.saveAndFlush(mpmBan1);
 		mpmBan2 = mpmBancoRepository.saveAndFlush(mpmBan2);
@@ -1462,11 +2003,11 @@ public class MpmCargaXMLResource {
 		// =============================
 		// Trata MpmDevedor ...
 		// =============================
-		MpmDevedor mpmDev1 = new MpmDevedor(null, "nome111", 111, mpmIde1, mpmEnd1);
-		MpmDevedor mpmDev2 = new MpmDevedor(null, "nome222", 222, mpmIde1, mpmEnd1);
-		MpmDevedor mpmDev3 = new MpmDevedor(null, "nome333", 333, mpmIde3, mpmEnd2);
-		MpmDevedor mpmDev4 = new MpmDevedor(null, "nome444", 444, mpmIde4, mpmEnd4);
-		MpmDevedor mpmDev5 = new MpmDevedor(null, "nome555", 555, mpmIde4, mpmEnd5);
+		MpmDevedor mpmDev1 = new MpmDevedor(null, "nome111", 111, "TD1", "NUMD1", mpmIde1, mpmEnd1);
+		MpmDevedor mpmDev2 = new MpmDevedor(null, "nome222", 222, "TD2", "NUMD2",  mpmIde1, mpmEnd1);
+		MpmDevedor mpmDev3 = new MpmDevedor(null, "nome333", 333, "TD3", "NUMD3",  mpmIde3, mpmEnd2);
+		MpmDevedor mpmDev4 = new MpmDevedor(null, "nome444", 444, "TD4", "NUMD4",  mpmIde4, mpmEnd4);
+		MpmDevedor mpmDev5 = new MpmDevedor(null, "nome555", 555, "TD5", "NUMD5",  mpmIde4, mpmEnd5);
 
 		mpmDev1 = mpmDevedorRepository.saveAndFlush(mpmDev1);
 		mpmDev2 = mpmDevedorRepository.saveAndFlush(mpmDev2);
@@ -1498,15 +2039,15 @@ public class MpmCargaXMLResource {
 		// Trata MpmPessoaTitulo ...
 		// =============================
 		MpmPessoaTitulo mpmPet1 = new MpmPessoaTitulo(null, "Pessoa Titulo 1", "TD01", "Num.Doc. 1", 
-														false, 111, "1", "1", true, mpmEnd7);
+														false, true, 111, "1", "1", true, mpmEnd7);
 		MpmPessoaTitulo mpmPet2 = new MpmPessoaTitulo(null, "Pessoa Titulo 2", "TD02", "Num.Doc. 2", 
-														false, 222, "2", "2", true, mpmEnd6);
+														false, true, 222, "2", "2", true, mpmEnd6);
 		MpmPessoaTitulo mpmPet3 = new MpmPessoaTitulo(null, "Pessoa Titulo 3", "TD03", "Num.Doc. 3", 
-														false, 333, "3", "3", true, mpmEnd2);
+														false, true, 333, "3", "3", true, mpmEnd2);
 		MpmPessoaTitulo mpmPet4 = new MpmPessoaTitulo(null, "Pessoa Titulo 4", "TD04", "Num.Doc. 4", 
-														false, 444, "4", "4", true, mpmEnd2);
+														false, true, 444, "4", "4", true, mpmEnd2);
 		MpmPessoaTitulo mpmPet5 = new MpmPessoaTitulo(null, "Pessoa Titulo 5", "TD05", "Num.Doc. 5", 
-														false, 555, "5", "5", true, mpmEnd2);
+														false, true, 555, "5", "5", true, mpmEnd2);
 
 		mpmPet1 = mpmPessoaTituloRepository.saveAndFlush(mpmPet1);
 		mpmPet2 = mpmPessoaTituloRepository.saveAndFlush(mpmPet2);
@@ -1564,12 +2105,12 @@ public class MpmCargaXMLResource {
 		// =========================
 		// Trata MpmAto ... 
 		// =========================
-		MpmAto mpmAto1 = new MpmAto(null, mpmAno3, "1111", "1", "Descricao Ato.1", "1", 
+		MpmAto mpmAto1 = new MpmAto(null, mpmAno3, "1111", "1", "Descricao Ato.1", "1", BigDecimal.valueOf(100.00),
 				BigDecimal.valueOf(100.00), BigDecimal.valueOf(100.00), BigDecimal.valueOf(100.00),
 				BigDecimal.valueOf(100.00), BigDecimal.valueOf(100.00), BigDecimal.valueOf(100.00),
 				BigDecimal.valueOf(100.00), BigDecimal.valueOf(100.00), BigDecimal.valueOf(100.00),
 				BigDecimal.valueOf(100.00), BigDecimal.valueOf(100.00), 1);
-		MpmAto mpmAto2 = new MpmAto(null, mpmAno3, "2222", "2", "Descricao Ato.2", "2", 
+		MpmAto mpmAto2 = new MpmAto(null, mpmAno3, "2222", "2", "Descricao Ato.2", "2", BigDecimal.valueOf(100.00),
 				BigDecimal.valueOf(100.00), BigDecimal.valueOf(100.00), BigDecimal.valueOf(100.00),
 				BigDecimal.valueOf(100.00), BigDecimal.valueOf(100.00), BigDecimal.valueOf(100.00),
 				BigDecimal.valueOf(100.00), BigDecimal.valueOf(100.00), BigDecimal.valueOf(100.00),
@@ -1600,8 +2141,8 @@ public class MpmCargaXMLResource {
 		// ==========================
 		// Trata MpmDataProcesso ... 
 		// ==========================
-		MpmDataProcesso mpmDatP1 = new MpmDataProcesso(null, dataX, dataX, "PI.111", "PF.111"); 
-		MpmDataProcesso mpmDatP2 = new MpmDataProcesso(null, dataX, dataX, "PI.222", "PF.222"); 
+		MpmDataProcesso mpmDatP1 = new MpmDataProcesso(null, dataX, dataX); //, "PI.111", "PF.111"); 
+		MpmDataProcesso mpmDatP2 = new MpmDataProcesso(null, dataX, dataX); // , "PI.222", "PF.222"); 
 		
 		mpmDatP1 = mpmDataProcessoRepository.saveAndFlush(mpmDatP1);
 		mpmDatP2 = mpmDataProcessoRepository.saveAndFlush(mpmDatP2);
@@ -1627,9 +2168,9 @@ public class MpmCargaXMLResource {
 		// =====================
 		// Trata MpmRemessa ... 
 		// =====================
-		MpmRemessa mpmRem1 = new MpmRemessa(null, mpmImpC1, "Z012103.181", "PROTI1", "PROTF1"); 
-		MpmRemessa mpmRem2 = new MpmRemessa(null, mpmImpC1, "Z012103.182", "PROTI2", "PROTF2");
-		MpmRemessa mpmRem3 = new MpmRemessa(null, mpmImpC2, "Z012103.183", "PROTI3", "PROTF3");
+		MpmRemessa mpmRem1 = new MpmRemessa(null, mpmImpC1, "Z012103.181"); //, "PROTI1", "PROTF1"); 
+		MpmRemessa mpmRem2 = new MpmRemessa(null, mpmImpC1, "Z012103.182"); //, "PROTI2", "PROTF2");
+		MpmRemessa mpmRem3 = new MpmRemessa(null, mpmImpC2, "Z012103.183"); //, "PROTI3", "PROTF3");
 		
 		mpmRem1 = mpmRemessaRepository.saveAndFlush(mpmRem1);
 		mpmRem2 = mpmRemessaRepository.saveAndFlush(mpmRem2);
@@ -1639,11 +2180,11 @@ public class MpmCargaXMLResource {
 		// Trata MpmHeader ... 
 		// =====================
 		MpmHeader mpmHea1 = new MpmHeader(null, mpmRem1, "111", "111", "111", "111", "111", "111",
-											"111", "111", "111", "111", "1", "111"); 
+											"111", "111", "111", "111", "1", "111", "CargaXML"); 
 		MpmHeader mpmHea2 = new MpmHeader(null, mpmRem1, "222", "222", "222", "222", "222", "222",
-											"222", "222", "222", "222", "2", "222"); 
+											"222", "222", "222", "222", "2", "222", "CargaXML"); 
 		MpmHeader mpmHea3 = new MpmHeader(null, mpmRem2, "333", "333", "333", "333", "333", "333",
-											"333", "333", "333", "333", "3", "333"); 
+											"333", "333", "333", "333", "3", "333", "CargaXML"); 
 		
 		mpmHea1 = mpmHeaderRepository.saveAndFlush(mpmHea1);
 		mpmHea2 = mpmHeaderRepository.saveAndFlush(mpmHea2);
@@ -1656,19 +2197,19 @@ public class MpmCargaXMLResource {
 												"1", "1", "1", "1", "1", "1", "1", "1", "1", "1",
 												"1", "1", "1", "1", "1", "1", "1", "1", "1", "1",
 												"1", "1", "1", "1", "1", "1", "1", "1", "1", "1",
-												"1", "1", "1", "1", "1", "1", "1", "1", "1", "1"); 
+												"1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "CargaXML"); 
 
 		MpmTransacao mpmTrans2 = new MpmTransacao(null, mpmRem1, "1", "1", "1", "1", "1", "1", "1",
 												"1", "1", "1", "1", "1", "1", "1", "1", "1", "1",
 												"1", "1", "1", "1", "1", "1", "1", "1", "1", "1",
 												"1", "1", "1", "1", "1", "1", "1", "1", "1", "1",
-												"1", "1", "1", "1", "1", "1", "1", "1", "1", "1"); 
+												"1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "CargaXML"); 
 
 		MpmTransacao mpmTrans3 = new MpmTransacao(null, mpmRem2, "1", "1", "1", "1", "1", "1", "1",
 												"1", "1", "1", "1", "1", "1", "1", "1", "1", "1",
 												"1", "1", "1", "1", "1", "1", "1", "1", "1", "1",
 												"1", "1", "1", "1", "1", "1", "1", "1", "1", "1",
-												"1", "1", "1", "1", "1", "1", "1", "1", "1", "1"); 
+												"1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "CargaXML"); 
 		
 		mpmTrans1 = mpmTransacaoRepository.saveAndFlush(mpmTrans1);
 		mpmTrans2 = mpmTransacaoRepository.saveAndFlush(mpmTrans2);
@@ -1677,9 +2218,9 @@ public class MpmCargaXMLResource {
 		// ======================
 		// Trata MpmTrailler ... 
 		// ======================
-		MpmTrailler mpmTra1 = new MpmTrailler(null, mpmRem1, "111", "111", "111", "1", "111"); 
-		MpmTrailler mpmTra2 = new MpmTrailler(null, mpmRem1, "222", "222", "222", "2", "222"); 
-		MpmTrailler mpmTra3 = new MpmTrailler(null, mpmRem2, "333", "333", "333", "3", "333"); 
+		MpmTrailler mpmTra1 = new MpmTrailler(null, mpmRem1, "111", "111", "111", "1", "111", "CargaXML"); 
+		MpmTrailler mpmTra2 = new MpmTrailler(null, mpmRem1, "222", "222", "222", "2", "222", "CargaXML"); 
+		MpmTrailler mpmTra3 = new MpmTrailler(null, mpmRem2, "333", "333", "333", "3", "333", "CargaXML"); 
 
 		mpmTra1 = mpmTraillerRepository.saveAndFlush(mpmTra1);
 		mpmTra2 = mpmTraillerRepository.saveAndFlush(mpmTra2);
@@ -1707,9 +2248,6 @@ public class MpmCargaXMLResource {
 		// ==========================
 		// Procede Relacionamentos:
 		// ==========================
-		mpmAli1.getMpmTitulos().addAll(Arrays.asList(mpmTit1, mpmTit2));
-		mpmAli3.getMpmTitulos().addAll(Arrays.asList(mpmTit3));
-
 		mpmEsp1.getMpmTitulos().addAll(Arrays.asList(mpmTit1, mpmTit2));
 		mpmEsp3.getMpmTitulos().addAll(Arrays.asList(mpmTit3));
 
@@ -1724,6 +2262,7 @@ public class MpmCargaXMLResource {
 		mpmTitPro5.getMpmTituloStatuss().addAll(Arrays.asList(mpmTitSta6));
 
 		mpmSta1.getMpmTituloStatuss().addAll(Arrays.asList(mpmTitSta1, mpmTitSta2, mpmTitSta3));
+		
 		//	
 
 		mpmBan1.getMpmApresentantes().addAll(Arrays.asList(mpmApr1, mpmApr2));
@@ -1749,7 +2288,17 @@ public class MpmCargaXMLResource {
 		mpmIde4.getMpmDevedors().addAll(Arrays.asList(mpmDev4, mpmDev5));
 
 		// N to N:
-		
+		mpmTit1.getMpmAlineas().addAll(Arrays.asList(mpmAli1));
+		mpmTit2.getMpmAlineas().addAll(Arrays.asList(mpmAli1));
+		mpmTit3.getMpmAlineas().addAll(Arrays.asList(mpmAli3));
+
+		mpmTit1 = mpmTituloRepository.saveAndFlush(mpmTit1);
+		mpmTit2 = mpmTituloRepository.saveAndFlush(mpmTit2);
+		mpmTit3 = mpmTituloRepository.saveAndFlush(mpmTit3);
+
+		mpmAli1.getMpmTitulos().addAll(Arrays.asList(mpmTit1, mpmTit2));
+		mpmAli3.getMpmTitulos().addAll(Arrays.asList(mpmTit3));
+
 		mpmTit1.getMpmDevedors().addAll(Arrays.asList(mpmDev1, mpmDev2));
 		mpmTit2.getMpmDevedors().addAll(Arrays.asList(mpmDev3, mpmDev4));
 		mpmTit3.getMpmDevedors().addAll(Arrays.asList(mpmDev1, mpmDev3, mpmDev5));
@@ -1859,6 +2408,5 @@ public class MpmCargaXMLResource {
 		mpmMotivoEditalRepository.saveAll(Arrays.asList(mpmMotE1));
 
 	}
-	
 	
 }

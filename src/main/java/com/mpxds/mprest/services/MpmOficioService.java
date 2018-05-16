@@ -20,5 +20,12 @@ public class MpmOficioService {
 		//
 		return mpObj.orElse(null);
 	}
+	
+	public MpmOficio buscarIndSistemaPrincipal(Boolean indSistemaPrincipal) {
+		//
+		Optional<MpmOficio> mpObj = mpRepo.findByIndSistemaPrincipal(indSistemaPrincipal);
+		//
+		return mpObj.orElse(null);
+	}
 
 }

@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Index;
@@ -18,10 +17,9 @@ import org.springframework.format.annotation.NumberFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-//@Table(name = "mpadt_custas_composicao", indexes = { // Verificar com PRISCO ???
-//		@Index(name = "index_mpadt_custas_composicao_mpmanoref_tab_it_subit_descr",
-//				columnList = "mpmAnoReferencia_id, tabela, item, subitem, descricao", unique = true)})
-@Table(name = "mpadt_custas_composicao")
+@Table(name = "mpadt_custas_composicao", indexes = { // Verificar com PRISCO ???
+		@Index(name = "index_mpadt_custas_composicao_mpmanoref_tabitsubit_descr",
+			columnList = "mpmAnoReferencia_id, codigo_ato, tabela, item, subitem, descricao", unique = true)})
 public class MpmCustasComposicao extends MpEntity {
 	//
 	private static final long serialVersionUID = 1L;
@@ -84,8 +82,8 @@ public class MpmCustasComposicao extends MpEntity {
 
 	public MpmCustasComposicao(Integer id, MpmAnoReferencia mpmAnoReferencia, String tabela, String item,
 			String subItem, String descricao, String complemento, String excessao, BigDecimal valorCusta,
-			String codigoAto, String codigoAtoc, BigDecimal de, BigDecimal ate, String anoTabItSubIt,
-			Integer idClone) {
+			String codigoAto, String codigoAtoc, BigDecimal de, BigDecimal ate,
+			String anoTabItSubIt, Integer idClone) {
 		//
 		super();
 		

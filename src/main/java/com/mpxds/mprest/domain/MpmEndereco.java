@@ -3,7 +3,6 @@ package com.mpxds.mprest.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Index;
@@ -52,6 +51,10 @@ public class MpmEndereco extends MpEntity {
 	@JsonIgnore
 	@OneToMany(mappedBy="mpmEndereco")
 	private List<MpmPessoaTitulo> mpmPessoaTitulos = new ArrayList<>();
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="mpmEndereco")
+	private List<MpmAgencia> mpmAgencias = new ArrayList<>();
 
 	//
 	
@@ -103,5 +106,8 @@ public class MpmEndereco extends MpEntity {
 	public List<MpmPessoaTitulo> getMpmPessoaTitulos() { return mpmPessoaTitulos; }
 	public void setMpmPessoaTitulos(List<MpmPessoaTitulo> mpmPessoaTitulos) { 
 																this.mpmPessoaTitulos = mpmPessoaTitulos; }
+	
+	public List<MpmAgencia> getMpmAgencias() { return mpmAgencias; }
+	public void setMpmAgencias(List<MpmAgencia> mpmAgencias) { this.mpmAgencias = mpmAgencias; }
 	
 }

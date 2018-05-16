@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Index;
@@ -40,47 +39,51 @@ public class MpmAto extends MpEntity {
 	private String tipoSelo;
 
 	@Column(nullable = true, precision = 12, scale = 2)
-	@NumberFormat(pattern = "#,###,###,##0.00")
+	@NumberFormat(pattern = "###,###,###,##0.00")
 	private BigDecimal emolumento;
 
+	@Column(name = "valor_variavel", nullable = true, precision = 12, scale = 2)
+	@NumberFormat(pattern = "###,###,###,##0.00")
+	private BigDecimal valorVariavel;
+
 	@Column(name = "lei_3217", nullable = true, precision = 9, scale = 2)
-	@NumberFormat(pattern = "#,###,###,##0.00")
+	@NumberFormat(pattern = "###,###,##0.00")
 	private BigDecimal lei3217;
 
 	@Column(name = "lei_4664", nullable = true, precision = 12, scale = 2)
-	@NumberFormat(pattern = "#,###,###,##0.00")
+	@NumberFormat(pattern = "###,###,###,##0.00")
 	private BigDecimal lei4664;
 
-	@Column(name = "lei_1111", nullable = true, precision = 12, scale = 2)
-	@NumberFormat(pattern = "#,###,###,##0.00")
+	@Column(name = "lei_111", nullable = true, precision = 12, scale = 2)
+	@NumberFormat(pattern = "###,###,###,##0.00")
 	private BigDecimal lei111;
 
 	@Column(name = "lei_3761", nullable = true, precision = 12, scale = 2)
-	@NumberFormat(pattern = "#,###,###,##0.00")
+	@NumberFormat(pattern = "###,###,###,##0.00")
 	private BigDecimal lei3761;
 
 	@Column(name = "lei_590", nullable = true, precision = 9, scale = 2)
-	@NumberFormat(pattern = "#,###,###,##0.00")
+	@NumberFormat(pattern = "###,###,##0.00")
 	private BigDecimal lei590;
 
 	@Column(name = "lei_6281", nullable = true, precision = 12, scale = 2)
-	@NumberFormat(pattern = "#,###,###,##0.00")
+	@NumberFormat(pattern = "###,###,###,##0.00")
 	private BigDecimal lei6281;
 
 	@Column(nullable = true, precision = 15, scale = 2)
-	@NumberFormat(pattern = "#,###,###,##0.00")
+	@NumberFormat(pattern = "###,###,###,###,##0.00")
 	private BigDecimal iss;
 
 	@Column(nullable = true, precision = 15, scale = 2)
-	@NumberFormat(pattern = "#,###,###,##0.00")
+	@NumberFormat(pattern = "###,###,###,###,##0.00")
 	private BigDecimal distribuicao;
 
 	@Column(name = "valor_ato", nullable = true, precision = 15, scale = 2)
-	@NumberFormat(pattern = "#,###,###,##0.00")
+	@NumberFormat(pattern = "###,###,###,###,##0.00")
 	private BigDecimal valorAto;
 
 	@Column(nullable = true, precision = 15, scale = 2)
-	@NumberFormat(pattern = "#,###,###,##0.00")
+	@NumberFormat(pattern = "###,###,###,###,##0.00")
 	private BigDecimal gratuidade;
 
 	@Column(name = "id_clone", nullable = true)
@@ -96,10 +99,11 @@ public class MpmAto extends MpEntity {
 	}
 
 	public MpmAto(Integer id, MpmAnoReferencia mpmAnoReferencia, String codigoAto, String atoSequencia,
-			String descricaoAto, String tipoSelo, BigDecimal emolumento, BigDecimal lei3217, 
-			BigDecimal lei4664, BigDecimal lei111, BigDecimal lei3761, BigDecimal lei590, 
-			BigDecimal lei6281, BigDecimal iss, BigDecimal distribuicao,
-			BigDecimal valorAto, BigDecimal gratuidade, Integer idClone) {
+			String descricaoAto, String tipoSelo, BigDecimal emolumento, BigDecimal valorVariavel,
+			BigDecimal lei3217, BigDecimal lei4664, BigDecimal lei111, 
+			BigDecimal lei3761, BigDecimal lei590, BigDecimal lei6281, 
+			BigDecimal iss, BigDecimal distribuicao, BigDecimal valorAto,
+			BigDecimal gratuidade, Integer idClone) {
 		//
 		super();
 		
@@ -110,6 +114,7 @@ public class MpmAto extends MpEntity {
 		this.descricaoAto = descricaoAto;
 		this.tipoSelo = tipoSelo;
 		this.emolumento = emolumento;
+		this.valorVariavel = valorVariavel;
 		this.lei3217 = lei3217;
 		this.lei4664 = lei4664;
 		this.lei111 = lei111;
@@ -163,6 +168,13 @@ public class MpmAto extends MpEntity {
 	}
 	public void setEmolumento(BigDecimal emolumento) {
 		this.emolumento = emolumento;
+	}
+
+	public BigDecimal getValorVariavel() {
+		return this.valorVariavel;
+	}
+	public void setValorVariavel(BigDecimal valorVariavel) {
+		this.valorVariavel = valorVariavel;
 	}
 
 	public BigDecimal getLei3217() {

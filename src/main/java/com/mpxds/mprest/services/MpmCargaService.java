@@ -20,5 +20,12 @@ public class MpmCargaService {
 		//
 		return mpObj.orElse(null);
 	}
+	
+	public MpmCarga buscarCodigo(String codigo) {
+		//
+		Optional<MpmCarga> mpObj = mpRepo.findByCodigo(codigo);
+		//
+		return mpObj.orElse(null);
+	}	
 
 }

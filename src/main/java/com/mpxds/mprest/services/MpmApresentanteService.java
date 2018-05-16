@@ -27,5 +27,12 @@ public class MpmApresentanteService {
 		//
 		return mpObj.orElse(null);
 	}
+	
+	public MpmApresentante buscarNome(String nome) {
+		//
+		Optional<MpmApresentante> mpObj = mpRepo.findByNome(nome);
+		//
+		return mpObj.orElse(null);
+	}
 
 }

@@ -11,4 +11,6 @@ import com.mpxds.mprest.domain.MpmApresentante;
 public interface MpmApresentanteRepository extends JpaRepository<MpmApresentante, Integer> {
 	//
 	Optional<MpmApresentante> findByCodigo(String codigo);
+
+	Optional<MpmApresentante> findByNome(String nome);
 }

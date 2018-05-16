@@ -26,11 +26,11 @@ public class MpmDataProcesso extends MpEntity {
 	@Column(name = "data_ate", nullable = true)
 	private Date dataAte;
 
-	@Column(name = "protocolo_inicial", nullable = true, length = 6)
-	private String protocoloInicial;
-	
-	@Column(name = "protocolo_final", nullable = true, length = 6)
-	private String protocoloFinal;
+//	@Column(name = "protocolo_inicial", nullable = true, length = 6)
+//	private String protocoloInicial;
+//	
+//	@Column(name = "protocolo_final", nullable = true, length = 6)
+//	private String protocoloFinal;
 
 	//
 	
@@ -38,16 +38,16 @@ public class MpmDataProcesso extends MpEntity {
 		//
 	}
 	
-	public MpmDataProcesso(Integer id, Date dataProtocolo, Date dataAte, String protocoloInicial, 
-			String protocoloFinal) {
+	public MpmDataProcesso(Integer id, Date dataProtocolo, Date dataAte) {
+//			String protocoloInicial, String protocoloFinal) {
 		//
 		super();
 		
 		this.id = id;
 		this.dataProtocolo = dataProtocolo;
 		this.dataAte = dataAte;
-		this.protocoloInicial = protocoloInicial;
-		this.protocoloFinal = protocoloFinal;
+//		this.protocoloInicial = protocoloInicial;
+//		this.protocoloFinal = protocoloFinal;
 	}
 
 	public Date getDataProtocolo() { return this.dataProtocolo; }
@@ -56,10 +56,10 @@ public class MpmDataProcesso extends MpEntity {
 	public Date getDataAte() { return this.dataAte;	}
 	public void setDataAte(Date dataAte) { this.dataAte = dataAte; }
 
-	public String getProtocoloInicial() { return this.protocoloInicial;	}
-	public void setProtocoloInicial(String protocoloInicial) { this.protocoloInicial = protocoloInicial; }
-
-	public String getProtocoloFinal() { return this.protocoloFinal; }
-	public void setProtocoloFinal(String protocoloFinal) { this.protocoloFinal = protocoloFinal; }
+//	public String getProtocoloInicial() { return this.protocoloInicial;	}
+//	public void setProtocoloInicial(String protocoloInicial) { this.protocoloInicial = protocoloInicial; }
+//
+//	public String getProtocoloFinal() { return this.protocoloFinal; }
+//	public void setProtocoloFinal(String protocoloFinal) { this.protocoloFinal = protocoloFinal; }
 
 }

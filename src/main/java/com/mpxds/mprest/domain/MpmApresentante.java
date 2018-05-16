@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Index;
@@ -19,7 +18,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "mpadt_apresentante", indexes = {
-		@Index(name = "index_mpadt_apresentante_codigo", columnList = "codigo", unique = true)})
+		@Index(name = "index_mpadt_apresentante_codigo", columnList = "codigo", unique = true),
+		@Index(name = "index_mpadt_apresentante_nome", columnList = "nome", unique = true)})
 public class MpmApresentante extends MpEntity {
 	//
 	private static final long serialVersionUID = 1L;

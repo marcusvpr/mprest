@@ -11,6 +11,7 @@ public class MpmAtoXML {
 	private String descricaoAto;
 	private String tipoSelo;
 	private String emolumento;
+	private String vl_Variavel;
 	private String lei3217;
 	private String lei4664;
 	private String lei111;
@@ -63,6 +64,10 @@ public class MpmAtoXML {
 	public void setEmolumento(String emolumento) {
 		this.emolumento = emolumento;
 	}
+
+	@XmlElement(name="Vl_Variavel")
+	public String getVl_Variavel() { return this.vl_Variavel; 	}
+	public void setVl_Variavel(String vl_Variavel) { this.vl_Variavel = vl_Variavel; }
 
 	@XmlElement(name="Lei3217")
 	public String getLei3217() {

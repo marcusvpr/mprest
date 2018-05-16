@@ -8,6 +8,7 @@ public class MpmObservacaoXML {
 	//
 	private String tpObservacao;
 	private String dscObservacao;
+	private String obsEdital;
 	
 	//
 		
@@ -19,10 +20,14 @@ public class MpmObservacaoXML {
 	public String getDscObservacao() { return dscObservacao; }
 	public void setDscObservacao(String dscObservacao) { this.dscObservacao = dscObservacao; }
 	
+	@XmlElement(name="ObsEdital")
+	public String getObsEdital() { return obsEdital; }
+	public void setObsEdital(String obsEdital) { this.obsEdital = obsEdital; }
+	
 	@Override
 	public String toString() {
-		return "MpmObservacaoXML [tpObservacao;=" + tpObservacao + ", dscObservacao;=" +
-																					dscObservacao + "]";
+		return "MpmObservacaoXML [tpObservacao;=" + tpObservacao +
+									", dscObservacao;=" + dscObservacao + ", obsEdital;=" + obsEdital +	"]";
 	}
 	
 }

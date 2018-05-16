@@ -32,4 +32,19 @@ public class MpmEnderecoService {
 		return mpObj.orElse(null);
 	}
 
+	public MpmEndereco buscarGravarMpmEnderecoByLogradouroAndNumeroAndComplementoAndCepAndBairroAndMpmCidade(
+											String logradouro, String numero, String complemento, String cep,
+											String bairro, MpmCidade mpmCidade) {
+		//
+		MpmEndereco mpmEndereco = this.buscarLogradouroAndNumeroAndComplementoAndCepAndBairroAndMpmCidade(
+						logradouro, numero, complemento, cep, bairro, mpmCidade); 
+		if (null == mpmEndereco) {
+			//
+			mpmEndereco = new MpmEndereco(null, logradouro, numero, complemento, cep, bairro, mpmCidade);				
+			mpmEndereco = this.mpRepo.saveAndFlush(mpmEndereco);
+		}
+		//
+		return mpmEndereco;
+	}
+	
 }

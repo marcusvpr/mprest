@@ -1,5 +1,7 @@
 package com.mpxds.mprest.services;
 
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,16 @@ public class MpmItemEmolumentoXmlService {
 		Optional<MpmItemEmolumentoXml> mpObj = mpRepo.findById(id);
 		//
 		return mpObj.orElse(null);
+	}
+	
+	public List<MpmItemEmolumentoXml> buscarCodigoAtoAndAtoSequenciaAndDataPraticaAndNumeroControles(
+																		String codigoAto, String atoSequencia,
+																		Date dataPratica, String numeroControle ) {
+		//
+		List<MpmItemEmolumentoXml> mpObjs = mpRepo.findCodigoAtoAndAtoSequenciaAndDataPraticaAndNumeroControles(
+																codigoAto, atoSequencia, dataPratica, numeroControle);
+		//
+		return mpObjs;
 	}
 
 }

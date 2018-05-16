@@ -20,5 +20,26 @@ public class MpmPessoaTituloService {
 		//
 		return mpObj.orElse(null);
 	}
+	
+	public MpmPessoaTitulo buscarNome(String nome) {
+		//
+		Optional<MpmPessoaTitulo> mpObj = mpRepo.findByNome(nome);
+		//
+		return mpObj.orElse(null);
+	}
+	
+	public MpmPessoaTitulo buscarNomeAndIndFavorecido(String nome, Boolean indFavorecido) {
+		//
+		Optional<MpmPessoaTitulo> mpObj = mpRepo.findByNomeAndIndFavorecido(nome, indFavorecido);
+		//
+		return mpObj.orElse(null);
+	}
+	
+	public MpmPessoaTitulo buscarNomeAndIndSacador(String nome, Boolean indSacador) {
+		//
+		Optional<MpmPessoaTitulo> mpObj = mpRepo.findByNomeAndIndSacador(nome, indSacador);
+		//
+		return mpObj.orElse(null);
+	}
 
 }

@@ -20,5 +20,12 @@ public class MpmDevedorService {
 		//
 		return mpObj.orElse(null);
 	}
+	
+	public MpmDevedor buscarCodigo(Integer codigo) {
+		//
+		Optional<MpmDevedor> mpObj = mpRepo.findByCodigo(codigo);
+		//
+		return mpObj.orElse(null);
+	}
 
 }
